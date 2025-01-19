@@ -2,11 +2,11 @@
   <div class="h-screen flex">
     <!-- Left side with illustration, hidden on mobile -->
     <div 
-      class="w-1/2 bg-red-700 p-14 relative hidden md:block" 
+      class="w-1/2 bg-red-700 p-14 relative hidden md:block absolute inset-0 bg-gradient-to-l from-red-700 to-red-800 transition-opacity duration-500 ease-in-out" 
       style="border-top-right-radius: 2rem; border-bottom-right-radius: 2rem;" 
       data-aos="fade-right" 
       data-aos-duration="1000">
-      <h1 class="text-4xl font-bold text-white mb-4">
+      <h1 class="text-4xl w-[30rem] font-bold text-white mb-4">
         Ayo Mulai Magang Sekarang!
       </h1>
       <p class="text-lg text-white mb-10">Anda Perlu Masuk untuk mendaftar magang dan mengakses semua fitur</p>
@@ -21,12 +21,21 @@
 
     <!-- Right side with login form -->
     <div class="w-full md:w-1/2 p-8 flex flex-col justify-between" data-aos="fade-left" data-aos-duration="1000">
-      <div class="flex justify-start mb-6">
+      <div class="flex justify-between mb-6">
         <img
         src="/storage/bayanpus.svg"
           alt="Balai Yanpus DPAD DIY"
           class="h-8"
         />
+        <div class="mt-4 text-center">
+    <a href="/" class="inline-flex items-center gap-2 px-4 py-2 bg-red-800 text-white rounded-full hover:bg-white hover:text-red-800 transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+            <path d="m12 19-7-7 7-7"/>
+            <path d="M19 12H5"/>
+        </svg>
+        Kembali
+    </a>
+</div>
       </div>
 
       <div class="max-w-md w-full mx-auto">
@@ -88,15 +97,10 @@
             Belum Punya Akun? 
             <a href="/register" class="text-red-700 hover:underline">Daftar Sekarang</a>
           </p>
-          <a href="/lupa-password" class="text-red-700 hover:underline block">
-            Lupa Kata Sandi?
-          </a>
         </div>
 
         <!-- Kembali ke Beranda link -->
-        <div class="mt-4 text-center">
-          <a href="/" class="text-red-700 hover:underline">Kembali ke Beranda</a>
-        </div>
+
       </div>
     </div>
   </div>

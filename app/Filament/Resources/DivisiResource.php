@@ -9,6 +9,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Builder;
 
 class DivisiResource extends Resource
@@ -42,6 +43,11 @@ class DivisiResource extends Resource
     public static function getPluralLabel(): string
     {
         return 'Divisi';  
+    }
+    public static function shouldRegisterNavigation(): bool
+    {
+        // Pastikan hanya Super Admin yang dapat mengakses resource ini
+        return Auth::user() && Auth::user()->role === 'superadmin';
     }
     public static function getslug(): string
     {

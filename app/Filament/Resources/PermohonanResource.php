@@ -17,8 +17,8 @@ class PermohonanResource extends Resource
 {
     protected static ?string $model = Permohonan::class;
 protected static ?string $navigationGroup = 'Permohonan';
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $navigationLabel = 'Permohonan Masuk';
+protected static ?string $navigationIcon = 'heroicon-o-document';
+protected static ?string $navigationLabel = 'Masuk';
 
     public static function form(Form $form): Form
     {

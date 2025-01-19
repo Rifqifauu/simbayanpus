@@ -19,7 +19,7 @@ class UserDetailResource extends Resource
     protected static ?string $model = UserDetail::class;
 
     protected static ?string $navigationGroup ='Permohonan';
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-document';
 
     protected static ?string $navigationLabel = 'Dalam Proses';
 

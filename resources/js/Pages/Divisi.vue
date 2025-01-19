@@ -1,18 +1,15 @@
 <template>
     <h3 class="text-center text-3xl font-bold mt-5 text-red-600 mb-6">Daftar Divisi Magang</h3>
-    <div class="container mx-auto px-4">
+    <div class="">
       <!-- Cards Container -->
-      <div v-for="(item, index) in divisi" :key="index" class="card max-w-sm mx-auto bg-white rounded-lg shadow-xl overflow-hidden mb-8 transform transition duration-500 hover:scale-105 hover:shadow-2xl hover:bg-red-50">
-        <div class="p-6">
-          <h2 class="text-2xl font-semibold text-red-700 mb-2">{{ item.nama_divisi }}</h2>
-          <p class="text-gray-600 mb-4">{{ item.keterangan }}</p>
-          
-          <div class="flex justify-between items-center mt-4">
-            <span class="text-lg font-medium text-gray-700">Kuota:</span>
-            <span class="text-xl font-bold text-red-600">{{ item.kuota }}</span>
-          </div>
-        </div>
-      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2 p-8">
+            <!-- Tim IT -->
+            <div  v-for="(item, index) in divisi" :key="index" c class="bg-red-700 text-white p-6 rounded-lg shadow-lg">
+                <h4 class="text-xl text-white font-bold mb-4">{{ item.nama_divisi }}</h4>
+                <p class="mb-4 text-white">{{ item.keterangan }}</p>
+                <p class="font-bold mb-4">Kuota tersedia: {{ item.kuota }}</p>
+            </div>
+            </div>
     </div>
 </template>
 
@@ -65,10 +62,6 @@ h2 {
   color: #c0392b; /* Darker red for the divisi name */
 }
 
-p {
-  color: #7f8c8d;
-  font-size: 14px;
-}
 
 .text-lg {
   font-size: 18px;
@@ -85,13 +78,6 @@ p {
   align-items: center;
 }
 
-.text-red-600 {
-  color: #e74c3c; /* Red color for Kuota */
-}
-
-.text-red-700 {
-  color: #c0392b; /* Darker red for the divisi name */
-}
 
 /* Hover effects */
 .hover\:bg-red-50:hover {

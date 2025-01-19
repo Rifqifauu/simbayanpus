@@ -1,4 +1,5 @@
 <?php
+use App\Mail\WelcomeMail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserDetailController;
 use App\Http\Controllers\HomeController;
@@ -6,6 +7,7 @@ use App\Http\Controllers\DivisiController;
 use App\Http\Controllers\DownloadController;
 use App\Http\Controllers\PermohonanController;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Inertia\Inertia;
 
 
@@ -36,3 +38,7 @@ Route::get('/download/cv/{id}', [DownloadController::class, 'downloadCv'])->name
 Route::get('/download/surat_pengantar/{id}', [DownloadController::class, 'downloadSuratPengantar'])->name('download.surat_pengantar');
 Route::get('/download/proposal/{id}', [DownloadController::class, 'downloadProposal'])->name('download.proposal');
 Route::get('/download/pedoman_magang/{id}', [DownloadController::class, 'downloadPedomanMagang'])->name('download.pedoman_magang');
+
+Route::get('/send-welcome-mail', function () {
+    Mail::to('rifqifauzi369@gmail.com')->send(new WelcomeMail());
+});

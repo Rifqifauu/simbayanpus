@@ -155,26 +155,42 @@ class UserDetailController extends Controller
     }
     
     
-    public function update(Request $request)
-    {
-        Log::info('Request Data:', $request->all()); // Memeriksa data yang diterima
+    public function update(Request $request) 
+    { 
+        Log::info('Request Data:', $request->all());
         $user = Auth::user();
+    
+        if (!$request->all()) {
+            return response()->json(['error' => 'FormData kosong'], 400);
+        }
+    
         $userDetail = $user->userDetail;
     
         try {
-            // Validasi input data
-            $validator = Validator::make($request->all(), [
-                'panggilan' => 'required|string|max:50',
-                'nim' => 'required|string|max:20|unique:user_details,nim',
-                'nik' => 'required|string|size:16|unique:user_details,nik',
-                'institusi' => 'required|string|max:100',
-                'program_studi' => 'required|string|max:100',
-                'medsos' => 'required|string|max:100',
-                'nomor_hp' => 'required|string|max:15',
-                'alamat' => 'required|string|max:255',
-                'jenis_kelamin' => 'required|string|max:25',
-                'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:2048'
-            ]);
+            // Buat array rules dasar tanpa validasi foto
+            $rules = [ 
+                'panggilan' => 'nullable|string|max:50', 
+                'nim' => 'nullable|string|max:20|unique:user_details,nim,' . $userDetail->id, 
+                'nik' => 'nullable|string|size:16|unique:user_details,nik,' . $userDetail->id, 
+                'institusi' => 'nullable|string|max:100', 
+                'program_studi' => 'nullable|string|max:100', 
+                'medsos' => 'nullable|string|max:100', 
+                'nomor_hp' => 'nullable|string|max:15', 
+                'alamat' => 'nullable|string|max:255', 
+                'jenis_kelamin' => 'nullable|string|max:25',
+            ];
+    
+            // Validasi NIM jika ada
+            if ($request->has('nim')) {
+                $rules['nim'] = 'required|string|max:20|unique:user_details,nim,' . $userDetail->id;
+            }
+    
+            // Hanya tambahkan validasi foto jika ada file yang diupload
+            if ($request->hasFile('foto')) {
+                $rules['foto'] = 'required|image|mimes:jpeg,png,jpg|max:2048';
+            }
+    
+            $validator = Validator::make($request->all(), $rules);
     
             if ($validator->fails()) {
                 Log::error('Validation Failed:', $validator->errors()->toArray());
@@ -183,7 +199,6 @@ class UserDetailController extends Controller
                 ]);
             }
     
-            // Pastikan data userDetail ada sebelum diupdate
             if (!$userDetail) {
                 Log::error('User detail not found.');
                 return Inertia::render('Profil', [
@@ -191,13 +206,11 @@ class UserDetailController extends Controller
                 ]);
             }
     
-            // Ambil data yang sudah tervalidasi
             $validatedData = $validator->validated();
     
-            // Cek apakah foto diupload, jika ada maka proses
+            // Proses foto hanya jika ada file yang diupload
             if ($request->hasFile('foto')) {
                 if ($userDetail->foto) {
-                    // Hapus foto lama
                     Storage::disk('public')->delete($userDetail->foto);
                 }
     
@@ -205,22 +218,20 @@ class UserDetailController extends Controller
                 $filename = time() . '_' . $file->getClientOriginalName();
                 $path = $file->storeAs('user_photos', $filename, 'public');
                 $validatedData['foto'] = $path;
+            } else {
+                // Hapus key 'foto' dari validatedData jika tidak ada file yang diupload
+                // Ini mencegah override nilai foto yang ada di database
+                unset($validatedData['foto']);
             }
     
-            // Update data userDetail
             $userDetail->update($validatedData);
     
             Log::info('User detail updated successfully:', $validatedData);
-    
-            return Inertia::render('Profil', [
-                'success' => 'Profile details updated successfully'
-            ]);
         } catch (\Exception $e) {
             Log::error('Error in UserDetailController@update: ' . $e->getMessage(), ['exception' => $e]);
             return Inertia::render('EditProfil', [
                 'errors' => ['message' => 'An error occurred while updating user details.']
             ]);
         }
-        
     }
 }

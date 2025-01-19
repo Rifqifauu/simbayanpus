@@ -3,8 +3,7 @@
 namespace App\Filament\Resources;
 
 use Carbon\Carbon;
-use App\Filament\Resources\MagangSelesaiResource\Pages;
-use App\Filament\Resources\MagangSelesaiResource\RelationManagers;
+use App\Filament\Resources\PermohonanDiterimaResource\Pages;
 use App\Models\UserDetail;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -14,13 +13,13 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class MagangSelesaiResource extends Resource
+class PermohonanDiterimaResource extends Resource
 {
     protected static ?string $model = UserDetail::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-users';
-    protected static ?string $navigationLabel = 'Magang Selesai';
-    protected static ?string $navigationGroup = 'Data Magang';
+    protected static ?string $navigationIcon = 'heroicon-o-document';
+    protected static ?string $navigationLabel = 'Permohonan Diterima';
+    protected static ?string $navigationGroup = 'Permohonan';
 
     public static function form(Form $form): Form
     {
@@ -34,11 +33,11 @@ class MagangSelesaiResource extends Resource
 {
     return $table
         ->modifyQueryUsing(fn (Builder $query) => $query->whereHas('user.Permohonan', function ($query) {
-            $query->where('status_pendaftaran', 'diterima')->whereDate('tgl_keluar', '<=', Carbon::today());
+            $query->where('status_pendaftaran', 'diterima')->whereDate('tgl_masuk','>',Carbon::today());
         }))
         ->columns([
             Tables\Columns\TextColumn::make('user.name')
-                ->label('User')
+                ->label('Nama Lengkap')
                 ->sortable()
                 ->searchable(),
             Tables\Columns\TextColumn::make('user.userDetail.institusi')
@@ -79,15 +78,13 @@ class MagangSelesaiResource extends Resource
 
     public static function getPluralLabel(): ?string
     {
-        return 'Magang Selesai';
+        return 'Magang Diterima';
     }
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListMagangSelesais::route('/'),
-            'create' => Pages\CreateMagangSelesai::route('/create'),
-            'view' => Pages\ViewMagangSelesai::route('/{record}'),
-            'edit' => Pages\EditMagangSelesai::route('/{record}/edit'),
+            'index' => Pages\ListPermohonanDiterimas::route('/'),
+            'create' => Pages\CreatePermohonanDiterima::route('/create'),
         ];
     }
 }

@@ -2,7 +2,12 @@
 
 namespace App\Filament\Resources;
 
+use Filament\Resources\View;
+use Filament\Forms\Components\TextInput;
+use Filament\Tables\Columns\TextColumn;
 use Carbon\Carbon;
+use Filament\Infolists;
+use Filament\Infolists\Infolist;
 use App\Filament\Resources\MagangAktifResource\Pages;
 use App\Filament\Resources\MagangAktifResource\RelationManagers;
 use App\Models\UserDetail;
@@ -18,7 +23,7 @@ class MagangAktifResource extends Resource
 {
     protected static ?string $model = UserDetail::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-users';
     protected static ?string $navigationLabel = 'Magang Aktif';
     protected static ?string $navigationGroup = 'Data Magang';
 
@@ -28,6 +33,29 @@ class MagangAktifResource extends Resource
             ->schema([
                 //
             ]);
+    }
+
+     
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
+        ->schema([
+            Infolists\Components\TextEntry::make('user.name')
+                ->label('Nama Lengkap'), // Menambahkan label
+            Infolists\Components\TextEntry::make('user.email')
+                ->label('Email'), // Menambahkan label
+            Infolists\Components\TextEntry::make('user.userDetail.institusi')
+                ->label('Institusi'), // Menambahkan label
+            Infolists\Components\TextEntry::make('user.userDetail.nomor_hp')
+                ->label('Nomor Hp'), // Menambahkan label
+            Infolists\Components\TextEntry::make('user.permohonan.tgl_masuk')
+                ->label('Tanggal Masuk'), // Menambahkan label
+            Infolists\Components\TextEntry::make('user.permohonan.tgl_keluar')
+                ->label('Tanggal Keluar'), // Menambahkan label
+            Infolists\Components\ImageEntry::make('user.userDetail.foto')
+                ->label('Foto'), // Menambahkan label
+        ]);
+    
     }
 
     public static function table(Table $table): Table

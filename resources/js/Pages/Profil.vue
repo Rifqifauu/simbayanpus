@@ -265,8 +265,7 @@ export default {
       }
     };
 
-
-const handleSubmit = async () => {
+    const handleSubmit = async () => {
   try {
     const form = new FormData();
 
@@ -282,28 +281,26 @@ const handleSubmit = async () => {
       }
     });
 
+    // Tambahkan _method untuk spoofing method PUT
+    form.append('_method', 'PUT');
+
     // Debug: Periksa FormData menggunakan forEach
     form.forEach((value, key) => {
       console.log('Isi Form', `Key: ${key}, Value: ${value}`);
     });
 
-    // Kirim data menggunakan axios
-    const response = await axios.put('/profile/edit/', form, {
-      headers: {
-        'Content-Type': 'multipart/form-data',  // Pastikan header Content-Type diset untuk form data
-      },
-    });
+    // Kirim data menggunakan POST, Laravel akan menerima method PUT karena spoofing
+    const response = await axios.post('/profile/edit', form);
+
     console.log(response.data);  
 
     if (response.status === 200) {
-      
       router.visit('/profile'); // Redirect setelah sukses
     }
   } catch (error) {
     console.error('Error updating profile:', error);
   }
 };
-
 
     return {
       formData,
