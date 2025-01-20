@@ -23,6 +23,10 @@ class User extends Authenticatable
         'password',
         'role',
     ];
+    public function pesan()
+    {
+        return $this->hasMany(UserDetail::class, 'id_user');
+    }
     public function userDetail()
     {
         return $this->hasOne(UserDetail::class, 'id_user');

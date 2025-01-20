@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('pesan', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Foreign key to users table
-            $table->string('pesan_masuk');
-            $table->string('pesan_keluar');
+            $table->foreignId('id_user')->constrained('users')->onDelete('cascade'); // Foreign key to users table
+            $table->string('pesan');
+            $table->enum('tipe', ['masuk', 'keluar']); // Enum column for message type
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pesans');
+        Schema::dropIfExists('pesan');
     }
 };

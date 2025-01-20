@@ -187,7 +187,7 @@ class UserDetailController extends Controller
     
             // Hanya tambahkan validasi foto jika ada file yang diupload
             if ($request->hasFile('foto')) {
-                $rules['foto'] = 'required|image|mimes:jpeg,png,jpg|max:2048';
+                $rules['foto'] = 'required|image|mimes:jpeg,png,jpg|max:10000';
             }
     
             $validator = Validator::make($request->all(), $rules);

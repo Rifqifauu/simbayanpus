@@ -10,5 +10,10 @@ class ListPermohonans extends ListRecords
 {
     protected static string $resource = PermohonanResource::class;
 
-
+    protected function getHeaderActions(): array
+    {
+        return [
+            Actions\CreateAction::make(),
+        ];
+    }
 }

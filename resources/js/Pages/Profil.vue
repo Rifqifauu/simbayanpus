@@ -3,7 +3,7 @@
     <div class="max-w-4xl mx-auto bg-white shadow-xl rounded-lg overflow-hidden">
       <!-- Form Header -->
       <div class="bg-red-600 text-white flex justify-between items-center p-4 rounded-2xl">
-        <h2 class="text-lg font-semibold">Edit Profile</h2>
+        <h2 class="text-lg font-semibold">{{ isEdit ? 'Edit Profile' : 'Create Profile' }}</h2>
         <button 
           @click="handleSubmit"
           class="flex items-center bg-white text-red-600 px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors"
@@ -11,9 +11,10 @@
           <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
           </svg>
-          Simpan
+          {{ isEdit ? 'Simpan' : 'Buat' }}
         </button>
       </div>
+
 
       <form @submit.prevent="handleSubmit" class="md:flex">
         <!-- Sidebar -->
@@ -124,11 +125,11 @@
 </template>
 
 <script>
-    import axios from 'axios';
-
-import { defineComponent, ref } from 'vue';
+import axios from 'axios';
+import { defineComponent, ref, computed } from 'vue';
 import { router } from '@inertiajs/vue3'; // Update this import
 import AppLayout from '@/Layouts/AppLayout.vue';
+
 
 
 // Form Input Component
@@ -161,6 +162,7 @@ const FormInput = defineComponent({
     </div>
   `,
 });
+
 
 // Form Textarea Component
 const FormTextarea = defineComponent({
@@ -242,6 +244,11 @@ export default {
       type: Object,
       required: true,
     },
+    title : String,
+  },
+  
+  mounted(){
+    document.title = this.title;
   },
 
   setup(props) {
@@ -252,9 +259,7 @@ export default {
     });
 
 
-    if (!props.userDetail) {
-    router.visit('/profile/create'); // Redirect ke /profile/create
-  };
+   
     const preview = ref(null);
 
     const handleImageChange = (event) => {
@@ -264,6 +269,10 @@ export default {
         formData.value.foto = file;
       }
     };
+    
+    const isEdit = computed(() => {
+      return props.userDetail !== null && props.userDetail !== undefined;
+    });
 
     const handleSubmit = async () => {
   try {
@@ -282,15 +291,18 @@ export default {
     });
 
     // Tambahkan _method untuk spoofing method PUT
-    form.append('_method', 'PUT');
+    if (props.userDetail) {
+      form.append('_method', 'PUT'); // Only append _method for PUT if editing
+    }
 
     // Debug: Periksa FormData menggunakan forEach
     form.forEach((value, key) => {
       console.log('Isi Form', `Key: ${key}, Value: ${value}`);
     });
 
-    // Kirim data menggunakan POST, Laravel akan menerima method PUT karena spoofing
-    const response = await axios.post('/profile/edit', form);
+    // Choose the endpoint based on whether the profile is being created or edited
+    const endpoint = props.userDetail ? '/profile/edit' : '/profile/store';
+    const response = await axios.post(endpoint, form);
 
     console.log(response.data);  
 
@@ -307,6 +319,7 @@ export default {
       preview,
       handleImageChange,
       handleSubmit,
+      isEdit,
     };
   },
 };

@@ -184,7 +184,7 @@
           if (response.data.success) {
             alert('Pendaftaran berhasil!');
             // Reset form or redirect
-            router.visit('/permohonan');
+            router.visit('/home');
             
           }
         } catch (error) {

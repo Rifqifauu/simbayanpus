@@ -7,6 +7,8 @@ use App\Filament\Resources\UserDetailResource\RelationManagers;
 use App\Models\UserDetail;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Infolists;
+use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\SelectColumn;
@@ -23,51 +25,57 @@ class UserDetailResource extends Resource
 
     protected static ?string $navigationLabel = 'Dalam Proses';
 
-    public static function form(Form $form): Form
+    public static function infolist(Infolist $infolist): Infolist
     {
-        return $form
+        return $infolist
             ->schema([
-                Forms\Components\Select::make('id_user')
-                ->label('Nama Lengkap')
-                ->options(\App\Models\User::all()->pluck('name', 'id'))
-                ->required(),
-                Forms\Components\TextInput::make('panggilan')
-                    ->label('Nama Panggilan')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('nik')
-                    ->label('NIK')
-                    ->required()
-                    ->maxLength(50)
-                    ->helperText('Nomor Induk Keluarga'),
-                    Forms\Components\TextInput::make('nim')
-                    ->label('NIM')
-                    ->required()
-                    ->maxLength(50)
-                    ->helperText('Nomor Induk Mahasiswa'),
-                Forms\Components\TextInput::make('institusi')
-                    ->label('Institusi')
-                    ->required()
-                    ->maxLength(100),
-                Forms\Components\TextInput::make('program_studi')
-                    ->label('Program Studi')
-                    ->required()
-                    ->maxLength(100),
-                Forms\Components\TextInput::make('medsos')
-                    ->label('Media Sosial')
-                    ->maxLength(255)
-                    ->url()
-                    ->helperText('URL media sosial (opsional)'),
-    
-                Forms\Components\FileUpload::make('foto')
-                    ->label('Foto Profil')
-                    ->image()
-                    ->required()
-                    ->rules('nullable|image|mimes:jpeg,png,jpg,gif,svg|max:10240') // Increase the max size to 10 MB
-                    ->helperText('Unggah foto profil yang sesuai.')
+                Infolists\Components\TextEntry::make('user.name')  // Nama Lengkap
+                    ->label('Nama Lengkap'),
+                Infolists\Components\TextEntry::make('jenis_kelamin')  // Jenis Kelamin
+                    ->label('Jenis Kelamin'),
+                Infolists\Components\TextEntry::make('program_studi')  // Program Studi
+                    ->label('Program Studi'),
+                Infolists\Components\TextEntry::make('institusi')  // Institusi
+                    ->label('Institusi'),
+                // CV - Display a download button instead of the URL
+                Infolists\Components\TextEntry::make('user.Permohonan.cv')  
+                    ->label('CV')
+                    ->html(fn($record) => 
+                        $record->user->Permohonan->cv ? 
+                        '<a href="' . route('download.cv', ['id' => $record->user->id]) . '" class="text-blue-600" target="_blank">Download CV</a>' : 
+                        'No CV Available'
+                    ),
+                // Surat Pengantar - Display a download button instead of the URL
+                Infolists\Components\TextEntry::make('user.Permohonan.surat_pengantar')  
+                    ->label('Surat Pengantar')
+                    ->html(fn($record) => 
+                        $record->user->Permohonan->surat_pengantar ? 
+                        '<a href="' . route('download.surat_pengantar', ['id' => $record->user->id]) . '" class="text-blue-600" target="_blank">Download Surat Pengantar</a>' : 
+                        'No Surat Pengantar Available'
+                    ),
+                // Proposal - Display a download button instead of the URL
+                Infolists\Components\TextEntry::make('user.Permohonan.proposal')  
+                    ->label('Proposal')
+                    ->html(fn($record) => 
+                        $record->user->Permohonan->proposal ? 
+                        '<a href="' . route('download.proposal', ['id' => $record->user->id]) . '" class="text-blue-600" target="_blank">Download Proposal</a>' : 
+                        'No Proposal Available'
+                    ),
+                // Pedoman Magang - Display a download button instead of the URL
+                Infolists\Components\TextEntry::make('user.Permohonan.pedoman_magang')  
+                    ->label('Pedoman Magang')
+                    ->html(fn($record) => 
+                        $record->user->Permohonan->pedoman_magang ? 
+                        '<a href="' . route('download.pedoman_magang', ['id' => $record->user->id]) . '" class="text-blue-600" target="_blank">Download Pedoman Magang</a>' : 
+                        'No Pedoman Magang Available'
+                    ),
+                Infolists\Components\ImageEntry::make('foto')  // Foto Profil
+                    ->label('Foto Profil'),
+                Infolists\Components\TextEntry::make('user.userDetail.status_pendaftaran')  // Status Pendaftaran
+                    ->label('Status Pendaftaran'),
             ]);
-            
     }
+    
     
     public static function getPluralLabel(): string
     {

@@ -9,6 +9,7 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use App\Models\User;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -24,9 +25,19 @@ class PermohonanDiterimaResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([
-                //
-            ]);
+        ->schema([
+            Forms\Components\Select::make('user_id')
+                ->label('User')
+                ->options(User::all()->pluck('name', 'id'))
+                ->required(),
+            Forms\Components\TextInput::make('tgl_keluar')
+                ->label('Ubah Status')
+                ->options('diterima','ditolak',)
+                ->required(),
+            Forms\Components\TextInput::make('pesan')
+                ->label('Pesan')
+                ->required(),
+        ]);
     }
 
     public static function table(Table $table): Table

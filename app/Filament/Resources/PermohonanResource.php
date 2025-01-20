@@ -25,47 +25,19 @@ protected static ?string $navigationLabel = 'Masuk';
         return $form
             ->schema([
                 Forms\Components\Select::make('user_id')
-                    ->label('User')
-                    ->options(User::all()->pluck('name', 'id'))
-                    ->required(),
-
-                Forms\Components\TextInput::make('divisi')
-                    ->label('Divisi')
-                    ->required(),
-
-                Forms\Components\TextInput::make('tgl_masuk')
-                    ->label('Tanggal Masuk')
-                    ->required()
-                    ->type('date'),
-
-                Forms\Components\TextInput::make('tgl_keluar')
-                    ->label('Tanggal Keluar')
-                    ->required()
-                    ->type('date'),
-
-                Forms\Components\FileUpload::make('cv')
-                    ->label('CV')
-                    ->required()
-                    ->disk('public')
-                    ->directory('permohonan/cv'),
-
-                Forms\Components\FileUpload::make('surat_pengantar')
-                    ->label('Surat Pengantar')
-                    ->required()
-                    ->disk('public')
-                    ->directory('permohonan/surat_pengantar'),
-
-                Forms\Components\FileUpload::make('proposal')
-                    ->label('Proposal')
-                    ->required()
-                    ->disk('public')
-                    ->directory('permohonan/proposal'),
-
-                Forms\Components\FileUpload::make('pedoman_magang')
-                    ->label('Pedoman Magang')
-                    ->nullable()
-                    ->disk('public')
-                    ->directory('permohonan/pedoman_magang'),
+                ->label('User')
+                ->options(User::all()->pluck('name', 'id'))
+                ->required(),
+            Forms\Components\TextInput::make('tgl_keluar')
+                ->label('Ubah Status')
+                ->options('diterima','ditolak',)
+                ->required(),
+            Forms\Components\TextInput::make('pesan')
+                ->label('Pesan')
+                ->required(),
+            Forms\Components\TextInput::make('tipe')
+                ->label('masuk')
+                ->required(),
             ]);
     }
 
