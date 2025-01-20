@@ -9,7 +9,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('user_details', function (Blueprint $table) {
-            $table->id(); // Foreign key ke tabel users
+            $table->id(); 
             $table->unsignedBigInteger('id_user')->nullable(); // Foreign key ke tabel users
             $table->string('panggilan')->nullable(); // Nama panggilan
             $table->string('nim')->nullable(); // NIM
@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('nomor_hp')->nullable(); // Nomor hp
             $table->string('jenis_kelamin')->nullable(); // Nomor hp
             $table->string('alamat')->nullable(); // Nomor hp
-            $table->string('status_pendaftaran')->nullable(); // Nomor hp
+            $table->string('status_pendaftaran')->default('default'); // Nomor hp
             $table->string('foto')->nullable(); // Path ke foto
             $table->timestamps(); 
 
