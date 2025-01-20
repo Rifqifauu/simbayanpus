@@ -26,17 +26,7 @@ class PermohonanDiterimaResource extends Resource
     {
         return $form
         ->schema([
-            Forms\Components\Select::make('user_id')
-                ->label('User')
-                ->options(User::all()->pluck('name', 'id'))
-                ->required(),
-            Forms\Components\TextInput::make('tgl_keluar')
-                ->label('Ubah Status')
-                ->options('diterima','ditolak',)
-                ->required(),
-            Forms\Components\TextInput::make('pesan')
-                ->label('Pesan')
-                ->required(),
+           
         ]);
     }
 
