@@ -9,6 +9,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('user_details', function (Blueprint $table) {
+            $table->id(); // Foreign key ke tabel users
             $table->unsignedBigInteger('id_user')->nullable(); // Foreign key ke tabel users
             $table->string('panggilan')->nullable(); // Nama panggilan
             $table->string('nim')->nullable(); // NIM
