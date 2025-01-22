@@ -25,7 +25,7 @@ class User extends Authenticatable
     ];
     public function pesan()
     {
-        return $this->hasMany(UserDetail::class, 'id_user');
+        return $this->hasMany(Pesan::class, 'id_user');
     }
     public function userDetail()
     {

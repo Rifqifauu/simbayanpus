@@ -1,4 +1,7 @@
 <template>
+  <div v-if="$page.props.flash.success" class="alert alert-success fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-100 text-green-800 px-4 py-2 rounded shadow">
+      {{ $page.props.flash.success }}
+    </div>
   <!-- Hero Section -->
   <section class="bg-cover bg-center h-[30rem] " style="background-image: url('storage/homescreen.jpg')" data-aos="fade-up">
   <div class="bg-black bg-opacity-10 h-full flex flex-col justify-center items-center text-center text-white">
@@ -138,6 +141,7 @@ export default {
   },
   props: {
     title: String,
+    flash: Object,
   },
   mounted() {
     document.title = this.title;

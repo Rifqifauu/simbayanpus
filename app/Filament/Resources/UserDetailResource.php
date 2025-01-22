@@ -26,55 +26,73 @@ class UserDetailResource extends Resource
     protected static ?string $navigationLabel = 'Dalam Proses';
 
     public static function infolist(Infolist $infolist): Infolist
-    {
-        return $infolist
-            ->schema([
-                Infolists\Components\TextEntry::make('user.name')  // Nama Lengkap
-                    ->label('Nama Lengkap'),
-                Infolists\Components\TextEntry::make('jenis_kelamin')  // Jenis Kelamin
-                    ->label('Jenis Kelamin'),
-                Infolists\Components\TextEntry::make('program_studi')  // Program Studi
-                    ->label('Program Studi'),
-                Infolists\Components\TextEntry::make('institusi')  // Institusi
-                    ->label('Institusi'),
-                // CV - Display a download button instead of the URL
-                Infolists\Components\TextEntry::make('user.Permohonan.cv')  
-                    ->label('CV')
-                    ->html(fn($record) => 
-                        $record->user->Permohonan->cv ? 
-                        '<a href="' . route('download.cv', ['id' => $record->user->id]) . '" class="text-blue-600" target="_blank">Download CV</a>' : 
-                        'No CV Available'
-                    ),
-                // Surat Pengantar - Display a download button instead of the URL
-                Infolists\Components\TextEntry::make('user.Permohonan.surat_pengantar')  
-                    ->label('Surat Pengantar')
-                    ->html(fn($record) => 
-                        $record->user->Permohonan->surat_pengantar ? 
-                        '<a href="' . route('download.surat_pengantar', ['id' => $record->user->id]) . '" class="text-blue-600" target="_blank">Download Surat Pengantar</a>' : 
-                        'No Surat Pengantar Available'
-                    ),
-                // Proposal - Display a download button instead of the URL
-                Infolists\Components\TextEntry::make('user.Permohonan.proposal')  
-                    ->label('Proposal')
-                    ->html(fn($record) => 
-                        $record->user->Permohonan->proposal ? 
-                        '<a href="' . route('download.proposal', ['id' => $record->user->id]) . '" class="text-blue-600" target="_blank">Download Proposal</a>' : 
-                        'No Proposal Available'
-                    ),
-                // Pedoman Magang - Display a download button instead of the URL
-                Infolists\Components\TextEntry::make('user.Permohonan.pedoman_magang')  
-                    ->label('Pedoman Magang')
-                    ->html(fn($record) => 
-                        $record->user->Permohonan->pedoman_magang ? 
-                        '<a href="' . route('download.pedoman_magang', ['id' => $record->user->id]) . '" class="text-blue-600" target="_blank">Download Pedoman Magang</a>' : 
-                        'No Pedoman Magang Available'
-                    ),
-                Infolists\Components\ImageEntry::make('foto')  // Foto Profil
-                    ->label('Foto Profil'),
-                Infolists\Components\TextEntry::make('user.userDetail.status_pendaftaran')  // Status Pendaftaran
-                    ->label('Status Pendaftaran'),
-            ]);
-    }
+{
+    return $infolist
+        ->schema([
+            Infolists\Components\ImageEntry::make('foto')
+            ->label('')
+            ->size(250)
+            ->columnSpan(2), // or `columnSpan('full')`,
+            Infolists\Components\TextEntry::make('user.name')
+                ->label('Nama Lengkap'),
+            Infolists\Components\TextEntry::make('jenis_kelamin')
+                ->label('Jenis Kelamin'),
+            Infolists\Components\TextEntry::make('program_studi')
+                ->label('Program Studi'),
+            Infolists\Components\TextEntry::make('user.email')
+                ->label('Email'),
+            Infolists\Components\TextEntry::make('nomor_hp')
+                ->label('Nomor Hp'),
+            Infolists\Components\TextEntry::make('institusi')
+                ->label('Institusi'),
+            Infolists\Components\TextEntry::make('user.Permohonan.cv')
+                ->label('CV')
+                ->formatStateUsing(function ($state, $record) {
+                    if ($record->user->Permohonan->cv) {
+                        return view('components.download-link', [
+                            'url' => route('download.cv', ['id' => $record->user->id]),
+                            'label' => 'Download CV'
+                        ]);
+                    }
+                    return 'No CV Available';
+                }),
+            Infolists\Components\TextEntry::make('user.Permohonan.surat_pengantar')
+                ->label('Surat Pengantar')
+                ->formatStateUsing(function ($state, $record) {
+                    if ($record->user->Permohonan->surat_pengantar) {
+                        return view('components.download-link', [
+                            'url' => route('download.surat_pengantar', ['id' => $record->user->id]),
+                            'label' => 'Download Surat Pengantar'
+                        ]);
+                    }
+                    return 'No Surat Pengantar Available';
+                }),
+            Infolists\Components\TextEntry::make('user.Permohonan.proposal')
+                ->label('Proposal')
+                ->formatStateUsing(function ($state, $record) {
+                    if ($record->user->Permohonan->proposal) {
+                        return view('components.download-link', [
+                            'url' => route('download.proposal', ['id' => $record->user->id]),
+                            'label' => 'Download Proposal'
+                        ]);
+                    }
+                    return 'No Proposal Available';
+                }),
+            Infolists\Components\TextEntry::make('user.Permohonan.pedoman_magang')
+                ->label('Pedoman Magang')
+                ->formatStateUsing(function ($state, $record) {
+                    if ($record->user->Permohonan->pedoman_magang) {
+                        return view('components.download-link', [
+                            'url' => route('download.pedoman_magang', ['id' => $record->user->id]),
+                            'label' => 'Download Pedoman Magang'
+                        ]);
+                    }
+                    return 'No Pedoman Magang Available';
+                }),
+            Infolists\Components\TextEntry::make('user.userDetail.status_pendaftaran')
+                ->label('Status Pendaftaran'),
+        ]);
+}
     
     
     public static function getPluralLabel(): string
@@ -103,29 +121,8 @@ class UserDetailResource extends Resource
                 Tables\Columns\TextColumn::make('institusi')
                     ->label('Institusi')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('user.Permohonan.cv')
-                    ->label('CV')
-                    ->searchable()
-                    ->url(fn($record) => route('download.cv', ['id' => $record->user->id]), true),
-                
-                    Tables\Columns\TextColumn::make('user.Permohonan.surat_pengantar')
-                    ->label('Surat Pengantar')
-                    ->searchable()
-                    ->url(fn($record) => route('download.surat_pengantar', ['id' => $record->user->id]), true),
-                
-                    Tables\Columns\TextColumn::make('user.Permohonan.proposal')
-                    ->label('Proposal')
-                    ->searchable()
-                    ->url(fn($record) => route('download.proposal', ['id' => $record->user->id]), true),
-                
-                    Tables\Columns\TextColumn::make('user.Permohonan.pedoman_magang')
-                    ->label('Pedoman Magang')
-                    ->searchable()
-                    ->url(fn($record) => route('download.pedoman_magang', ['id' => $record->user->id]), true),
-                Tables\Columns\ImageColumn::make('foto')
-                ->url(fn ($record) => asset('storage/' . $record->foto))
-                ->size(100),
                 SelectColumn::make('user.userDetail.status_pendaftaran')
+                ->label('Status Pendaftaran')
     ->options([
         'diterima' => 'Terima',
         'ditolak' => 'Tolak',
@@ -135,7 +132,6 @@ class UserDetailResource extends Resource
                 
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
                 Tables\Actions\ViewAction::make(),
             ])
             ->bulkActions([
@@ -156,9 +152,8 @@ class UserDetailResource extends Resource
     public static function getPages(): array
     {
         return [
+            'view' => Pages\ViewUserDetails::route('/{record}'),
             'index' => Pages\ListUserDetails::route('/'),
-            'create' => Pages\CreateUserDetail::route('/create'),
-            'edit' => Pages\EditUserDetail::route('/{record}/edit'),
-        ];
+            'create' => Pages\CreateUserDetail::route('/create'),        ];
     }
 }

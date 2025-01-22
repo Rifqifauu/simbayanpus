@@ -184,7 +184,7 @@
           if (response.data.success) {
             alert('Pendaftaran berhasil!');
             // Reset form or redirect
-            router.visit('/home');
+            router.get('/permohonan');
             
           }
         } catch (error) {
@@ -193,9 +193,7 @@
           // Display the error message if the user has already applied
           if (error.response && error.response.data && error.response.data.message) {
             errorMessage.value = error.response.data.message;
-          } else {
-            errorMessage.value = 'Terjadi kesalahan. Silakan coba lagi.';
-          }
+          } 
         }
       };
   

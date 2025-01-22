@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Models\Pesan;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -42,6 +43,21 @@ class HomeController extends Controller
         return Inertia::render('Kontak', [
             'user' => $user,
             'title' => 'Kontak',
+        ]);
+    }
+    public function pesan()
+    {
+        // Mengambil data user yang sedang login
+        $user = Auth::user();
+        
+        // Perbaikan: Menambahkan get() untuk mengeksekusi query
+        $pesanMasuk = Pesan::where('id_user', $user->id)->get();
+
+        // Mengembalikan response Inertia yang valid
+        return Inertia::render('Pesan', [
+            'user' => $user,
+            'title' => 'Pesan',
+            'pesanMasuk' => $pesanMasuk,
         ]);
     }
 }

@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\PesanResource\Pages;
 use App\Filament\Resources\PesanResource\RelationManagers;
 use App\Models\Pesan;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -31,7 +32,18 @@ class PesanResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('user.name')  // Akses nama pengguna melalui relasi 'user'
+                ->label('Nama')
+                ->searchable()
+                ->sortable(),   
+                Tables\Columns\TextColumn::make('user.email')  // Akses nama pengguna melalui relasi 'user'
+                ->label('Email')
+                ->searchable()
+                ->sortable(),   
+                Tables\Columns\TextColumn::make('pesan')  // Akses nama pengguna melalui relasi 'user'
+                ->label('Pesan')
+                ->searchable()
+                ->sortable(),   
             ])
             ->filters([
                 //

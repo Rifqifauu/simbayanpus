@@ -98,9 +98,42 @@
             <a href="/register" class="text-red-700 hover:underline">Daftar Sekarang</a>
           </p>
         </div>
+      </div>
+    </div>
 
-        <!-- Kembali ke Beranda link -->
+    <!-- Modal for Error Messages -->
+    <div v-if="showModal" class="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center z-50">
+      <div class="bg-white p-6 rounded-lg shadow-lg w-80">
+        <div class="flex justify-between items-center">
+          <h3 class="text-xl font-semibold text-red-700">Error</h3>
+          <button @click="closeModal" class="text-gray-600 hover:text-gray-800">X</button>
+        </div>
+        <div class="mt-4">
+          <p class="text-gray-800">{{ errorMessage }}</p>
+        </div>
+        <div class="mt-6 text-center">
+          <button @click="closeModal" class="px-4 py-2 bg-red-700 text-white rounded-lg hover:bg-red-800">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
 
+    <!-- Modal for Success Messages -->
+    <div v-if="showSuccessModal" class="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center z-50">
+      <div class="bg-white p-6 rounded-lg shadow-lg w-80">
+        <div class="flex justify-between items-center">
+          <h3 class="text-xl font-semibold text-green-700">Login Berhasil</h3>
+          <button @click="closeSuccessModal" class="text-gray-600 hover:text-gray-800">X</button>
+        </div>
+        <div class="mt-4">
+          <p class="text-gray-800">{{ successMessage }}</p>
+        </div>
+        <div class="mt-6 text-center">
+          <button @click="closeSuccessModal" class="px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800">
+            Close
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -109,44 +142,70 @@
 <script>
 import { ref, onMounted } from 'vue'
 import AOS from 'aos'
+import axios from 'axios';
 import 'aos/dist/aos.css'
-import { router} from '@inertiajs/vue3';
+
 export default {
   setup() {
     const form = ref({
       email: '',
       password: '',
       remember: false
-    })
-    onMounted(() => {
-      document.title = "Login"  // Set the title dynamically when the component is mounted
-    })
-
-    const showPassword = ref(false)
+    });
+    const showPassword = ref(false);
+    const showModal = ref(false);
+    const errorMessage = ref('');
+    const showSuccessModal = ref(false);
+    const successMessage = ref('Login Berhasil!');
 
     const handleLogin = async () => {
       try {
-        // Implement login logic here
-        console.log('Login attempted with:', form.value)
-        router.post('/login', form.value)
+        console.log('Login attempted with:', form.value);
+        // Menggunakan axios untuk POST request
+        const response = await axios.post('/login', form.value);
+        console.log('Login successful:', response.data);
+        // Jika login berhasil, tampilkan modal sukses
+        showSuccessModal.value = true;
+        showModal.value = false;
+
       } catch (error) {
-        console.error('Login error:', error)
+        if (error.response && error.response.data.errors) {
+          // Capture error message dan tampilkan modal error
+          errorMessage.value = error.response.data.errors.email[0]; // Assuming error is related to email
+          showModal.value = true;
+        } else {
+          console.error('An unexpected error occurred:', error);
+        }
       }
-    }
+    };
+    const closeModal = () => {
+      showModal.value = false;
+    };
+    const closeSuccessModal = () => {
+      showSuccessModal.value = false;
+      document.location.href = '/home';
+    };
 
     onMounted(() => {
-      AOS.init() // Initialize AOS
-    })
+      AOS.init(); // Initialize AOS (Animate on Scroll)
+      document.title = "Login"; // Set dynamic title
+    });
 
     return {
       form,
       showPassword,
-      handleLogin
-    }
+      showModal,
+      errorMessage,
+      showSuccessModal,
+      successMessage,
+      handleLogin,
+      closeModal,
+      closeSuccessModal
+    };
   }
-}
+};
 </script>
 
 <style scoped>
-/* Add any additional custom styles here */
+/* Additional custom styles */
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen flex flex-col">
     <header>
-      <nav class="bg-gradient-to-r from-red-600 to-red-700 text-white">
+      <nav class="bg-gradient-to-r from-red-600 to-red-700 text-white ">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="flex justify-between items-center h-16">
             <!-- Logo/Brand -->
@@ -15,7 +15,7 @@
 
 </div>
             <!-- Desktop Navigation -->
-            <div class="hidden lg:flex lg:items-center lg:space-x-8 ml-auto pe-4">
+            <div class="hidden lg:flex lg:items-center lg:space-x-8 ml-auto pe-4  ">
               <button @click="home" class="text-lg text-white hover:text-gray-200 transition px-3 py-2">
                 Beranda
               </button>

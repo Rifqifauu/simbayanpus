@@ -15,7 +15,6 @@
         </button>
       </div>
 
-
       <form @submit.prevent="handleSubmit" class="md:flex">
         <!-- Sidebar -->
         <aside class="md:w-2/5 p-6 bg-gray-50">
@@ -121,7 +120,7 @@
         </main>
       </form>
     </div>
-  </div>
+</div>
 </template>
 
 <script>
@@ -129,7 +128,6 @@ import axios from 'axios';
 import { defineComponent, ref, computed } from 'vue';
 import { router } from '@inertiajs/vue3'; // Update this import
 import AppLayout from '@/Layouts/AppLayout.vue';
-
 
 
 // Form Input Component
@@ -227,6 +225,8 @@ const FormSelect = defineComponent({
 });
 
 export default {
+  components: {
+  },
   name: 'EditProfile',
   layout: AppLayout,
   components: {
@@ -245,13 +245,16 @@ export default {
       required: true,
     },
     title : String,
+    success: String,
+    error: String,
   },
   
   mounted(){
     document.title = this.title;
-  },
+},
 
   setup(props) {
+    console.log('Props di setup:', props);
    
 // Mendapatkan akses ke $inertia
     const formData = ref({
@@ -307,7 +310,6 @@ export default {
     console.log(response.data);  
 
     if (response.status === 200) {
-      router.visit('/profile'); // Redirect setelah sukses
     }
   } catch (error) {
     console.error('Error updating profile:', error);

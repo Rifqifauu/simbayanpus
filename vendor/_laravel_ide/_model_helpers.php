@@ -768,7 +768,7 @@ namespace App\Models {
      * @property string $email
      * @property string $name
      * @property int $id
-     * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserDetail> $pesan
+     * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Pesan> $pesan
      * @property-read int|null $pesan_count
      * @property-read \App\Models\UserDetail $userDetail
      * @property-read \App\Models\Permohonan $Permohonan
