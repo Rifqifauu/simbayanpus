@@ -2,7 +2,7 @@
   <div class="h-screen flex">
     <!-- Left side with illustration, hidden on mobile -->
     <div 
-      class="w-1/2 bg-red-700 p-14 relative hidden md:block absolute inset-0 bg-gradient-to-l from-red-700 to-red-800 transition-opacity duration-500 ease-in-out" 
+      class="w-1/2 bg-red-700 p-14 relative hidden md:block inset-0 bg-gradient-to-l from-red-700 to-red-800 transition-opacity duration-500 ease-in-out" 
       style="border-top-right-radius: 2rem; border-bottom-right-radius: 2rem;" 
       data-aos="fade-right" 
       data-aos-duration="1000">
@@ -105,8 +105,7 @@
     <div v-if="showModal" class="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center z-50">
       <div class="bg-white p-6 rounded-lg shadow-lg w-80">
         <div class="flex justify-between items-center">
-          <h3 class="text-xl font-semibold text-red-700">Error</h3>
-          <button @click="closeModal" class="text-gray-600 hover:text-gray-800">X</button>
+          <h3 class="text-xl font-semibold text-red-700">Gagal Masuk!</h3>
         </div>
         <div class="mt-4">
           <p class="text-gray-800">{{ errorMessage }}</p>
@@ -121,22 +120,17 @@
 
     <!-- Modal for Success Messages -->
     <div v-if="showSuccessModal" class="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center z-50">
-      <div class="bg-white p-6 rounded-lg shadow-lg w-80">
-        <div class="flex justify-between items-center">
-          <h3 class="text-xl font-semibold text-green-700">Login Berhasil</h3>
-          <button @click="closeSuccessModal" class="text-gray-600 hover:text-gray-800">X</button>
-        </div>
-        <div class="mt-4">
-          <p class="text-gray-800">{{ successMessage }}</p>
-        </div>
-        <div class="mt-6 text-center">
-          <button @click="closeSuccessModal" class="px-4 py-2 bg-green-700 text-white rounded-lg hover:bg-green-800">
-            Close
-          </button>
-        </div>
+    <div class="bg-white p-6 rounded-lg shadow-lg w-80">
+      <div class="text-center">
+        <h3 class="text-2xl font-semibold text-green-700">Anda Berhasil Masuk</h3>
+      </div>
+      <div class="mt-6 text-center">
+        <img src="../../../storage/asset/berhasil.gif" alt="Success Illustration" class="mx-auto mb-50 w-40 h-50">
+        <p class="text-gray-800">{{ successMessage }}</p>
+      </div>
       </div>
     </div>
-  </div>
+</div>
 </template>
 
 <script>
@@ -156,7 +150,7 @@ export default {
     const showModal = ref(false);
     const errorMessage = ref('');
     const showSuccessModal = ref(false);
-    const successMessage = ref('Login Berhasil!');
+    const successMessage = ref('');
 
     const handleLogin = async () => {
       try {
@@ -167,7 +161,7 @@ export default {
         // Jika login berhasil, tampilkan modal sukses
         showSuccessModal.value = true;
         showModal.value = false;
-
+        document.location.href = '/home';
       } catch (error) {
         if (error.response && error.response.data.errors) {
           // Capture error message dan tampilkan modal error

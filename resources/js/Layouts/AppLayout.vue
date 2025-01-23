@@ -8,8 +8,8 @@
             <div class="flex justify-between items-center h-16">
   <!-- Logo/Brand -->
   <div class="flex-shrink-0 p-2">
-  <a href="storage/logo-balaiyanpus.svg" class="text-white text-lg font-bold hover:text-gray-200 transition">
-    <img src="storage/logo-balaiyanpus.svg" alt="Logo" class="w-14 h-auto">
+  <a href="../../../storage/asset/logo-removebg-preview.png" class="text-white text-lg font-bold hover:text-gray-200 transition">
+    <img src="../../../storage/asset/logo-removebg-preview.png" alt="Logo" class="w-14 h-auto">
   </a>
 </div>
 

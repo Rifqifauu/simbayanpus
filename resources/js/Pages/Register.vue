@@ -11,10 +11,11 @@
         <p class="text-lg text-white mb-10">
           Daftarkan akun Anda untuk mendaftar magang dan mengakses semua fitur.
         </p>
-        <img src="/storage/register.svg" alt="Illustration" class="w-100" />
+        <img src="../../../storage/asset/Element/undraw_post_eok2.svg" alt="Illustration" class="w-100" />
       </div>
   
       <!-- Right side with registration form -->
+      
       <div class="w-full md:w-1/2 p-8 flex flex-col justify-center">
         <div class="max-w-md w-full mx-auto">
           <h2 class="text-3xl font-bold mb-4 text-red-700">Daftar</h2>
@@ -106,10 +107,41 @@
         </div>
       </div>
     </div>
+
+        <!-- Modal for Error Messages -->
+        <div v-if="showModal" class="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center z-50">
+      <div class="bg-white p-6 rounded-lg shadow-lg w-80">
+        <div class="flex justify-between items-center">
+          <h3 class="text-xl font-semibold text-red-700">Error</h3>
+        </div>
+        <div class="mt-4">
+          <p class="text-gray-800">{{ errorMessage }}</p>
+        </div>
+        <div class="mt-6 text-center">
+          <button @click="closeModal" class="px-4 py-2 bg-red-700 text-white rounded-lg hover:bg-red-800">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal for Success Messages -->
+    <div v-if="showSuccessModal" class="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center z-50">
+      <div class="bg-white p-6 rounded-lg shadow-lg w-80">
+        <div class="text-center">
+          <h3 class="text-xl font-semibold text-green-700">Daftar Berhasil</h3>
+        </div>
+        <div class="mt-6 text-center">
+        <img src="../../../storage/asset/daftarberhasil.gif" alt="Success Illustration" class="mx-auto mb-50 w-40 h-50">
+        <p class="text-gray-800">{{ successMessage }}</p>
+      </div>
+      </div>
+    </div>
   </template>
   
   <script>
   import { ref } from "vue";
+  import axios from "axios";
   import { router } from "@inertiajs/vue3";
   
   export default {
@@ -124,32 +156,58 @@
       const errors = ref({});
       const showPassword = ref(false);
       const showConfirmPassword = ref(false);
-  
+      const showModal = ref(false);
+      const errorMessage = ref('');
+      const showSuccessModal = ref(false);
+      const successMessage = ref('Pendaftaran Akun Anda Berhasil');
+
+
       const handleRegister = async () => {
-        try {
-          // Send data to the backend using Inertia
-          await router.post("/register", form.value, {
-            onError: (serverErrors) => {
-              errors.value = serverErrors;
-            },
-          });
-        } catch (error) {
-          console.error("Error during registration:", error);
+      try {
+        console.log('Register attempted with:', form.value);
+        // Menggunakan axios untuk POST request
+        const response = await axios.post('/register', form.value);
+        console.log('Register successful:', response.data);
+        // Jika login berhasil, tampilkan modal sukses
+        showSuccessModal.value = true;
+        showModal.value = false;
+        document.location.href = '/login';
+
+      } catch (error) {
+        if (error.response && error.response.data.errors) {
+          // Capture error message dan tampilkan modal error
+          errorMessage.value = error.response.data.errors.email[0]; // Assuming error is related to email
+          showModal.value = true;
+        } else {
+          console.error('An unexpected error occurred:', error);
         }
+      }
+    };
+      const closeModal = () => {
+        showModal.value = false;
       };
-  
+      const closeSuccessModal = () => {
+        showSuccessModal.value = false;
+        document.location.href = '/login';
+      };
       return {
         form,
         errors,
         showPassword,
         showConfirmPassword,
         handleRegister,
+        showModal,
+        errorMessage,
+        showSuccessModal,
+        successMessage,
+        closeModal,
+        closeSuccessModal
       };
     },
   };
   </script>
   
   <style scoped>
-  /* Additional styles here */
+
   </style>
   

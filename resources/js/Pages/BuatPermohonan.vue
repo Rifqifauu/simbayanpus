@@ -206,7 +206,7 @@
         handleFileUpload,
         triggerFileInput,
         submitForm,
-        errorMessage // Include errorMessage in the return
+        errorMessage,
       };
     }
   };
