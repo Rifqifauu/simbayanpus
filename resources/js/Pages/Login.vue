@@ -104,16 +104,12 @@
     <!-- Modal for Error Messages -->
     <div v-if="showModal" class="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center z-50">
       <div class="bg-white p-6 rounded-lg shadow-lg w-80">
-        <div class="flex justify-between items-center">
+        <div class="text-center">
           <h3 class="text-xl font-semibold text-red-700">Gagal Masuk!</h3>
         </div>
-        <div class="mt-4">
+        <div class="mt-4 text-center">
+          <img src="../../../storage/asset/gagal.gif" alt="Success Illustration" class="mx-auto mb-50 w-40 h-50">
           <p class="text-gray-800">{{ errorMessage }}</p>
-        </div>
-        <div class="mt-6 text-center">
-          <button @click="closeModal" class="px-4 py-2 bg-red-700 text-white rounded-lg hover:bg-red-800">
-            Close
-          </button>
         </div>
       </div>
     </div>
@@ -167,6 +163,11 @@ export default {
           // Capture error message dan tampilkan modal error
           errorMessage.value = error.response.data.errors.email[0]; // Assuming error is related to email
           showModal.value = true;
+          setTimeout(
+            () => {
+              showModal.value = false;
+            },2000
+          );
         } else {
           console.error('An unexpected error occurred:', error);
         }
