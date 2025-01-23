@@ -312,7 +312,18 @@ export default {
     if (response.status === 200) {
     }
   } catch (error) {
+    if (error.response && error.response.data.errors) {
     console.error('Error updating profile:', error);
+    errorMessage.value = error.response.data.errors; // Assuming error is related to email
+    } else {
+          console.error('An unexpected error occurred:', error.response.data.messages)
+          for (let key in error.response.data.messages) {
+          if (error.response.data.messages.hasOwnProperty(key)) {
+            // Menampilkan setiap pesan error untuk masing-masing field
+            console.log(`Error in ${key}:`, error.response.data.messages[key][0]);
+          }
+        }
+        }
   }
 };
 
