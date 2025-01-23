@@ -11,7 +11,7 @@
                     {{ isEdit ? "Edit Profile" : "Create Profile" }}
                 </h2>
                 <button
-                    @click="openModal"
+                    @click="handleSubmit"
                     class="flex items-center bg-white text-red-600 px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors"
                 >
                     <svg

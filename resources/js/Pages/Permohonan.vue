@@ -187,7 +187,7 @@
                             >
                                 <DialogTitle
                                     as="h3"
-                                    class="text-lg font-medium leading-6 text-gray-900"
+                                    class="text-lg font-medium leading-6 text-gray-900 text-center"
                                 >
                                     Belum Ada Permohonan
                                 </DialogTitle>
@@ -200,7 +200,7 @@
                                     </p>
                                 </div>
 
-                                <div class="mt-4">
+                                <div class="mt-4 text-center">
                                     <button
                                         type="button"
                                         class="inline-flex justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"

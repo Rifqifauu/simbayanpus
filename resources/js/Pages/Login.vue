@@ -116,17 +116,16 @@
 
     <!-- Modal for Success Messages -->
     <div v-if="showSuccessModal" class="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center z-50">
-    <div class="bg-white p-6 rounded-lg shadow-lg w-80">
-      <div class="text-center">
-        <h3 class="text-2xl font-semibold text-green-700">Anda Berhasil Masuk</h3>
-      </div>
-      <div class="mt-6 text-center">
-        <img src="../../../storage/asset/berhasil.gif" alt="Success Illustration" class="mx-auto mb-50 w-40 h-50">
-        <p class="text-gray-800">{{ successMessage }}</p>
-      </div>
+      <div class="bg-white p-6 rounded-lg shadow-lg w-80">
+        <div class="text-center">
+          <h3 class="text-2xl font-semibold text-green-700">Anda Berhasil Masuk</h3>
+        </div>
+        <div class="mt-6 text-center">
+          <img src="../../../storage/asset/berhasil.gif" alt="Success Illustration" class="mx-auto mb-50 w-40 h-50">
+        </div>
       </div>
     </div>
-</div>
+  </div>
 </template>
 
 <script>
@@ -148,31 +147,34 @@ export default {
     const showSuccessModal = ref(false);
     const successMessage = ref('');
 
-    const handleLogin = async () => {
-      try {
-        console.log('Login attempted with:', form.value);
-        // Menggunakan axios untuk POST request
-        const response = await axios.post('/login', form.value);
-        console.log('Login successful:', response.data);
-        // Jika login berhasil, tampilkan modal sukses
-        showSuccessModal.value = true;
+const handleLogin = async () => {
+  try {
+    console.log('Login attempted with:', form.value);
+    const response = await axios.post('/login', form.value);
+    console.log('Login successful:', response.data);
+    successMessage.value = 'Login berhasil! Anda akan diarahkan ke halaman utama.';
+    showSuccessModal.value = true;
+    showModal.value = false;
+    setTimeout(() => {
+      document.location.href = '/home';
+      }, 2000);
+  } catch (error) {
+    if (error.response && error.response.data.errors) {
+      errorMessage.value = error.response.data.errors.email[0]; // Pesan error dari server
+      showModal.value = true; // Tampilkan modal error
+      setTimeout(() => {
         showModal.value = false;
-        document.location.href = '/home';
-      } catch (error) {
-        if (error.response && error.response.data.errors) {
-          // Capture error message dan tampilkan modal error
-          errorMessage.value = error.response.data.errors.email[0]; // Assuming error is related to email
-          showModal.value = true;
-          setTimeout(
-            () => {
-              showModal.value = false;
-            },2000
-          );
-        } else {
-          console.error('An unexpected error occurred:', error);
-        }
-      }
-    };
+      }, 2000);
+    } else {
+      errorMessage.value = 'Terjadi kesalahan tak terduga. Silakan coba lagi nanti.';
+      showModal.value = true;
+      setTimeout(() => {
+        showModal.value = false;
+      }, 2000);
+    }
+  }
+};
+
     const closeModal = () => {
       showModal.value = false;
     };
@@ -182,8 +184,8 @@ export default {
     };
 
     onMounted(() => {
-      AOS.init(); // Initialize AOS (Animate on Scroll)
-      document.title = "Login"; // Set dynamic title
+      AOS.init();
+      document.title = "Login";
     });
 
     return {
@@ -202,5 +204,4 @@ export default {
 </script>
 
 <style scoped>
-/* Additional custom styles */
 </style>

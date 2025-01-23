@@ -107,7 +107,7 @@ Balai Layanan Perpustakaan DPAD DIY    </h3>
   <!-- Locations Section -->
   <section class="bg-gray-100 py-16 px-6" data-aos="fade-up">
     <h3 class="text-2xl lg:text-3xl font-bold text-center mb-10">Lokasi Magang</h3>
-    <div class="container mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
+    <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
       <div class="bg-white p-6 rounded-lg shadow-md text-center hover:shadow-lg transition duration-300" data-aos="fade-up">
         <img src="https://www.ha-fizh.com/wp-content/uploads/2018/07/grhtm-fzh.jpg" alt="Grhatama Pustaka" class="rounded mb-4 w-full h-48 object-cover">
         <h4 class="font-bold">Grhatama Pustaka</h4>
@@ -119,10 +119,6 @@ Balai Layanan Perpustakaan DPAD DIY    </h3>
       <div class="bg-white p-6 rounded-lg shadow-md text-center hover:shadow-lg transition duration-300" data-aos="fade-up" data-aos-delay="200">
         <img src="https://dpad.jogjaprov.go.id/public/article/845/1452812532_845.jpg" alt="Rumah Belajar Modern" class="rounded mb-4 w-full h-48 object-cover">
         <h4 class="font-bold">Rumah Belajar Modern</h4>
-      </div>
-      <div class="bg-white p-6 rounded-lg shadow-md text-center hover:shadow-lg transition duration-300" data-aos="fade-up" data-aos-delay="300">
-        <img src="https://www.infopublik.id/resources/album/pelayanan-publik/1_antarafoto-perpustakaan-keliling-monika-di-yogyakrta-140723-afa-3.jpg" alt="Perpustakaan Keliling" class="rounded mb-4 w-full h-48 object-cover">
-        <h4 class="font-bold">Perpustakaan Keliling</h4>
       </div>
     </div>
   </section>
