@@ -59,15 +59,15 @@
 
       <!-- Contact Form Card -->
       <div class="bg-red-600 rounded-lg p-6 text-white">
-        <form @submit.prevent="submitForm">
+        <div v-if="!user" class="text-left">
+          <form @submit.prevent="submitForm">
           <div class="mb-4">
             <label for="nama" class="block text-xl font-semibold mb-2">Nama</label>
             <input
               id="nama"
-              v-model="user.name"
+              value="Nama Pengguna"
               type="text"
               class="w-full px-4 py-2 rounded-lg bg-white/20 text-white placeholder-white/70"
-              required
               disabled
             />
           </div>
@@ -76,10 +76,48 @@
             <label for="email" class="block text-xl font-semibold mb-2">Email</label>
             <input
               id="email"
-              v-model="user.email"
+              value="Email"
               type="email"
               class="w-full px-4 py-2 rounded-lg bg-white/20 text-white placeholder-white/70"
-              required
+              disabled
+            />
+          </div>
+
+          <div class="mb-6">
+            <label for="pesan" class="block text-xl font-semibold mb-2">Tulis Pesan</label>
+            <textarea
+              id="pesan"
+              class="w-full px-4 py-2 rounded-lg bg-white text-gray-900 h-32 placeholder-gray-500"
+              placeholder="Silahkan login untuk mengirim pesan..."
+              disabled 
+            ></textarea>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-4 rounded-lg transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+          disabled>         Kirim Pesan </button>
+        </form>        </div>
+
+        <form v-else @submit.prevent="submitForm">
+          <div class="mb-4">
+            <label for="nama" class="block text-xl font-semibold mb-2">Nama</label>
+            <input
+              id="nama"
+              :value="user.name"
+              type="text"
+              class="w-full px-4 py-2 rounded-lg bg-white/20 text-white placeholder-white/70"
+              disabled
+            />
+          </div>
+
+          <div class="mb-4">
+            <label for="email" class="block text-xl font-semibold mb-2">Email</label>
+            <input
+              id="email"
+              :value="user.email"
+              type="email"
+              class="w-full px-4 py-2 rounded-lg bg-white/20 text-white placeholder-white/70"
               disabled
             />
           </div>
@@ -124,24 +162,34 @@ export default {
     },
     user: {
       type: Object,
-      required: true
+      default: null
     }
   },
 
   setup(props) {
     const isSubmitting = ref(false);
+    
     const formData = ref({
       pesan: '',
-      asal: 'user',
-      id_user: props.user.id,
+      asal: 'user'
     });
 
-    const submitForm = async () => {
-      try {
-        console.log(formData.value);
+    const redirectToLogin = () => {
+      window.location.href = '/login';
+    };
 
+    const submitForm = async () => {
+      if (!props.user) {
+        alert('Anda harus login untuk mengirim pesan.');
+        return;
+      }
+
+      try {
         isSubmitting.value = true;
-        await axios.post('/pesan', formData.value);
+        await axios.post('/pesan', {
+          ...formData.value,
+          id_user: props.user.id
+        });
         formData.value.pesan = '';
         alert('Pesan berhasil dikirim!');
       } catch (error) {
@@ -155,7 +203,8 @@ export default {
     return {
       formData,
       isSubmitting,
-      submitForm
+      submitForm,
+      redirectToLogin
     };
   },
 
