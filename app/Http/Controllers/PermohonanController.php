@@ -8,13 +8,14 @@ use Inertia\Inertia;
 use App\Models\UserDetail;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Divisi;
+use App\Models\User;
 class PermohonanController extends Controller
 {
     
     public function index()
     {
         $user = Auth::user();
-        $status = optional($user->userDetail)->status_pendaftaran; // Menggunakan optional() untuk menghindari error null
+        $status = optional($user->userDetail)->status_pendaftaran ?? null; // Menggunakan optional() untuk menghindari error null
     
         return Inertia::render('Permohonan', [
             'user'=> $user,
@@ -32,8 +33,7 @@ class PermohonanController extends Controller
             'user' => $user,
             'divisions' => $divisi,
         ]);
-    }
-    public function store(Request $request)
+    }    public function store(Request $request)
 {
     // Check if the user already has a submitted application
     $user = Auth::user();
@@ -97,5 +97,21 @@ class PermohonanController extends Controller
         'message' => 'Pendaftaran berhasil disimpan.',
     ]);
 }
+public function action(Request $request, $id) {
+    $user = User::find($id);
+        if (!$user) {
+            return back()->with('error', 'User tidak ditemukan');
+        }
+        $userDetail = $user->userDetail;
+        if ($userDetail) {
+            $userDetail->update(['status_pendaftaran' => $request->input('status_pendaftaran')]);
+        }
+        $user->pesan()->updateOrCreate(
+            ['user_id' => $user->id],
+            ['pesan' => $request->input('pesan')]
+        );
+
+        return back()->with('success', 'Data berhasil diperbarui');
+    }
 
 }

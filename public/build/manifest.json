@@ -1,15 +1,42 @@
 {
   "resources/css/app.css": {
-    "file": "assets/app-D8CKXguj.css",
+    "file": "assets/app-7uKc_IGh.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
   "resources/js/app.js": {
-    "css": [
-      "assets/app-DMP9l_w7.css"
+    "assets": [
+      "assets/logo-removebg-preview-WrLuXYUv.png",
+      "assets/gagal-B1QrhP0p.gif",
+      "assets/berhasil-Cm1ALE9X.gif",
+      "assets/daftarberhasil-Bv8dPwkI.gif",
+      "assets/undraw_post_eok2-Bcoasy7g.svg"
     ],
-    "file": "assets/app-DKwCnPOK.js",
+    "css": [
+      "assets/app-BUF4sPj4.css"
+    ],
+    "file": "assets/app-DhTd6dNQ.js",
     "isEntry": true,
     "src": "resources/js/app.js"
+  },
+  "storage/asset/Element/undraw_post_eok2.svg": {
+    "file": "assets/undraw_post_eok2-Bcoasy7g.svg",
+    "src": "storage/asset/Element/undraw_post_eok2.svg"
+  },
+  "storage/asset/berhasil.gif": {
+    "file": "assets/berhasil-Cm1ALE9X.gif",
+    "src": "storage/asset/berhasil.gif"
+  },
+  "storage/asset/daftarberhasil.gif": {
+    "file": "assets/daftarberhasil-Bv8dPwkI.gif",
+    "src": "storage/asset/daftarberhasil.gif"
+  },
+  "storage/asset/gagal.gif": {
+    "file": "assets/gagal-B1QrhP0p.gif",
+    "src": "storage/asset/gagal.gif"
+  },
+  "storage/asset/logo-removebg-preview.png": {
+    "file": "assets/logo-removebg-preview-WrLuXYUv.png",
+    "src": "storage/asset/logo-removebg-preview.png"
   }
 }

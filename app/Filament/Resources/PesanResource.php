@@ -23,9 +23,20 @@ class PesanResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([
-                //
-            ]);
+        ->schema([
+            Forms\Components\Select::make('id_user')
+                ->label('User Email')
+                ->options(User::pluck('email', 'id')) // Ambil email sebagai label, ID sebagai value
+                ->searchable() // Tambahkan fitur pencarian jika banyak data
+                ->preload(), // Memuat opsi lebih cepat
+            
+            Forms\Components\Textarea::make('pesan')
+                ->label('Pesan')
+                ->maxLength(500),
+    
+            Forms\Components\Hidden::make('asal')
+                ->default('admin'),
+        ]);
     }
 
     public static function table(Table $table): Table
@@ -69,8 +80,6 @@ class PesanResource extends Resource
     {
         return [
             'index' => Pages\ListPesans::route('/'),
-            'create' => Pages\CreatePesan::route('/create'),
-            'edit' => Pages\EditPesan::route('/{record}/edit'),
         ];
     }
 }

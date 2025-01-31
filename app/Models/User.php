@@ -27,6 +27,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Pesan::class, 'id_user');
     }
+    public function dokumen()
+    {
+        return $this->hasMany(Dokumen::class, 'id_user');
+    }
     public function userDetail()
     {
         return $this->hasOne(UserDetail::class, 'id_user');

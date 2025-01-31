@@ -3,10 +3,10 @@
         <!-- Header with updated styling -->
         <header class="header">
             <h1 class="title">Status Permohonan</h1>
-            <p class="subtitle">Lacak kemajuan permohonan Anda dengan mudah</p>
+            <img v-if="status !== 'default' && status !==null " :src="currentStatus.image" alt="" class="mx-auto max-w-18 pt-2 h-auto">
         </header>
 
-        <template v-if="status !== 'default'">
+        <template v-if="status !== 'default' && status !==null ">
             <!-- Updated Progress Bar -->
             <div class="progress-container" aria-live="polite">
                 <div class="progress-bar">
@@ -152,73 +152,37 @@
             </div>
         </template>
 
-        <!-- Default Status Modal -->
-        <TransitionRoot appear :show="status === 'default'" as="template">
-            <Dialog as="div" @close="closeModal" class="relative z-10">
-                <!-- Backdrop -->
-                <TransitionChild
-                    as="template"
-                    enter="duration-300 ease-out"
-                    enter-from="opacity-0"
-                    enter-to="opacity-100"
-                    leave="duration-200 ease-in"
-                    leave-from="opacity-100"
-                    leave-to="opacity-0"
-                >
-                    <div class="fixed inset-0 bg-black bg-opacity-25" />
-                </TransitionChild>
-
-                <!-- Modal Content -->
-                <div class="fixed inset-0 overflow-y-auto">
-                    <div
-                        class="flex min-h-full items-center justify-center p-4 text-center"
-                    >
-                        <TransitionChild
-                            as="template"
-                            enter="duration-300 ease-out"
-                            enter-from="opacity-0 scale-95"
-                            enter-to="opacity-100 scale-100"
-                            leave="duration-200 ease-in"
-                            leave-from="opacity-100 scale-100"
-                            leave-to="opacity-0 scale-95"
-                        >
-                            <DialogPanel
-                                class="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all"
-                            >
-                                <DialogTitle
-                                    as="h3"
-                                    class="text-lg font-medium leading-6 text-gray-900 text-center"
-                                >
-                                    Belum Ada Permohonan
-                                </DialogTitle>
-
-                                <div class="mt-2">
-                                    <p class="text-sm text-gray-500">
-                                        Anda belum melakukan permohonan apapun.
-                                        Silakan mulai dengan mengajukan
-                                        permohonan melalui tombol di bawah ini.
-                                    </p>
-                                </div>
-
-                                <div class="mt-4 text-center">
-                                    <button
-                                        type="button"
-                                        class="inline-flex justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
-                                        @click="handleNewSubmission"
-                                    >
-                                        Buat Permohonan Baru
-                                    </button>
-                                </div>
-                            </DialogPanel>
-                        </TransitionChild>
-                    </div>
+    <div v-if="status === 'default' || status === null" class="relative z-10">
+    <div class="fixed inset-0 bg-black bg-opacity-25"></div>
+    <div class="fixed inset-0 overflow-y-auto">
+        <div class="flex min-h-full items-center justify-center p-4 text-center">
+            <div class="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+                <h3 class="text-lg font-medium leading-6 text-gray-900 text-center">
+                    {{ getTitle() }}
+                </h3>
+                <div class="mt-2">
+                    <p class="text-sm text-gray-500">
+                        {{ getMessage() }}
+                    </p>
                 </div>
-            </Dialog>
-        </TransitionRoot>
+                <div class="mt-4 text-center">
+                    <button
+                        type="button"
+                        class="inline-flex justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
+                        @click="handleAction"
+                    >
+                        {{ getButtonText() }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
     </div>
 </template>
 
 <script>
+import { router } from "@inertiajs/vue3";
 import { defineComponent } from "vue";
 import {
     Dialog,
@@ -247,8 +211,11 @@ export default defineComponent({
             type: String,
             required: true,
             validator: (value) =>
-                ["default", "pending", "diproses", "diterima"].includes(value),
-            default: "default",
+                [null,"default", "pending", "diproses", "diterima","ditolak"].includes(value),
+            default: null,
+        },
+        user: {
+            type: Object,
         },
     },
 
@@ -257,7 +224,7 @@ export default defineComponent({
             steps: [
                 {
                     id: "pending",
-                    label: "Pending",
+                    label: "Dikirim",
                     description: "Permohonan dikirim",
                 },
                 {
@@ -273,16 +240,19 @@ export default defineComponent({
             ],
             statusContent: {
                 pending: {
+                    image: '/storage/pending.svg',
                     title: "Permohonan Dikirim",
                     description:
                         "Permohonan Anda sedang dikirim ke sistem kami. Silakan tunggu notifikasi selanjutnya.",
                 },
                 diproses: {
+                    image: 'storage/diproses.svg',
                     title: "Sedang Diproses",
                     description:
                         "Tim kami sedang memproses permohonan Anda. Kami akan memberikan update secara berkala.",
                 },
                 diterima: {
+                    image: 'storage/diterima.svg',
                     title: "Permohonan diterima",
                     description:
                         "Selamat! Permohonan magang Anda telah diterima. Silakan unduh atau cetak dokumen Anda.",
@@ -295,9 +265,21 @@ export default defineComponent({
         currentStatus() {
             return this.statusContent[this.status];
         },
+   
     },
 
     methods: {
+        keteranganDiterima() {
+        if (this.user && this.user.id) {
+            window.location.href = `/download/sk_diterima/${this.user.id}`;
+        } else {
+            console.error("User ID tidak ditemukan");
+        }},
+        pedomanMagang() {
+            window.location.href = `/download/pedoman_magang`;
+    },
+    
+       
         isActive(step) {
             const steps = this.steps.map((s) => s.id);
             return steps.indexOf(step) <= steps.indexOf(this.status);
@@ -309,6 +291,32 @@ export default defineComponent({
                 steps.indexOf(stepId) < steps.indexOf(this.status) ||
                 (this.status === "diterima" && stepId === "diterima")
             );
+        },
+        getTitle() {
+            if (this.status === 'default') return 'Belum Ada Permohonan';
+            if (this.status === null) return 'Belum Ada Data Profil';
+            return '';
+        },
+        getMessage() {
+            if (this.status === 'default') {
+                return 'Anda belum melakukan permohonan apapun. Silakan mulai dengan mengajukan permohonan melalui tombol di bawah ini.';
+            }
+            if (this.status === null) {
+                return 'Anda belum mengisi data profil. Silahkan isi terlebih dahulu.';
+            }
+            return '';
+        },
+        getButtonText() {
+            if (this.status === 'default') return 'Buat Permohonan Baru';
+            if (this.status === null) return 'Ke halaman profil';
+            return '';
+        },
+        handleAction() {
+            if (this.status === 'default') {
+                this.handleNewSubmission();
+            } else if (this.status === null) {
+                this.profil();
+            }
         },
 
         handleSupport() {
@@ -330,17 +338,20 @@ export default defineComponent({
         handleNewSubmission() {
             window.location.href = "/permohonan/create";
         },
+        profil() {
+            window.location.href = "/profile";
+        },
     },
 });
 </script>
 
 <style scoped>
 .status-page {
-    @apply min-h-screen bg-red-50 py-12 px-4 sm:px-6 lg:px-8;
+    @apply min-h-screen bg-red-50 py-4 px-4 sm:px-6 lg:px-8;
 }
 
 .header {
-    @apply max-w-3xl mx-auto text-center mb-12;
+    @apply max-w-4xl mx-auto text-center mb-12;
 }
 
 .title {
@@ -407,7 +418,7 @@ export default defineComponent({
 }
 
 .status-content {
-    @apply max-w-4xl mx-auto px-4 py-6 bg-white rounded-lg shadow-md;
+    @apply max-w-4xl mx-auto px-4 py-4 bg-white rounded-lg shadow-md;
 }
 
 .status-title {

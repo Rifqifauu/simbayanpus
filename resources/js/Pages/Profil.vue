@@ -72,6 +72,46 @@
               />
             </div>
           </aside>
+          <transition 
+    enter-active-class="transition-transform duration-300 ease-out"
+    enter-from-class="opacity-0 scale-90"
+    enter-to-class="opacity-100 scale-100"
+    leave-active-class="transition-transform duration-300 ease-in"
+    leave-from-class="opacity-100 scale-100"
+    leave-to-class="opacity-0 scale-90"
+  >
+    <!-- Modal for Success Messages -->
+    <div v-if="showSuccessModal" class="fixed inset-0 flex justify-center items-center z-50">
+      <div class="bg-white p-6 rounded-lg shadow-lg w-80">
+        <div class="text-center">
+          <h3 class="text-2xl font-semibold text-black">Profil Berhasil Diubah</h3>
+        </div>
+        <div class="mt-6 text-center">
+          <img src="../../../storage/asset/daftarberhasil.gif" alt="Success Illustration" class="mx-auto mb-50 w-40 h-50">
+        </div>
+      </div>
+    </div></transition>
+           <!-- Modal for Error Messages -->
+    <transition 
+    enter-active-class="transition-transform duration-300 ease-out"
+    enter-from-class="opacity-0 scale-90"
+    enter-to-class="opacity-100 scale-100"
+    leave-active-class="transition-transform duration-300 ease-in"
+    leave-from-class="opacity-100 scale-100"
+    leave-to-class="opacity-0 scale-90"
+  >
+    <div v-if="showErrorModal" class="fixed inset-0 flex justify-center items-center z-50">
+      <div class="bg-white p-6 rounded-lg shadow-lg w-80">
+        <div class="text-center">
+          <h3 class="text-xl font-semibold text-red-700">Gagal Menyimpan Data!</h3>
+        </div>
+        <div class="mt-4 text-center">
+          <img src="../../../storage/asset/gagal.gif" alt="Success Illustration" class="mx-auto mb-6 w-40 h-40">
+          <p class="text-gray-800">{{ errorMessage }}</p>
+        </div>
+      </div>
+    </div>
+    </transition>
   
           <!-- Main Content -->
           <main class="md:w-3/5 p-6">
@@ -260,6 +300,10 @@
       const formData = ref({
         ...props.userDetail,
       });
+      const errorMessage = ref('');
+
+      const showSuccessModal = ref('');
+      const showErrorModal = ref('');
   
   
      
@@ -310,17 +354,30 @@
       console.log(response.data);  
   
       if (response.status === 200) {
+        showSuccessModal.value = true;
+        setTimeout(() => {
+showSuccessModal.value=false;
+      }, 2000);
       }
     } catch (error) {
       if (error.response && error.response.data.errors) {
       console.error('Error updating profile:', error);
-      errorMessage.value = error.response.data.errors; // Assuming error is related to email
+      errorMessage.value = error.response.data.errors; 
+      showErrorModal.value = true; // Tampilkan modal error
+      setTimeout(() => {
+        showErrorModal.value = false;
+      }, 2000);
       } else {
             console.error('An unexpected error occurred:', error.response.data.messages)
             for (let key in error.response.data.messages) {
             if (error.response.data.messages.hasOwnProperty(key)) {
               // Menampilkan setiap pesan error untuk masing-masing field
               console.log(`Error in ${key}:`, error.response.data.messages[key][0]);
+              errorMessage.value = error.response.data.messages[key][0];
+              showErrorModal.value = true; // Tampilkan modal error
+      setTimeout(() => {
+        showErrorModal.value = false;
+      }, 2000);
             }
           }
           }
@@ -328,11 +385,14 @@
   };
   
       return {
+        showSuccessModal, 
         formData,
         preview,
         handleImageChange,
         handleSubmit,
         isEdit,
+        showErrorModal,
+        errorMessage,
       };
     },
   };

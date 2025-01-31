@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen flex flex-col">
     <header>
-      <nav class="bg-gradient-to-r from-red-600 to-red-700 text-white ">
+      <nav class="bg-gradient-to-r from-red-600 to-red-800 text-white ">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="flex justify-between items-center h-16">
             <!-- Logo/Brand -->
@@ -15,7 +15,7 @@
 
 </div>
             <!-- Desktop Navigation -->
-            <div class="hidden lg:flex lg:items-center lg:space-x-8 ml-auto pe-4  ">
+            <div class="relative hidden lg:flex lg:items-center lg:space-x-8 ml-auto pe-4  ">
               <button @click="home" class="text-lg text-white hover:text-gray-200 transition px-3 py-2">
                 Beranda
               </button>
@@ -45,7 +45,7 @@
     group transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-lg transform hover:border-red-400">
     <div class="absolute inset-0 bg-gradient-to-r from-red-800 to-red-600 transition-opacity duration-500 ease-in-out"></div>
     <div class="absolute inset-0 bg-gradient-to-l from-red-800 to-red-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
-    <span class="relative">Login</span>
+    <span class="relative">Masuk</span>
 </button>
               </div>
 
@@ -87,6 +87,7 @@
                 </div>
               </div>
             </div>
+
 
             <!-- Mobile Menu Button -->
             <div class="lg:hidden">
@@ -227,7 +228,7 @@
             <h4 class="text-red-700 font-bold mb-4">Hubungi Kami</h4>
             <ul class="text-gray-700 space-y-2">
               <li>Telp. (0274) 4536234;</li>
-              <li><a href="http://www.balaiyanpus.jogjaprov.go.id" class="hover:text-red-700">www.balaiyanpus.jogjaprov.go.id</a></li>
+              <li><a href="https://balaiyanpus.jogjaprov.go.id" class="hover:text-red-700">www.balaiyanpus.jogjaprov.go.id</a></li>
               <li>Grhatama Pustaka, Jalan Raya Janti, Banguntapan, Bantul, DIY</li>
             </ul>
           </div>

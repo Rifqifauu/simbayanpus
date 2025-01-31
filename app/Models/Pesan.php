@@ -25,7 +25,7 @@ class Pesan extends Model
     protected $fillable = [
         'id_user',
         'pesan',
-        'tipe', // Enum column: 'masuk' or 'keluar'
+        'asal', 
     ];
 
     /**
@@ -34,7 +34,7 @@ class Pesan extends Model
      * Automatically cast attributes to their appropriate types.
      */
     protected $casts = [
-        'tipe' => 'string', // Enum is stored as a string
+        'asal' => 'string', 
     ];
 
     /**

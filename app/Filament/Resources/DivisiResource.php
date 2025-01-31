@@ -78,7 +78,7 @@ class DivisiResource extends Resource
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }
@@ -94,8 +94,6 @@ class DivisiResource extends Resource
     {
         return [
             'index' => Pages\ListDivisis::route('/'),
-            'create' => Pages\CreateDivisi::route('/create'),
-            'edit' => Pages\EditDivisi::route('/{record}/edit'),
         ];
     }
 }

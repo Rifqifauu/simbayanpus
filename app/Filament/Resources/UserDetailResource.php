@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\UserDetailResource\Pages;
 use App\Filament\Resources\UserDetailResource\RelationManagers;
 use App\Models\UserDetail;
+use App\Models\Pesan;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Infolists;
@@ -15,6 +16,7 @@ use Filament\Tables\Columns\SelectColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Notifications\Notification;
 
 class UserDetailResource extends Resource
 {
@@ -24,6 +26,7 @@ class UserDetailResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-document';
 
     protected static ?string $navigationLabel = 'Dalam Proses';
+
 
     public static function infolist(Infolist $infolist): Infolist
 {
@@ -121,18 +124,46 @@ class UserDetailResource extends Resource
                 Tables\Columns\TextColumn::make('institusi')
                     ->label('Institusi')
                     ->searchable(),
-                SelectColumn::make('user.userDetail.status_pendaftaran')
-                ->label('Status Pendaftaran')
-    ->options([
-        'diterima' => 'Terima',
-        'ditolak' => 'Tolak',
-    ]) // Menyediakan URL lengkap
+                    
+       // Menyediakan URL lengkap
             ])
             ->filters([
                 
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
+                Tables\Actions\Action::make('kirimPesan')
+                    ->label('Ubah Status')
+                    ->icon('heroicon-s-pencil-square')
+                    ->form([
+                        Forms\Components\Textarea::make('pesan')
+                            ->label('Isi Pesan')
+                            ->required(),
+                        Forms\Components\Select::make('status_pendaftaran')
+                            ->label('Status Pendaftaran')
+                            ->options([
+                                'ditolak' => 'Ditolak',
+                                'diterima' => 'Diterima',
+                            ])
+                            ->required(),
+                    ])
+                    ->action(function (UserDetail $record, array $data) {
+                        // Create new message
+                        Pesan::create([
+                            'id_user' => $record->id_user, // Get the user_id from UserDetail
+                            'pesan' => $data['pesan'],
+                            'tipe' => 'masuk',
+                            'tanggal' => now(),
+                        ]);
+                        UserDetail::where('id_user', $record->id_user)->update([
+                            'status_pendaftaran' => $data['status_pendaftaran'],
+                        ]);
+
+                        // Show success notification
+                        Notification::make()
+                            ->success()
+                            ->title('Status Berhasil Diubah')
+                            ->send();
+                    })
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

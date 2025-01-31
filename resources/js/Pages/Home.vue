@@ -1,7 +1,4 @@
 <template>
-  <div v-if="$page.props.flash.success" class="alert alert-success fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-100 text-green-800 px-4 py-2 rounded shadow">
-      {{ $page.props.flash.success }}
-    </div>
   <!-- Hero Section -->
   <section class="bg-cover bg-center h-[30rem] " style="background-image: url('storage/homescreen.jpg')" data-aos="fade-up">
   <div class="bg-black bg-opacity-10 h-full flex flex-col justify-center items-center text-center text-white">
@@ -10,7 +7,7 @@
     </h2>
     <h3 class="text-2xl font-bold lg:text-3xl pt-3" data-aos="fade-up" data-aos-delay="100">
 Balai Layanan Perpustakaan DPAD DIY    </h3>
-<p class="mt-4 text-lg w-[40rem]" data-aos="fade-up" data-aos-delay="200">
+<p class="mt-4 text-lg max-w-[40rem]" data-aos="fade-up" data-aos-delay="200">
   Portal resmi bagi calon pemagang yang ingin mendaftar di Balai Layanan Perpustakaan DPAD DIY
 </p>
 
@@ -144,7 +141,8 @@ export default {
     AOS.init({
       duration: 1000, // Durasi animasi
       easing: 'ease-in-out', // Jenis easing
-      once: true, // Animasi hanya terjadi sekali
+      once: true,
+       // Animasi hanya terjadi sekali
     });
   },
   layout: AppLayout,
@@ -157,6 +155,7 @@ export default {
 </script>
 
 <style scoped>
+
 /* Animasi Fade-in saat elemen muncul di viewport */
 @keyframes fadeIn {
   from { opacity: 0; }

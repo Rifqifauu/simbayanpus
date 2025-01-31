@@ -24,7 +24,9 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('name')
+                ->label('Nama'),
+
             ]);
     }
 
@@ -44,6 +46,7 @@ class UserResource extends Resource
                 ->badge()
                 ->color(fn (string $state): string => match ($state) {
                     'admin' => 'success',
+                    'super admin' => 'warning',
                     'user' => 'info',
                 })
                 ->searchable()
@@ -64,6 +67,7 @@ class UserResource extends Resource
             ])
             ->actions([
                 Tables\Actions\DeleteAction::make(),
+                Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -74,7 +78,7 @@ class UserResource extends Resource
     public static function shouldRegisterNavigation(): bool
     {
         // Pastikan hanya Super Admin yang dapat mengakses resource ini
-        return Auth::user() && Auth::user()->role === 'superadmin';
+        return Auth::user() && Auth::user()->role === 'super admin';
     }
 
     public static function getRelations(): array

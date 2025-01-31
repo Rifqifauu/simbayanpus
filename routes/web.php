@@ -7,6 +7,7 @@ use App\Http\Controllers\DivisiController;
 use App\Http\Controllers\UserDetailController;
 use App\Http\Controllers\PermohonanController;
 use App\Http\Controllers\DownloadController;
+use App\Http\Controllers\PesanController;
 
 // Authentication Routes
 Auth::routes();
@@ -20,7 +21,10 @@ Route::get('/kontak', [HomeController::class, 'kontak'])->name('kontak')->withou
 
 // Permohonan Routes (with authentication middleware)
 Route::middleware('auth')->group(function () {
-    Route::get('/pesan', [HomeController::class, 'pesan'])->name('pesan');
+    Route::get('/pesan', [PesanController::class, 'index'])->name('pesan.index');
+    Route::delete('/pesan/{id}', [PesanController::class, 'delete'])->name('pesan.delete');
+    Route::post('/pesan', [PesanController::class, 'store'])->name('pesan.store');
+    Route::delete('/pesan/{id}', [PesanController::class, 'delete'])->name('pesan.delete');
     Route::get('/permohonan', [PermohonanController::class, 'index'])->name('permohonan');
     Route::get('/permohonan/create', [PermohonanController::class, 'create'])->name('buatpermohonan');
     Route::post('/permohonan/create', [PermohonanController::class, 'store'])->name('simpanpermohonan');
@@ -30,9 +34,10 @@ Route::middleware('auth')->group(function () {
     // Download Routes
     Route::prefix('download')->group(function () {
         Route::get('/cv/{id}', [DownloadController::class, 'downloadCv'])->name('download.cv');
+        Route::get('/sk_diterima/{id}', [DownloadController::class, 'downloadSKDiterima'])->name('download.skditerima');
         Route::get('/surat_pengantar/{id}', [DownloadController::class, 'downloadSuratPengantar'])->name('download.surat_pengantar');
         Route::get('/proposal/{id}', [DownloadController::class, 'downloadProposal'])->name('download.proposal');
-        Route::get('/pedoman_magang/{id}', [DownloadController::class, 'downloadPedomanMagang'])->name('download.pedoman_magang');
+        Route::get('/pedoman_magang', [DownloadController::class, 'pedomanMagang'])->name('download.pedoman_magang');
 });
 });
 // Logout Route

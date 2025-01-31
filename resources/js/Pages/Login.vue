@@ -1,41 +1,32 @@
 <template>
-  <div class="h-screen flex">
+  <div class="flex flex-col md:flex-row">
     <!-- Left side with illustration, hidden on mobile -->
     <div 
-      class="w-1/2 bg-red-700 p-14 relative hidden md:block inset-0 bg-gradient-to-l from-red-700 to-red-800 transition-opacity duration-500 ease-in-out" 
+      class="w-full md:w-1/2 bg-red-700 p-8 md:p-14 relative hidden md:block inset-0 bg-gradient-to-l from-red-700 to-red-800 transition-opacity duration-500 ease-in-out" 
       style="border-top-right-radius: 2rem; border-bottom-right-radius: 2rem;" 
       data-aos="fade-right" 
       data-aos-duration="1000">
-      <h1 class="text-4xl w-[30rem] font-bold text-white mb-4">
+      <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">
         Ayo Mulai Magang Sekarang!
       </h1>
-      <p class="text-lg text-white mb-10">Anda Perlu Masuk untuk mendaftar magang dan mengakses semua fitur</p>
+      <p class="text-base md:text-lg text-white mb-6">Anda Perlu Masuk untuk mendaftar magang dan mengakses semua fitur</p>
       <div class="relative">
         <img
-        src="/storage/login.svg"
-        alt="Person standing in front of door"
-        class="w-100"
+          src="/storage/login.svg"
+          alt="Person standing in front of door"
+          class="w-64 md:w-full mx-auto"
         />
       </div>
     </div>
 
     <!-- Right side with login form -->
-    <div class="w-full md:w-1/2 p-8 flex flex-col justify-between" data-aos="fade-left" data-aos-duration="1000">
+    <div class="w-full md:w-1/2 p-8 flex flex-col justify-center" data-aos="fade-left" data-aos-duration="1000">
       <div class="flex justify-between mb-6">
         <img
-        src="/storage/bayanpus.svg"
+          src="/storage/bayanpus.svg"
           alt="Balai Yanpus DPAD DIY"
           class="h-8"
         />
-        <div class="mt-4 text-center">
-    <a href="/" class="inline-flex items-center gap-2 px-4 py-2 bg-red-800 text-white rounded-full hover:bg-white hover:text-red-800 transition-colors">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
-            <path d="m12 19-7-7 7-7"/>
-            <path d="M19 12H5"/>
-        </svg>
-        Kembali
-    </a>
-</div>
       </div>
 
       <div class="max-w-md w-full mx-auto">
@@ -102,31 +93,50 @@
     </div>
 
     <!-- Modal for Error Messages -->
-    <div v-if="showModal" class="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center z-50">
+    <transition 
+    enter-active-class="transition-transform duration-300 ease-out"
+    enter-from-class="opacity-0 scale-90"
+    enter-to-class="opacity-100 scale-100"
+    leave-active-class="transition-transform duration-300 ease-in"
+    leave-from-class="opacity-100 scale-100"
+    leave-to-class="opacity-0 scale-90"
+  >
+    <div v-if="showModal" class="fixed inset-0 flex justify-center items-center z-50">
       <div class="bg-white p-6 rounded-lg shadow-lg w-80">
         <div class="text-center">
           <h3 class="text-xl font-semibold text-red-700">Gagal Masuk!</h3>
         </div>
         <div class="mt-4 text-center">
-          <img src="../../../storage/asset/gagal.gif" alt="Success Illustration" class="mx-auto mb-50 w-40 h-50">
+          <img src="../../../storage/asset/gagal.gif" alt="Success Illustration" class="mx-auto mb-6 w-40 h-40">
           <p class="text-gray-800">{{ errorMessage }}</p>
         </div>
       </div>
     </div>
-
+    </transition>
+    
+    <transition 
+    enter-active-class="transition-transform duration-300 ease-out"
+    enter-from-class="opacity-0 scale-90"
+    enter-to-class="opacity-100 scale-100"
+    leave-active-class="transition-transform duration-300 ease-in"
+    leave-from-class="opacity-100 scale-100"
+    leave-to-class="opacity-0 scale-90"
+  >
     <!-- Modal for Success Messages -->
-    <div v-if="showSuccessModal" class="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center z-50">
+    <div v-if="showSuccessModal" class="fixed inset-0 flex justify-center items-center z-50">
       <div class="bg-white p-6 rounded-lg shadow-lg w-80">
         <div class="text-center">
           <h3 class="text-2xl font-semibold text-green-700">Anda Berhasil Masuk</h3>
         </div>
         <div class="mt-6 text-center">
-          <img src="../../../storage/asset/berhasil.gif" alt="Success Illustration" class="mx-auto mb-50 w-40 h-50">
+          <img src="../../../storage/asset/berhasil.gif" alt="Success Illustration" class="mx-auto mb-6 w-40 h-40">
         </div>
       </div>
     </div>
+    </transition>
   </div>
 </template>
+
 
 <script>
 import { ref, onMounted } from 'vue'

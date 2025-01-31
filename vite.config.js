@@ -4,11 +4,11 @@ import vue from '@vitejs/plugin-vue';
 
 export default defineConfig({
     server: {
-        host: 'localhost', 
+      host: 'localhost', // Mengizinkan akses dari semua IP dalam jaringan lokal
         
         hmr: {
-          host: 'localhost'
-      },// Ensure it's set to localhost
+          host: 'localhost', // IP lokal server (komputer Anda)
+        },// Ensure it's set to localhost
       },
   plugins: [
     

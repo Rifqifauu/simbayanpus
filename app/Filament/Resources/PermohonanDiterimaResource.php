@@ -3,6 +3,8 @@
 namespace App\Filament\Resources;
 
 use Carbon\Carbon;
+use Filament\Infolists;
+use Filament\Infolists\Infolist;
 use App\Filament\Resources\PermohonanDiterimaResource\Pages;
 use App\Models\UserDetail;
 use Filament\Forms;
@@ -19,15 +21,29 @@ class PermohonanDiterimaResource extends Resource
     protected static ?string $model = UserDetail::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-document';
-    protected static ?string $navigationLabel = 'Permohonan Diterima';
+    protected static ?string $navigationLabel = 'Diterima';
     protected static ?string $navigationGroup = 'Permohonan';
 
-    public static function form(Form $form): Form
+    public static function infolist(Infolist $infolist): Infolist
     {
-        return $form
+        return $infolist
         ->schema([
-           
+            Infolists\Components\TextEntry::make('user.name')
+                ->label('Nama Lengkap'), // Menambahkan label
+            Infolists\Components\TextEntry::make('user.email')
+                ->label('Email'), // Menambahkan label
+            Infolists\Components\TextEntry::make('user.userDetail.institusi')
+                ->label('Institusi'), // Menambahkan label
+            Infolists\Components\TextEntry::make('user.userDetail.nomor_hp')
+                ->label('Nomor Hp'), // Menambahkan label
+            Infolists\Components\TextEntry::make('user.permohonan.tgl_masuk')
+                ->label('Tanggal Masuk'), // Menambahkan label
+            Infolists\Components\TextEntry::make('user.permohonan.tgl_keluar')
+                ->label('Tanggal Keluar'), // Menambahkan label
+            Infolists\Components\ImageEntry::make('user.userDetail.foto')
+                ->label('Foto'), // Menambahkan label
         ]);
+    
     }
 
     public static function table(Table $table): Table
@@ -66,7 +82,9 @@ class PermohonanDiterimaResource extends Resource
                   ->width(80)
                 , // Menyediakan URL lengkap
         ])
-        ->actions([ /* Your actions */ ])
+        ->actions([ 
+            /* Your actions */ ])
+
         ->bulkActions([ /* Your bulk actions */ ]);
 }
 
@@ -84,8 +102,8 @@ class PermohonanDiterimaResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListPermohonanDiterimas::route('/'),
-            'create' => Pages\CreatePermohonanDiterima::route('/create'),
+            'index' => Pages\ListPermohonanDiterimas::route('/'),     
+            'view' => Pages\ViewPermohonanDiterima::route('/{record}'),
         ];
     }
 }

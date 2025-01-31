@@ -1,146 +1,184 @@
 <template>
-    <div class="contact-page">
-      <h1 class="text-center text-3xl font-bold text-red-600 mb-8">{{ title }}</h1> <!-- Display the title prop -->
-  
-      <div class="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto px-4">
-        <!-- Contact Information Card -->
-        <div class="bg-red-600 rounded-lg p-6 text-white">
-          <div class="mb-6">
-            <h2 class="flex items-center gap-2 text-xl font-semibold mb-2">
-              <i class="fas fa-map-marker-alt"></i> Alamat
-            </h2>
-            <p>Ghatama Pustaka, Jalan Raya Janti, Banguntapan, Bantul, DIY</p>
-          </div>
-  
-          <div class="mb-6">
-            <h2 class="text-xl font-semibold mb-2">Email</h2>
-            <p>balaiyanpus@jogjaprov.go.id</p> <!-- Display the email from the user prop -->
-          </div>
-  
-          <div class="mb-6">
-            <h2 class="text-xl font-semibold mb-2">Whatsapp</h2>
-            <p>0881-295-8112</p>
-          </div>
-  
-          <div class="mb-6">
-            <h2 class="text-xl font-semibold mb-2">Telepon</h2>
-            <p>(0274) 4469024</p>
-          </div>
-  
-          <div>
-            <h2 class="flex items-center gap-2 text-xl font-semibold mb-2">
-              <i class="fas fa-map"></i> Peta
-            </h2>
-            <div class="rounded-lg overflow-hidden">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7905.805142211918!2d110.409016!3d-7.800138999999999!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a5756951cdd8d%3A0x476c4fa152e22651!2sDiorama%20Arsip%20Jogja!5e0!3m2!1sen!2sus!4v1736836306636!5m2!1sen!2sus"
-                width="100%"
-                height="250"
-                style="border:0;"
-                allowfullscreen=""
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-              ></iframe>
-            </div>
-          </div>
+  <div class="contact-page">
+    <h1 class="text-center text-3xl font-bold text-red-600 mb-8">{{ title }}</h1>
+
+    <div class="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto px-4">
+      <!-- Contact Information Card -->
+      <div class="bg-red-600 rounded-lg p-6 text-white">
+        <div class="mb-6">
+          <h2 class="flex items-center gap-2 text-xl font-semibold mb-2">
+            <i class="fas fa-map-marker-alt"></i> Alamat
+          </h2>
+          <p>Ghatama Pustaka, Jalan Raya Janti, Banguntapan, Bantul, DIY</p>
         </div>
-  
-        <!-- Contact Form Card -->
-        <div class="bg-red-600 rounded-lg p-6 text-white">
-          <form @submit.prevent="submitForm">
-            <div class="mb-4">
-              <label class="block text-xl font-semibold mb-2">Nama</label>
-              <input
-                v-model="formData.nama"
-                type="text"
-                class="w-full px-4 py-2 rounded-lg text-gray-900"
-                required
-              />
-            </div>
-  
-            <div class="mb-4">
-              <label class="block text-xl font-semibold mb-2">Email</label>
-              <input
-                v-model="formData.email"
-                type="email"
-                class="w-full px-4 py-2 rounded-lg text-gray-900"
-                required
-              />
-            </div>
-  
-            <div class="mb-6">
-              <label class="block text-xl font-semibold mb-2">Tulis Pesan</label>
-              <textarea
-                v-model="formData.pesan"
-                class="w-full px-4 py-2 rounded-lg text-gray-900 h-32"
-                placeholder="Tulis pesan disini..."
-                required
-              ></textarea>
-            </div>
-  
-            <button
-              type="submit"
-              class="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-4 rounded-lg transition duration-300"
-            >
-              Kirim
-            </button>
-          </form>
+
+        <div class="mb-6">
+          <h2 class="flex items-center gap-2 text-xl font-semibold mb-2">
+            <i class="fas fa-envelope"></i> Email
+          </h2>
+          <a href="mailto:balaiyanpus@jogjaprov.go.id" class="hover:text-yellow-200 transition-colors">
+            balaiyanpus@jogjaprov.go.id
+          </a>
+        </div>
+
+        <div class="mb-6">
+          <h2 class="flex items-center gap-2 text-xl font-semibold mb-2">
+            <i class="fab fa-whatsapp"></i> Whatsapp
+          </h2>
+          <a href="https://wa.me/628812958112" class="hover:text-yellow-200 transition-colors">
+            0881-295-8112
+          </a>
+        </div>
+
+        <div class="mb-6">
+          <h2 class="flex items-center gap-2 text-xl font-semibold mb-2">
+            <i class="fas fa-phone"></i> Telepon
+          </h2>
+          <a href="tel:+62744469024" class="hover:text-yellow-200 transition-colors">
+            (0274) 4469024
+          </a>
+        </div>
+
+        <div>
+          <h2 class="flex items-center gap-2 text-xl font-semibold mb-2">
+            <i class="fas fa-map"></i> Peta
+          </h2>
+          <div class="rounded-lg overflow-hidden">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7905.805142211918!2d110.409016!3d-7.800138999999999!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a5756951cdd8d%3A0x476c4fa152e22651!2sDiorama%20Arsip%20Jogja!5e0!3m2!1sen!2sus!4v1736836306636!5m2!1sen!2sus"
+              width="100%"
+              height="250"
+              class="border-0"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
         </div>
       </div>
+
+      <!-- Contact Form Card -->
+      <div class="bg-red-600 rounded-lg p-6 text-white">
+        <form @submit.prevent="submitForm">
+          <div class="mb-4">
+            <label for="nama" class="block text-xl font-semibold mb-2">Nama</label>
+            <input
+              id="nama"
+              v-model="user.name"
+              type="text"
+              class="w-full px-4 py-2 rounded-lg bg-white/20 text-white placeholder-white/70"
+              required
+              disabled
+            />
+          </div>
+
+          <div class="mb-4">
+            <label for="email" class="block text-xl font-semibold mb-2">Email</label>
+            <input
+              id="email"
+              v-model="user.email"
+              type="email"
+              class="w-full px-4 py-2 rounded-lg bg-white/20 text-white placeholder-white/70"
+              required
+              disabled
+            />
+          </div>
+
+          <div class="mb-6">
+            <label for="pesan" class="block text-xl font-semibold mb-2">Tulis Pesan</label>
+            <textarea
+              id="pesan"
+              v-model="formData.pesan"
+              class="w-full px-4 py-2 rounded-lg bg-white text-gray-900 h-32 placeholder-gray-500"
+              placeholder="Tulis pesan disini..."
+              required
+            ></textarea>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-4 rounded-lg transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+            :disabled="isSubmitting"
+          >
+            {{ isSubmitting ? 'Mengirim...' : 'Kirim' }}
+          </button>
+        </form>
+      </div>
     </div>
-  </template>
-  
-  <script>
+  </div>
+</template>
+
+<script>
+import { ref } from 'vue';
+import axios from 'axios';
 import AppLayout from '../layouts/AppLayout.vue';
 
-  export default {
-    mounted(){
-        document.title = this.title;
-    },
-    layout: AppLayout,
-    props: {
-      title: {
-        type: String,
-        required: true
-      },
-      user: {
-        type: Object,
-        required: true
-      }
-    },
-    data() {
-      return {
-        formData: {
-          nama: '',
-          email: '',
-          pesan: ''
-        }
-      };
-    },
-    methods: {
-      submitForm() {
-        // Handle form submission here
-        console.log('Form submitted:', this.formData);
-        // Reset form after submission
-        this.formData = {
-          nama: '',
-          email: '',
-          pesan: ''
-        };
-      }
-    }
-  };
-  </script>
+export default {
+  name: 'ContactPage',
+  layout: AppLayout,
   
-  <style scoped>
+  props: {
+    title: {
+      type: String,
+      required: true
+    },
+    user: {
+      type: Object,
+      required: true
+    }
+  },
+
+  setup(props) {
+    const isSubmitting = ref(false);
+    const formData = ref({
+      pesan: '',
+      asal: 'user',
+      id_user: props.user.id,
+    });
+
+    const submitForm = async () => {
+      try {
+        console.log(formData.value);
+
+        isSubmitting.value = true;
+        await axios.post('/pesan', formData.value);
+        formData.value.pesan = '';
+        alert('Pesan berhasil dikirim!');
+      } catch (error) {
+        console.error('Error sending message:', error);
+        alert('Gagal mengirim pesan. Silakan coba lagi.');
+      } finally {
+        isSubmitting.value = false;
+      }
+    };
+
+    return {
+      formData,
+      isSubmitting,
+      submitForm
+    };
+  },
+
+  mounted() {
+    document.title = this.title;
+  }
+};
+</script>
+
+<style scoped>
+.contact-page {
+  padding: 2rem 1rem;
+}
+
+@media (min-width: 768px) {
   .contact-page {
-    padding: 2rem 1rem;
+    padding: 3rem 2rem;
   }
-  
-  @media (min-width: 768px) {
-    .contact-page {
-      padding: 3rem 2rem;
-    }
-  }
-  </style>
-  
+}
+
+input:disabled,
+textarea:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+</style>

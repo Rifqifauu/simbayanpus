@@ -36,22 +36,12 @@ protected static ?string $navigationLabel = 'Masuk';
             }))
             ->columns([
                 Tables\Columns\TextColumn::make('user.name')
-                    ->label('User')
+                    ->label('Nama')
                     ->sortable()
                     ->searchable(),
 
-                Tables\Columns\TextColumn::make('divisi')
-                    ->label('Divisi')
-                    ->sortable()
-                    ->searchable(),
-
-                Tables\Columns\TextColumn::make('tgl_masuk')
-                    ->label('Tanggal Masuk')
-                    ->sortable()
-                    ->searchable(),
-
-                Tables\Columns\TextColumn::make('tgl_keluar')
-                    ->label('Tanggal Keluar')
+                Tables\Columns\TextColumn::make('user.email')
+                    ->label('Email')
                     ->sortable()
                     ->searchable(),
 
@@ -62,7 +52,7 @@ protected static ?string $navigationLabel = 'Masuk';
             ])
             ->actions([
                 Action::make('prosesPendaftaran')
-                    ->label('Proses Pendaftaran')
+                    ->label('Proses Permohonan')
                     ->action(function ($record) {
                         $userDetail = $record->user->userDetail;
                         if ($userDetail) {
@@ -70,7 +60,7 @@ protected static ?string $navigationLabel = 'Masuk';
                             $userDetail->save();
                         }
                     })
-                    ->icon('heroicon-o-pencil')
+                    ->icon('heroicon-o-check-badge')
                     ->color('success'),
             ])
             ->bulkActions([]);
