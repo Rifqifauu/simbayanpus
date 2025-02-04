@@ -139,8 +139,8 @@
               />
               <FormInput
                 v-model="formData.institusi"
-                label="Institusi"
-                placeholder="Masukkan institusi"
+                label="Institusi/PT"
+                placeholder="Masukkan institusi/PT"
                 required
               />
 
@@ -394,7 +394,7 @@ const showErrorModal = ref(false);
       }, 2000);
             }
           }
-          }
+        }
     }
   };
   

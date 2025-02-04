@@ -7,6 +7,7 @@ use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Components\Select;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -26,6 +27,15 @@ class UserResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')
                 ->label('Nama'),
+                Forms\Components\TextInput::make('email')
+                ->label('Email'),
+                Forms\Components\Select::make('role')
+    ->label('Role')
+    ->options([
+        'user' => 'User',
+        'admin' => 'Admin',
+        'super_admin' => 'Super Admin',
+    ]),
 
             ]);
     }

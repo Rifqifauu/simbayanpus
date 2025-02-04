@@ -180,7 +180,7 @@ import SuccessModal from '@/components/SuccessModal.vue'
         let errorMessages = '';
         for (let field in errors) {
           if (errors.hasOwnProperty(field)) {
-            errorMessages += `${errors[field][0]}<br>`; 
+            errorMessages += `${errors[field][0]}  `; 
           }
         }
         errorMessage.value = errorMessages; 

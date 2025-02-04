@@ -97,12 +97,12 @@ class MagangAktifResource extends Resource
             //     ->searchable(),
 
             Tables\Columns\TextColumn::make('user.permohonan.tgl_masuk')  // Mengakses tgl_masuk dari permohonan melalui relasi user
-                ->label('Tanggal Masuk')
+                ->label('Mulai Magang')
                 ->sortable()
                 ->searchable(),
 
             Tables\Columns\TextColumn::make('user.permohonan.tgl_keluar')  // Mengakses tgl_keluar dari permohonan melalui relasi user
-                ->label('Tanggal Keluar')
+                ->label('Selesai Magang')
                 ->sortable()
                 ->searchable(),
 

@@ -18,28 +18,28 @@ class DivisiResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationLabel = 'Divisi';
+    protected static ?string $navigationLabel = 'Penugasan';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\Textarea::make('nama_divisi')
-                ->label('Nama Divisi*')
+                ->label('Layanan*')
                 ,
                 Forms\Components\Textarea::make('keterangan')
                     ->label('Keterangan*')
                     ,
-                Forms\Components\TextInput::make('kuota')
-                    ->label('Kuota')
-                    ->numeric()
-                    ->default(1),
+                // Forms\Components\TextInput::make('kuota')
+                //     ->label('Kuota')
+                //     ->numeric()
+                //     ->default(1),
             ]);
     }
 
     public static function getPluralLabel(): string
     {
-        return 'Divisi';  
+        return 'Penugasan';  
     }
     public static function shouldRegisterNavigation(): bool
     {
@@ -57,21 +57,22 @@ class DivisiResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('nama_divisi')
-                    ->label('Nama Divisi')
+                    ->label('Layanan')
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('keterangan')
                     ->label('Keterangan')
                     ->limit(50),
-                Tables\Columns\TextColumn::make('kuota')
-                    ->label('Kuota')
-                    ->sortable(),
+                // Tables\Columns\TextColumn::make('kuota')
+                //     ->label('Kuota')
+                //     ->sortable(),
             ])
             ->filters([
                 // Tambahkan filter jika diperlukan
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

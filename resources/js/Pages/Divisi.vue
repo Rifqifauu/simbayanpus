@@ -1,5 +1,5 @@
 <template>
-  <h3 class="text-center text-3xl font-bold mt-5 text-red-600 mb-6">Daftar Divisi Magang</h3>
+  <h3 class="text-center text-3xl font-bold mt-5 text-red-600 mb-6">Daftar Penugasan Magang</h3>
   <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2 p-8">
     <div v-for="(item, index) in divisi" :key="index" @click="openModal(item)" class="bg-red-700 text-white p-6 rounded-lg shadow-lg cursor-pointer hover:bg-red-800">
       <h4 class="text-xl text-white font-bold mb-4">{{ item.nama_divisi }}</h4>

@@ -23,12 +23,12 @@
     <div class="w-full md:w-1/2 p-8 flex flex-col justify-center" data-aos="fade-left" data-aos-duration="1000">
   <div class="flex justify-between items-center mb-6">
     <!-- Tombol Kembali -->
-    <button onclick="window.history.back()" class="flex items-center text-red-700 hover:text-red-800">
+    <a href="/home" class="flex items-center text-red-700 hover:text-red-800">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
       </svg>
       Kembali ke Beranda
-    </button>
+    </a>
 
     <!-- Logo di Sebelah Kanan -->
     <img
