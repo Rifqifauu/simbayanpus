@@ -45,20 +45,5 @@ class HomeController extends Controller
             'title' => 'Kontak',
         ]);
     }
-    public function pesan()
-    {
-        // Mengambil data user yang sedang login
-        $user = Auth::user();
-        
-        // Perbaikan: Menambahkan get() untuk mengeksekusi query
-        $pesanMasuk = Pesan::where('id_user', $user->id)->get();
-
-        // Mengembalikan response Inertia yang valid
-        return Inertia::render('Pesan', [
-            'user' => $user,
-            'title' => 'Pesan',
-            'pesanMasuk' => $pesanMasuk,
-        ]);
-    }
 }
 

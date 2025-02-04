@@ -31,21 +31,41 @@ class UserDetailResource extends Resource
     public static function infolist(Infolist $infolist): Infolist
 {
     return $infolist
-        ->schema([
+        ->schema([ 
             Infolists\Components\ImageEntry::make('foto')
             ->label('')
-            ->size(250)
-            ->columnSpan(2), // or `columnSpan('full')`,
+            ->height(250)
+            ->columnSpan(2),
+            Infolists\Components\TextEntry::make('user.permohonan.tgl_masuk')
+                ->label('Tanggal Masuk') 
+                ->badge()
+                ->color('primary'),
+            Infolists\Components\TextEntry::make('user.permohonan.tgl_keluar')
+                ->label('Tanggal Keluar')
+                ->badge()
+                ->color('primary'),
+            Infolists\Components\TextEntry::make('nik')
+            ->label('NIK'),
             Infolists\Components\TextEntry::make('user.name')
                 ->label('Nama Lengkap'),
             Infolists\Components\TextEntry::make('jenis_kelamin')
                 ->label('Jenis Kelamin'),
-            Infolists\Components\TextEntry::make('program_studi')
-                ->label('Program Studi'),
+            Infolists\Components\TextEntry::make('agama')
+                ->label('Agama'),
+            Infolists\Components\TextEntry::make('alamat')
+                ->label('Alamat KTP'),
+            Infolists\Components\TextEntry::make('domisili')
+                ->label('Alamat Domisili'),
             Infolists\Components\TextEntry::make('user.email')
                 ->label('Email'),
+                Infolists\Components\TextEntry::make('medsos')
+                ->label('Media Sosial'),
             Infolists\Components\TextEntry::make('nomor_hp')
                 ->label('Nomor Hp'),
+                Infolists\Components\TextEntry::make('nim')
+                ->label('NIM/NIS/NIP'),
+                Infolists\Components\TextEntry::make('program_studi')
+                ->label('Program Studi'),
             Infolists\Components\TextEntry::make('institusi')
                 ->label('Institusi'),
             Infolists\Components\TextEntry::make('user.Permohonan.cv')
@@ -53,8 +73,8 @@ class UserDetailResource extends Resource
                 ->formatStateUsing(function ($state, $record) {
                     if ($record->user->Permohonan->cv) {
                         return view('components.download-link', [
-                            'url' => route('download.cv', ['id' => $record->user->id]),
-                            'label' => 'Download CV'
+                            'url' => route('view.cv', ['id' => $record->user->id]),
+                            'label' => 'View CV'
                         ]);
                     }
                     return 'No CV Available';
@@ -64,8 +84,8 @@ class UserDetailResource extends Resource
                 ->formatStateUsing(function ($state, $record) {
                     if ($record->user->Permohonan->surat_pengantar) {
                         return view('components.download-link', [
-                            'url' => route('download.surat_pengantar', ['id' => $record->user->id]),
-                            'label' => 'Download Surat Pengantar'
+                            'url' => route('view.surat_pengantar', ['id' => $record->user->id]),
+                            'label' => 'View Surat Pengantar'
                         ]);
                     }
                     return 'No Surat Pengantar Available';
@@ -75,8 +95,8 @@ class UserDetailResource extends Resource
                 ->formatStateUsing(function ($state, $record) {
                     if ($record->user->Permohonan->proposal) {
                         return view('components.download-link', [
-                            'url' => route('download.proposal', ['id' => $record->user->id]),
-                            'label' => 'Download Proposal'
+                            'url' => route('view.proposal', ['id' => $record->user->id]),
+                            'label' => 'View Proposal'
                         ]);
                     }
                     return 'No Proposal Available';
@@ -86,8 +106,8 @@ class UserDetailResource extends Resource
                 ->formatStateUsing(function ($state, $record) {
                     if ($record->user->Permohonan->pedoman_magang) {
                         return view('components.download-link', [
-                            'url' => route('download.pedoman_magang', ['id' => $record->user->id]),
-                            'label' => 'Download Pedoman Magang'
+                            'url' => route('view.pedoman_magang', ['id' => $record->user->id]),
+                            'label' => 'View Pedoman Magang'
                         ]);
                     }
                     return 'No Pedoman Magang Available';

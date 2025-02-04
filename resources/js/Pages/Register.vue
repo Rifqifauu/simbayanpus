@@ -108,39 +108,29 @@
       </div>
     </div>
 
-        <!-- Modal for Error Messages -->
-        <div v-if="showModal" class="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center z-50">
-      <div class="bg-white p-6 rounded-lg shadow-lg w-80">
-        <div class="text-center">
-          <h3 class="text-xl font-semibold text-red-700">Pendaftaran Gagal</h3>
-        </div>
-        <div class="mt-4 text-center">
-          <img src="../../../storage/asset/gagal.gif" alt="Success Illustration" class="mx-auto mb-50 w-40 h-50">
-          <p class="text-gray-800">{{ errorMessage }}</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Modal for Success Messages -->
-    <div v-if="showSuccessModal" class="fixed inset-0 bg-gray-500 bg-opacity-75 flex justify-center items-center z-50">
-      <div class="bg-white p-6 rounded-lg shadow-lg w-80">
-        <div class="text-center">
-          <h3 class="text-xl font-semibold text-green-700">Daftar Berhasil</h3>
-        </div>
-        <div class="mt-6 text-center">
-        <img src="../../../storage/asset/daftarberhasil.gif" alt="Success Illustration" class="mx-auto mb-50 w-40 h-50">
-        <p class="text-gray-800">{{ successMessage }}</p>
-      </div>
-      </div>
-    </div>
+    <ErrorModal 
+      :show="showErrorModal"
+      :message="errorMessage"
+      title="Pendaftaran Akun Gagal"
+    />
+    
+    <SuccessModal
+      :show="showSuccessModal"
+      title="Pendaftaran Akun Berhasil"
+    />
+   
   </template>
   
   <script>
   import { ref } from "vue";
   import axios from "axios";
-  import { router } from "@inertiajs/vue3";
-  
+import ErrorModal from '@/components/ErrorModal.vue'
+import SuccessModal from '@/components/SuccessModal.vue'
   export default {
+    components: {
+    ErrorModal,
+    SuccessModal
+  },
     setup() {
       const form = ref({
         name: "",
@@ -152,7 +142,7 @@
       const errors = ref({});
       const showPassword = ref(false);
       const showConfirmPassword = ref(false);
-      const showModal = ref(false);
+      const showErrorModal = ref(false);
       const errorMessage = ref('');
       const showSuccessModal = ref(false);
       const successMessage = ref('Pendaftaran Akun Anda Berhasil');
@@ -166,32 +156,27 @@
         console.log('Register successful:', response.data);
         // Jika login berhasil, tampilkan modal sukses
         showSuccessModal.value = true;
-        showModal.value = false;
+        showErrorModal.value = false;
         setTimeout(() => {
           document.location.href = '/login';
           }, 2000);
       } catch (error) {
         if (error.response && error.response.data.errors) {
           errorMessage.value = error.response.data.errors.email[0]; // Assuming error is related to email
-          showModal.value = true;
+          showErrorModal.value = true;
           setTimeout(() => {
-            showModal.value = false;
+            showErrorModal.value = false;
           }, 2000);
         } else {
           console.error('An unexpected error occurred:', error);
+          errorMessage.value = error.response.data.errors.email[0]; // Assuming error is related to email
+          showErrorModal.value = true;
           setTimeout(() => {
-            showModal.value = false;
+            showErrorModal.value = false;
           }, 2000);
         }
       }
     };
-      const closeModal = () => {
-        showModal.value = false;
-      };
-      const closeSuccessModal = () => {
-        showSuccessModal.value = false;
-        document.location.href = '/login';
-      };
 
       return {
         form,
@@ -199,12 +184,10 @@
         showPassword,
         showConfirmPassword,
         handleRegister,
-        showModal,
+        showErrorModal,
         errorMessage,
         showSuccessModal,
         successMessage,
-        closeModal,
-        closeSuccessModal
       };
     },
   };

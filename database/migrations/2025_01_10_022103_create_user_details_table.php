@@ -19,7 +19,9 @@ return new class extends Migration
             $table->string('medsos')->nullable(); // Media sosial
             $table->string('nomor_hp')->nullable(); // Nomor hp
             $table->string('jenis_kelamin')->nullable(); // Nomor hp
+            $table->string('agama')->nullable(); // Nomor hp
             $table->string('alamat')->nullable(); // Nomor hp
+            $table->string('domisili')->nullable(); // Nomor hp
             $table->string('status_pendaftaran')->default('default'); // Nomor hp
             $table->string('foto')->nullable(); // Path ke foto
             $table->timestamps(); 

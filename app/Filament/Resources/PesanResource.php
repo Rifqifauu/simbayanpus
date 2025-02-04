@@ -43,6 +43,10 @@ class PesanResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('asal')  // Akses nama pengguna melalui relasi 'user'
+                ->label('Pengirim')
+                ->searchable()
+                ->sortable(),   
                 Tables\Columns\TextColumn::make('user.name')  // Akses nama pengguna melalui relasi 'user'
                 ->label('Nama')
                 ->searchable()

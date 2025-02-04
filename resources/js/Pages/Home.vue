@@ -1,13 +1,13 @@
-<template>
+\<template>
   <!-- Hero Section -->
   <section class="bg-cover bg-center h-[30rem] " style="background-image: url('storage/homescreen.jpg')" data-aos="fade-up">
-  <div class="bg-black bg-opacity-10 h-full flex flex-col justify-center items-center text-center text-white">
-    <h2 class="text-5xl font-bold lg:text-5xl" data-aos="fade-up" data-aos-delay="100">
+  <div class="px-4 bg-black bg-opacity-10 h-full flex flex-col justify-center items-center text-center text-white">
+    <h2 class="text-4xl font-bold lg:text-5xl md:text-5xl" data-aos="fade-up" data-aos-delay="100">
       Selamat Datang di Website Magang 
     </h2>
-    <h3 class="text-2xl font-bold lg:text-3xl pt-3" data-aos="fade-up" data-aos-delay="100">
+    <h3 class="text-2xl font-bold md:text-3xl lg:text-3xl pt-3" data-aos="fade-up" data-aos-delay="100">
 Balai Layanan Perpustakaan DPAD DIY    </h3>
-<p class="mt-4 text-lg max-w-[40rem]" data-aos="fade-up" data-aos-delay="200">
+<p class="mt-4 text-lg md:text-xl lg:text-xl max-w-[40rem]" data-aos="fade-up" data-aos-delay="200">
   Portal resmi bagi calon pemagang yang ingin mendaftar di Balai Layanan Perpustakaan DPAD DIY
 </p>
 
@@ -29,8 +29,8 @@ Balai Layanan Perpustakaan DPAD DIY    </h3>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
       <img src="https://sippn.menpan.go.id/images/article/large/banner-ruang-sekretariat-balai-yanpus-sisi-timur.jpg" alt="About" class="rounded-lg shadow-md w-full h-86 object-cover" data-aos="slide-right">
       <div data-aos="slide-left">
-        <p class="text-justify text-gray-700 leading-relaxed">
-          Sejarah terbentuknya Balai Layanan Perpustakaan tidak dapat dipisahkan dengan peresmian gedung Grhatama Pustaka oleh Gubernur DIY Sultan Hamengku Buwono X pada Senin wage, 21 Desember 2015. Grhatama Pustaka merupakan nama Gedung layanan perpustakaan milik Pemerintah Daerah Daerah Istimewa Yogyakarta. Nama tersebut diberikan langsung oleh Gubernur DIY untuk perpustakaan yang beralamat di Jalan Janti Banguntapan Bantul. Gedung layanan perpustakaan ini merupakan perpaduan konsep modern dan tradisional. Kemegahan dan berbagai fasilitas mengakomodir kebutuhan masyarakat modern akan kemudahan dan kenyamanan. Terdiri dari 3 lantai Grhatama Pustaka menjadi destinasi rekreatif edukatif bagi masyarakat DIY dan sekitarnya.        </p>
+        <p class="px-2 text-justify text-gray-700 leading-relaxed">
+          Sejarah terbentuknya Balai Layanan Perpustakaan tidak dapat dipisahkan dengan peresmian gedung Grhatama Pustaka oleh Gubernur DIY Sultan Hamengku Buwono X pada Senin wage, 21 Desember 2015. Grhatama Pustaka merupakan nama Gedung layanan perpustakaan milik Pemerintah Daerah Daerah Istimewa Yogyakarta. Nama tersebut diberikan langsung oleh Gubernur DIY untuk perpustakaan yang beralamat di Jalan Janti Banguntapan Bantul. <br> <br> Gedung layanan perpustakaan ini merupakan perpaduan konsep modern dan tradisional. Kemegahan dan berbagai fasilitas mengakomodir kebutuhan masyarakat modern akan kemudahan dan kenyamanan. Terdiri dari 3 lantai Grhatama Pustaka menjadi destinasi rekreatif edukatif bagi masyarakat DIY dan sekitarnya.        </p>
       </div>
     </div>
   </section>
@@ -64,41 +64,32 @@ Balai Layanan Perpustakaan DPAD DIY    </h3>
   </section>
 
    <!-- Requirements Section -->
-<section class="py-10 bg-red-800">
+   <section class="py-10 bg-red-800">
   <div class="container mx-auto px-2">
-    <h2 class="text-3xl font-bold text-center mb-12 text-white">
-      Apa saja persyaratan yang harus dipenuhi untuk magang<br />
-      di Balai Yanpus DPAD DIY?
+    <h2 class="md:text-4xl px-4 text-2xl font-bold text-center mb-8 text-white">
+      Apa saja persyaratan yang harus dipenuhi?
     </h2>
     <div class="max-w-3xl mx-auto space-y-4">
-      <div class="bg-white rounded-lg p-4 shadow" data-aos="fade-up" data-aos-delay="100">
-        <div class="flex items-center">
-          <span class="bg-red-700 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4">1</span>
-          <p>Pengajuan magang dengan mengajukan surat izin magang atau surat permohonan magang.</p>
-        </div>
+      <div class="bg-white rounded-lg p-4 shadow flex items-center space-x-4" data-aos="fade-up" data-aos-delay="100">
+        <span class="bg-red-700 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0">1</span>
+        <p class="flex-1">Pengajuan magang dengan mengajukan surat izin magang atau surat permohonan magang.</p>
       </div>
-      <div class="bg-white rounded-lg p-4 shadow" data-aos="fade-up" data-aos-delay="200">
-        <div class="flex items-center">
-          <span class="bg-red-700 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4">2</span>
-          <p>Pengajuan setidaknya 14 hari sebelum periode magang berlangsung.</p>
-        </div>
+      <div class="bg-white rounded-lg p-4 shadow flex items-center space-x-4" data-aos="fade-up" data-aos-delay="200">
+        <span class="bg-red-700 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0">2</span>
+        <p class="flex-1">Pengajuan setidaknya 14 hari sebelum periode magang berlangsung.</p>
       </div>
-      <div class="bg-white rounded-lg p-4 shadow" data-aos="fade-up" data-aos-delay="300">
-        <div class="flex items-center">
-          <span class="bg-red-700 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4">3</span>
-          <p>Pengajuan dilampiri dengan draft proposal magang.</p>
-        </div>
+      <div class="bg-white rounded-lg p-4 shadow flex items-center space-x-4" data-aos="fade-up" data-aos-delay="300">
+        <span class="bg-red-700 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0">3</span>
+        <p class="flex-1">Pengajuan dilampiri dengan draft proposal magang.</p>
       </div>
-      <div class="bg-white rounded-lg p-4 shadow" data-aos="fade-up" data-aos-delay="400">
-        <div class="flex items-center">
-          <span class="bg-red-700 text-white rounded-full w-8 h-8 flex items-center justify-center mr-4">4</span>
-          <p>Pengajuan akan diproses berdasarkan ketersediaan kuota magang yang ditentukan oleh Balai Layanan Perpustakaan.</p>
-        </div>
+      <div class="bg-white rounded-lg p-4 shadow flex items-center space-x-4" data-aos="fade-up" data-aos-delay="400">
+        <span class="bg-red-700 text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0">4</span>
+        <p class="flex-1">Pengajuan akan diproses berdasarkan ketersediaan kuota magang yang ditentukan oleh Balai Layanan Perpustakaan.</p>
       </div>
-      <!-- Additional requirement items -->
     </div>
   </div>
 </section>
+
 
 
   <!-- Locations Section -->

@@ -25,9 +25,8 @@
           <h2 class="flex items-center gap-2 text-xl font-semibold mb-2">
             <i class="fab fa-whatsapp"></i> Whatsapp
           </h2>
-          <a href="https://wa.me/628812958112" class="hover:text-yellow-200 transition-colors">
-            0881-295-8112
-          </a>
+          <a href="https://wa.me/628812658192" class="hover:text-yellow-200 transition-colors">
+            +62 881-2658-192          </a>
         </div>
 
         <div class="mb-6">
@@ -144,17 +143,23 @@
       </div>
     </div>
   </div>
+  <SuccessModal
+      :show="showSuccessModal"
+      title="Pesan Terkirim"
+    />
 </template>
 
 <script>
 import { ref } from 'vue';
 import axios from 'axios';
 import AppLayout from '../layouts/AppLayout.vue';
-
+import SuccessModal from '../components/SuccessModal.vue';
 export default {
   name: 'ContactPage',
   layout: AppLayout,
-  
+  components:{
+    SuccessModal
+  },
   props: {
     title: {
       type: String,
@@ -173,6 +178,7 @@ export default {
       pesan: '',
       asal: 'user'
     });
+    const showSuccessModal = ref(false);
 
     const redirectToLogin = () => {
       window.location.href = '/login';
@@ -191,7 +197,10 @@ export default {
           id_user: props.user.id
         });
         formData.value.pesan = '';
-        alert('Pesan berhasil dikirim!');
+        showSuccessModal.value = true;
+        setTimeout(() => {
+          document.location.href = '/pesan';
+        }, 2000);
       } catch (error) {
         console.error('Error sending message:', error);
         alert('Gagal mengirim pesan. Silakan coba lagi.');
@@ -204,7 +213,8 @@ export default {
       formData,
       isSubmitting,
       submitForm,
-      redirectToLogin
+      redirectToLogin,
+      showSuccessModal,
     };
   },
 

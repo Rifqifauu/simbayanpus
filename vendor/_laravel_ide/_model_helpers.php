@@ -1268,6 +1268,8 @@ namespace App\Models {
     /**
      * App\Models\UserDetail
      *
+     * @property string|null $domisili
+     * @property string|null $agama
      * @property \Illuminate\Support\Carbon|null $created_at
      * @property \Illuminate\Support\Carbon|null $updated_at
      * @property string|null $foto
@@ -1299,6 +1301,8 @@ namespace App\Models {
      * @method static \Illuminate\Database\Eloquent\Builder|UserDetail whereFoto($value)
      * @method static \Illuminate\Database\Eloquent\Builder|UserDetail whereUpdatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder|UserDetail whereCreatedAt($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|UserDetail whereAgama($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|UserDetail whereDomisili($value)
      * @method static \Illuminate\Database\Eloquent\Builder|UserDetail newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder|UserDetail newQuery()
      * @method static \Illuminate\Database\Eloquent\Builder|UserDetail query()

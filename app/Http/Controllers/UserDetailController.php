@@ -39,8 +39,10 @@ class UserDetailController extends Controller
             'program_studi' => 'required|string|max:100',
             'medsos' => 'required|string|max:100',
             'nomor_hp' => 'required|string|max:15',
+            'agama' => 'required|string|max:15',
             'jenis_kelamin' => 'required|string|max:50',
             'alamat' => 'required|string|max:255',
+            'domisili' => 'required|string|max:255',
             'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:10000'
         ]);
     
@@ -72,7 +74,6 @@ class UserDetailController extends Controller
             }
     
             UserDetail::create($validatedData);
-    
             return response()->json([
                 'success' => 'Profil Berhasil Dibuat'
             ], 200);  // Mengembalikan status code 200 untuk sukses
@@ -102,10 +103,12 @@ class UserDetailController extends Controller
                 'nim' => 'nullable|string|max:20|unique:user_details,nim,' . $userDetail->id,
                 'nik' => 'nullable|string|size:16|unique:user_details,nik,' . $userDetail->id,
                 'institusi' => 'nullable|string|max:100',
+                'agama' => 'nullable|string|max:255',
                 'program_studi' => 'nullable|string|max:100',
                 'medsos' => 'nullable|string|max:100',
                 'nomor_hp' => 'nullable|string|max:15',
                 'alamat' => 'nullable|string|max:255',
+                'domisili' => 'nullable|string|max:255',
                 'jenis_kelamin' => 'nullable|string|max:25',
             ];
     

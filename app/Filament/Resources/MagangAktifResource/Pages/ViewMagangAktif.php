@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\MagangAktifResource\Pages;
 
 use App\Filament\Resources\MagangAktifResource;
-use Filament\Actions;
 use Filament\Actions\Action;
 use Filament\Resources\Pages\ViewRecord;
 

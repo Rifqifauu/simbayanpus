@@ -92,59 +92,33 @@
       </div>
     </div>
 
-    <!-- Modal for Error Messages -->
-    <transition 
-    enter-active-class="transition-transform duration-300 ease-out"
-    enter-from-class="opacity-0 scale-90"
-    enter-to-class="opacity-100 scale-100"
-    leave-active-class="transition-transform duration-300 ease-in"
-    leave-from-class="opacity-100 scale-100"
-    leave-to-class="opacity-0 scale-90"
-  >
-    <div v-if="showModal" class="fixed inset-0 flex justify-center items-center z-50">
-      <div class="bg-white p-6 rounded-lg shadow-lg w-80">
-        <div class="text-center">
-          <h3 class="text-xl font-semibold text-red-700">Gagal Masuk!</h3>
-        </div>
-        <div class="mt-4 text-center">
-          <img src="../../../storage/asset/gagal.gif" alt="Success Illustration" class="mx-auto mb-6 w-40 h-40">
-          <p class="text-gray-800">{{ errorMessage }}</p>
-        </div>
-      </div>
-    </div>
-    </transition>
+    <ErrorModal 
+      :show="showErrorModal"
+      :message="errorMessage"
+      :title="titleMessage"
+    />
     
-    <transition 
-    enter-active-class="transition-transform duration-300 ease-out"
-    enter-from-class="opacity-0 scale-90"
-    enter-to-class="opacity-100 scale-100"
-    leave-active-class="transition-transform duration-300 ease-in"
-    leave-from-class="opacity-100 scale-100"
-    leave-to-class="opacity-0 scale-90"
-  >
-    <!-- Modal for Success Messages -->
-    <div v-if="showSuccessModal" class="fixed inset-0 flex justify-center items-center z-50">
-      <div class="bg-white p-6 rounded-lg shadow-lg w-80">
-        <div class="text-center">
-          <h3 class="text-2xl font-semibold text-green-700">Anda Berhasil Masuk</h3>
-        </div>
-        <div class="mt-6 text-center">
-          <img src="../../../storage/asset/berhasil.gif" alt="Success Illustration" class="mx-auto mb-6 w-40 h-40">
-        </div>
-      </div>
-    </div>
-    </transition>
+    <SuccessModal
+      :show="showSuccessModal"
+      :title="titleMessage"
+    />
   </div>
 </template>
-
 
 <script>
 import { ref, onMounted } from 'vue'
 import AOS from 'aos'
-import axios from 'axios';
+import axios from 'axios'
 import 'aos/dist/aos.css'
+import ErrorModal from '@/components/ErrorModal.vue'
+import SuccessModal from '@/components/SuccessModal.vue'
 
 export default {
+  components: {
+    ErrorModal,
+    SuccessModal
+  },
+  
   setup() {
     const form = ref({
       email: '',
@@ -152,45 +126,38 @@ export default {
       remember: false
     });
     const showPassword = ref(false);
-    const showModal = ref(false);
+    const showErrorModal = ref(false);
     const errorMessage = ref('');
+    const titleMessage = ref('');
     const showSuccessModal = ref(false);
-    const successMessage = ref('');
-
-const handleLogin = async () => {
-  try {
-    console.log('Login attempted with:', form.value);
-    const response = await axios.post('/login', form.value);
-    console.log('Login successful:', response.data);
-    successMessage.value = 'Login berhasil! Anda akan diarahkan ke halaman utama.';
-    showSuccessModal.value = true;
-    showModal.value = false;
-    setTimeout(() => {
-      document.location.href = '/home';
-      }, 2000);
-  } catch (error) {
-    if (error.response && error.response.data.errors) {
-      errorMessage.value = error.response.data.errors.email[0]; // Pesan error dari server
-      showModal.value = true; // Tampilkan modal error
-      setTimeout(() => {
-        showModal.value = false;
-      }, 2000);
-    } else {
-      errorMessage.value = 'Terjadi kesalahan tak terduga. Silakan coba lagi nanti.';
-      showModal.value = true;
-      setTimeout(() => {
-        showModal.value = false;
-      }, 2000);
-    }
-  }
-};
-
-    const closeModal = () => {
-      showModal.value = false;
-    };
-    const closeSuccessModal = () => {
-      showSuccessModal.value = false;
-      document.location.href = '/home';
+    
+    const handleLogin = async () => {
+      try {
+        console.log('Login attempted with:', form.value);
+        const response = await axios.post('/login', form.value);
+        console.log('Login successful:', response.data);
+        showSuccessModal.value = true;
+        showErrorModal.value = false;
+        titleMessage.value = 'Login Berhasil';
+        setTimeout(() => {
+          document.location.href = '/home';
+        }, 2000);
+      } catch (error) {
+        if (error.response && error.response.data.errors) {
+          errorMessage.value = error.response.data.errors.email[0];
+          titleMessage.value = 'Login Gagal';
+          showErrorModal.value = true;
+          setTimeout(() => {
+            showErrorModal.value = false;
+          }, 2000);
+        } else {
+          errorMessage.value = 'Terjadi kesalahan tak terduga. Silakan coba lagi nanti.';
+          showErrorModal.value = true;
+          setTimeout(() => {
+            showErrorModal.value = false;
+          }, 2000);
+        }
+      }
     };
 
     onMounted(() => {
@@ -201,17 +168,12 @@ const handleLogin = async () => {
     return {
       form,
       showPassword,
-      showModal,
-      errorMessage,
+      showErrorModal,
       showSuccessModal,
-      successMessage,
-      handleLogin,
-      closeModal,
-      closeSuccessModal
+      errorMessage,
+      handleLogin, 
+      titleMessage
     };
   }
 };
 </script>
-
-<style scoped>
-</style>

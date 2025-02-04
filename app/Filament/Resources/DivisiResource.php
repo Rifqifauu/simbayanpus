@@ -24,13 +24,10 @@ class DivisiResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('nama_divisi')
-                    ->label('Nama Divisi')
-                    ->required()
-                    ->maxLength(255),
+             
                 Forms\Components\Textarea::make('keterangan')
                     ->label('Keterangan')
-                    ->maxLength(500),
+                    ,
                 Forms\Components\TextInput::make('kuota')
                     ->label('Kuota')
                     ->required()

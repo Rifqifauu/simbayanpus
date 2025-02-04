@@ -1,12 +1,12 @@
 <template>
     <div class="status-page">
         <!-- Header with updated styling -->
-        <header class="header">
-            <h1 class="title">Status Permohonan</h1>
-            <img v-if="status !== 'default' && status !==null " :src="currentStatus.image" alt="" class="mx-auto max-w-18 pt-2 h-auto">
+        <header class="header mt-4">
+            <h1 v-if="status !== 'default' && status !== null && status !== 'ditolak'" class="text-3xl pb-4 sm:text-3xl md:text-4xl font-bold mb-2 text-red-800">Status Permohonan</h1>
+            <img v-if="status !== 'default' && status !==null  && status !== 'ditolak'" :src="currentStatus.image" alt="" class="mx-auto max-w-18 pt-2 h-auto">
         </header>
 
-        <template v-if="status !== 'default' && status !==null ">
+        <template v-if="status !== 'default'  && status !== 'ditolak' && status !==null ">
             <!-- Updated Progress Bar -->
             <div class="progress-container" aria-live="polite">
                 <div class="progress-bar">
@@ -55,55 +55,10 @@
                     <p class="status-description">
                         {{ currentStatus.description }}
                     </p>
-
                     <div class="action-buttons">
-                        <button
-                            v-if="status === 'pending'"
-                            @click="handleSupport"
-                            class="button support-button"
-                        >
-                            <!-- Support Icon -->
-                            <svg
-                                class="button-icon"
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke-width="1.5"
-                                stroke="currentColor"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z"
-                                />
-                            </svg>
-                            Hubungi Dukungan
-                        </button>
-
-                        <button
-                            v-if="status === 'diproses'"
-                            @click="handleUpdate"
-                            class="button update-button"
-                        >
-                            <!-- Refresh Icon -->
-                            <svg
-                                class="button-icon"
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke-width="1.5"
-                                stroke="currentColor"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"
-                                />
-                            </svg>
-                            Perbarui Status
-                        </button>
-
-                        <button
+            
+                        <div class="flex flex-col md:flex-row gap-2">
+                            <button
                             v-if="status === 'diterima'"
                             @click="keteranganDiterima"
                             class="button print-button"
@@ -125,50 +80,39 @@
                             </svg>
                             Surat Keterangan Diterima
                         </button>
-                        <button
-                            v-if="status === 'diterima'"
-                            @click="pedomanMagang"
-                            class="button print-button"
-                        >
-                            <!-- Print Icon -->
-                            <svg
-                                class="button-icon"
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke-width="1.5"
-                                stroke="currentColor"
-                            >
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0110.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0l.229 2.523a1.125 1.125 0 01-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0021 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 00-1.913-.247M6.34 18H5.25A2.25 2.25 0 013 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 011.913-.247m10.5 0a48.536 48.536 0 00-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5zm-3 0h.008v.008H15V10.5z"
-                                />
-                            </svg>
-                            Pedoman Magang
-                        </button>
+                    </div>
                     </div>
                 </div>
             </div>
         </template>
 
-    <div v-if="status === 'default' || status === null" class="relative z-10">
-    <div class="fixed inset-0 bg-black bg-opacity-25"></div>
-    <div class="fixed inset-0 overflow-y-auto">
-        <div class="flex min-h-full items-center justify-center p-4 text-center">
-            <div class="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                <h3 class="text-lg font-medium leading-6 text-gray-900 text-center">
+        <div v-if="status === 'default' || status === null || status === 'ditolak'" class="">
+        <div class="inset-0 bg-black bg-opacity-50"></div>
+        <div class="inset-0 overflow-y-auto">
+            <div class="w-full px-8 flex min-h-full items-center justify-center text-center">
+            <div class="w-full rounded-2xl bg-white p-8 text-left align-middle shadow-2xl transition-all">
+                <!-- Gambar -->
+                <div class="w-full flex justify-center">
+                    <img src="storage/permohonan-exception.jpg" alt="Illustration" class="w-62 h-52 object-contain">
+                </div>
+                
+                <!-- Judul -->
+                <h3 class="text-2xl font-semibold text-gray-900 text-center mt-4">
                     {{ getTitle() }}
                 </h3>
-                <div class="mt-2">
-                    <p class="text-sm text-gray-500">
+                
+                <!-- Pesan -->
+                <div class="mt-4">
+                    <p class="text-lg text-gray-600 text-center">
                         {{ getMessage() }}
                     </p>
                 </div>
-                <div class="mt-4 text-center">
+                
+                <!-- Tombol -->
+                <div class="mt-6 text-center">
                     <button
                         type="button"
-                        class="inline-flex justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
+                        class="inline-flex justify-center rounded-lg border border-transparent bg-red-600 px-6 py-3 text-lg font-medium text-white hover:bg-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2"
                         @click="handleAction"
                     >
                         {{ getButtonText() }}
@@ -177,13 +121,14 @@
             </div>
         </div>
     </div>
+
 </div>
     </div>
 </template>
 
 <script>
-import { router } from "@inertiajs/vue3";
 import { defineComponent } from "vue";
+import axios from "axios";
 import {
     Dialog,
     DialogPanel,
@@ -194,6 +139,9 @@ import {
 import AppLayout from "../layouts/AppLayout.vue";
 
 export default defineComponent({
+    mounted() {
+    document.title = 'Permohonan';
+  },
     name: "StatusPage",
 
     components: {
@@ -243,7 +191,7 @@ export default defineComponent({
                     image: '/storage/pending.svg',
                     title: "Permohonan Dikirim",
                     description:
-                        "Permohonan Anda sedang dikirim ke sistem kami. Silakan tunggu notifikasi selanjutnya.",
+                        "Permohonan Anda sedang dikirim ke sistem kami. Apabila dalam 7 hari belum ada perubahan status, silahkan hubungi melalui WhatsApp yang tertera di kontak.",
                 },
                 diproses: {
                     image: 'storage/diproses.svg',
@@ -271,15 +219,14 @@ export default defineComponent({
     methods: {
         keteranganDiterima() {
         if (this.user && this.user.id) {
-            window.location.href = `/download/sk_diterima/${this.user.id}`;
+            window.location.href = `/view/sk_diterima/${this.user.id}`;
         } else {
             console.error("User ID tidak ditemukan");
         }},
         pedomanMagang() {
-            window.location.href = `/download/pedoman_magang`;
+            window.location.href = `/view/pedoman_magang`;
     },
-    
-       
+           
         isActive(step) {
             const steps = this.steps.map((s) => s.id);
             return steps.indexOf(step) <= steps.indexOf(this.status);
@@ -294,12 +241,16 @@ export default defineComponent({
         },
         getTitle() {
             if (this.status === 'default') return 'Belum Ada Permohonan';
+            if (this.status === 'ditolak') return 'Permohonan Anda Ditolak';
             if (this.status === null) return 'Belum Ada Data Profil';
             return '';
         },
         getMessage() {
             if (this.status === 'default') {
-                return 'Anda belum melakukan permohonan apapun. Silakan mulai dengan mengajukan permohonan melalui tombol di bawah ini.';
+                return 'Anda belum mengajukan permohonan apapun. Silakan mulai dengan mengajukan permohonan melalui tombol di bawah ini.';
+            }
+            if (this.status === 'ditolak') {
+                return 'Mohon maaf, permohonan Anda belum bisa kami terima. Silahkan mengecek pesan masuk untuk mengetahui lebih detail. Untuk mengajukan ulang, silahkan klik tombol di bawah ini.';
             }
             if (this.status === null) {
                 return 'Anda belum mengisi data profil. Silahkan isi terlebih dahulu.';
@@ -309,6 +260,7 @@ export default defineComponent({
         getButtonText() {
             if (this.status === 'default') return 'Buat Permohonan Baru';
             if (this.status === null) return 'Ke halaman profil';
+            if (this.status === 'ditolak') return 'Buat Permohonan Ulang';
             return '';
         },
         handleAction() {
@@ -316,6 +268,8 @@ export default defineComponent({
                 this.handleNewSubmission();
             } else if (this.status === null) {
                 this.profil();
+            } else if (this.status === 'ditolak'){
+                this.deletePermohonan(this.user.id);
             }
         },
 
@@ -341,6 +295,32 @@ export default defineComponent({
         profil() {
             window.location.href = "/profile";
         },
+        async deletePermohonan(id) {
+    try {
+        const response = await axios.delete(`/permohonan/delete/${id}`);
+
+        console.log("Full Response Object:", response); // Debugging lengkap
+        console.log("Response Data:", response.data); // Lihat response.data
+
+        // Cek apakah response.data ada sebelum mengaksesnya
+        if (response.data.success) {
+            window.location.href = '/permohonan/create';
+        } else {
+            console.error("Response data tidak sesuai:", response);
+        }
+    } catch (error) {
+        console.error("Request Failed:", error);
+
+        if (error.response?.data) {
+            console.error("Server Error:", error.response.data);
+        } else if (error.request) {
+            console.error("No Response from Server:", error.request);
+        } else {
+            console.error("Error Message:", error.message);
+        }
+    }
+}
+
     },
 });
 </script>

@@ -3,6 +3,8 @@
 namespace App\Filament\Resources;
 
 use Carbon\Carbon;
+use Filament\Infolists;
+use Filament\Infolists\Infolist;
 use App\Filament\Resources\MagangSelesaiResource\Pages;
 use App\Filament\Resources\MagangSelesaiResource\RelationManagers;
 use App\Models\UserDetail;
@@ -28,6 +30,49 @@ class MagangSelesaiResource extends Resource
             ->schema([
                 //
             ]);
+    }
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
+        ->schema([
+            Infolists\Components\ImageEntry::make('foto')
+            ->label('')
+            ->height(250)
+            ->columnSpan(2),
+            Infolists\Components\TextEntry::make('user.permohonan.tgl_masuk')
+            ->label('Tanggal Masuk') 
+            ->badge()
+            ->color('primary'),
+        Infolists\Components\TextEntry::make('user.permohonan.tgl_keluar')
+            ->label('Tanggal Keluar')
+            ->badge()
+            ->color('primary'),
+        Infolists\Components\TextEntry::make('nik')
+        ->label('NIK'),
+        Infolists\Components\TextEntry::make('user.name')
+            ->label('Nama Lengkap'),
+        Infolists\Components\TextEntry::make('jenis_kelamin')
+            ->label('Jenis Kelamin'),
+        Infolists\Components\TextEntry::make('agama')
+            ->label('Agama'),
+        Infolists\Components\TextEntry::make('alamat')
+            ->label('Alamat KTP'),
+        Infolists\Components\TextEntry::make('domisili')
+            ->label('Alamat Domisili'),
+        Infolists\Components\TextEntry::make('user.email')
+            ->label('Email'),
+            Infolists\Components\TextEntry::make('medsos')
+            ->label('Media Sosial'),
+        Infolists\Components\TextEntry::make('nomor_hp')
+            ->label('Nomor Hp'),
+            Infolists\Components\TextEntry::make('nim')
+            ->label('NIM/NIS/NIP'),
+            Infolists\Components\TextEntry::make('program_studi')
+            ->label('Program Studi'),
+        Infolists\Components\TextEntry::make('institusi')
+            ->label('Institusi'),
+        ]);
+    
     }
 
     public static function table(Table $table): Table

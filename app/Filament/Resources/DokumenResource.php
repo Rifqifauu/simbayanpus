@@ -20,20 +20,39 @@ class DokumenResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    public static function form(Form $form): Form
+    public static function form(Forms\Form $form): Forms\Form
     {
-        return $form
-            ->schema([
-                Forms\Components\Select::make('id_user')
+        return $form->schema([
+            Forms\Components\Select::make('keterangan')
+                ->label('Keterangan')
+                ->options([
+                    'diterima' => 'Diterima',
+                    'selesai' => 'Selesai',
+                ])
+                ->searchable()
+                ->preload()
+                ->required(),
+    
+            Forms\Components\Select::make('id_user')
                 ->label('User Email')
-                ->options(User::pluck('email', 'id')) // Ambil email sebagai label, ID sebagai value
-                ->searchable() // Tambahkan fitur pencarian jika banyak data
-                ->preload(), // Memuat opsi lebih cepat
-            Forms\Components\TextInput::make('keterangan')
-                ->label('Keterangan'),
-            Forms\Components\FileUpload::make('dokumen'),
-            ]);
+                ->options(
+                    User::whereDoesntHave('dokumen', function ($query) {
+                        $query->whereIn('keterangan', ['diterima', 'selesai']);
+                    })
+                    ->whereHas('userDetail', function ($query) {
+                        $query->whereIn('status_pendaftaran', ['diterima', 'selesai']);
+                    })
+                    ->pluck('email', 'id') // Ambil email sebagai label, ID sebagai value
+                )                
+                ->searchable()
+                ->preload()
+                ->required(),
+    
+            Forms\Components\FileUpload::make('dokumen')
+                ->required(),
+        ]);
     }
+    
 
     public static function table(Table $table): Table
     {
@@ -43,10 +62,17 @@ class DokumenResource extends Resource
                 ->label('Nama Lengkap')
                 ->sortable()
                 ->searchable(),
-            Tables\Columns\TextColumn::make('user.dokumen.keterangan')
-                ->label('Keterangan')
+                Tables\Columns\TextColumn::make('user.email')
+                ->label('Email')
                 ->sortable()
                 ->searchable(),
+                Tables\Columns\TextColumn::make('keterangan')
+                ->label('Keterangan')
+                ->formatStateUsing(function ($record) {
+                    return $record->keterangan;
+                })
+                ->sortable()
+                ->searchable(),            
             ])
             ->filters([
                 //

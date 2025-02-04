@@ -3,7 +3,7 @@
 namespace App\Filament\Resources\UserDetailResource\Pages;
 
 use App\Filament\Resources\UserDetailResource;
-use Filament\Actions;
+use Filament\Actions\Action;
 use Filament\Resources\Pages\ViewRecord;
 
 class ViewUserDetails extends ViewRecord
@@ -13,5 +13,12 @@ class ViewUserDetails extends ViewRecord
     public function getTitle(): string 
     {
         return 'Detail Pemohon';
+    }
+    protected function getHeaderActions(): array
+    {
+        return [
+            Action::make('back')
+            ->label('Back')
+            ->url(url()->previous())        ];
     }
 }

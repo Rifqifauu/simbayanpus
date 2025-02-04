@@ -2,16 +2,11 @@
 
 namespace App\Filament\Resources;
 
-use Filament\Resources\View;
-use Filament\Forms\Components\TextInput;
-use Filament\Tables\Columns\TextColumn;
 use Carbon\Carbon;
 use Filament\Infolists;
 use Filament\Infolists\Infolist;
 use App\Filament\Resources\MagangAktifResource\Pages;
-use App\Filament\Resources\MagangAktifResource\RelationManagers;
 use App\Models\UserDetail;
-use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -40,20 +35,42 @@ class MagangAktifResource extends Resource
     {
         return $infolist
         ->schema([
-            Infolists\Components\TextEntry::make('user.name')
-                ->label('Nama Lengkap'), // Menambahkan label
-            Infolists\Components\TextEntry::make('user.email')
-                ->label('Email'), // Menambahkan label
-            Infolists\Components\TextEntry::make('user.userDetail.institusi')
-                ->label('Institusi'), // Menambahkan label
-            Infolists\Components\TextEntry::make('user.userDetail.nomor_hp')
-                ->label('Nomor Hp'), // Menambahkan label
+            Infolists\Components\ImageEntry::make('foto')
+            ->label('')
+            ->height(250)
+            ->columnSpan(2),
             Infolists\Components\TextEntry::make('user.permohonan.tgl_masuk')
-                ->label('Tanggal Masuk'), // Menambahkan label
-            Infolists\Components\TextEntry::make('user.permohonan.tgl_keluar')
-                ->label('Tanggal Keluar'), // Menambahkan label
-            Infolists\Components\ImageEntry::make('user.userDetail.foto')
-                ->label('Foto'), // Menambahkan label
+            ->label('Tanggal Masuk') 
+            ->badge()
+            ->color('primary'),
+        Infolists\Components\TextEntry::make('user.permohonan.tgl_keluar')
+            ->label('Tanggal Keluar')
+            ->badge()
+            ->color('primary'),
+        Infolists\Components\TextEntry::make('nik')
+        ->label('NIK'),
+        Infolists\Components\TextEntry::make('user.name')
+            ->label('Nama Lengkap'),
+        Infolists\Components\TextEntry::make('jenis_kelamin')
+            ->label('Jenis Kelamin'),
+        Infolists\Components\TextEntry::make('agama')
+            ->label('Agama'),
+        Infolists\Components\TextEntry::make('alamat')
+            ->label('Alamat KTP'),
+        Infolists\Components\TextEntry::make('domisili')
+            ->label('Alamat Domisili'),
+        Infolists\Components\TextEntry::make('user.email')
+            ->label('Email'),
+            Infolists\Components\TextEntry::make('medsos')
+            ->label('Media Sosial'),
+        Infolists\Components\TextEntry::make('nomor_hp')
+            ->label('Nomor Hp'),
+            Infolists\Components\TextEntry::make('nim')
+            ->label('NIM/NIS/NIP'),
+            Infolists\Components\TextEntry::make('program_studi')
+            ->label('Program Studi'),
+        Infolists\Components\TextEntry::make('institusi')
+            ->label('Institusi'),
         ]);
     
     }

@@ -113,5 +113,38 @@ public function action(Request $request, $id) {
 
         return back()->with('success', 'Data berhasil diperbarui');
     }
+    public function destroy($id)
+{
+    try {
+        // Cek apakah permohonan dengan user_id tersebut ada
+        $permohonan = Permohonan::where('user_id', $id);
+        
+        if (!$permohonan->exists()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Permohonan tidak ditemukan'
+            ], 404);
+        }
 
+        // Hapus permohonan
+        $permohonan->delete();
+
+        // Ambil user detail dan update status jika ditemukan
+        $userDetail = UserDetail::where('id_user', $id)->first();
+        if ($userDetail) {
+            $userDetail->update(['status_pendaftaran' => 'default']);
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Permohonan berhasil dihapus'
+        ]);
+    } catch (\Exception $e) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Gagal menghapus permohonan',
+            'error' => $e->getMessage()
+        ], 500);
+    }
+}
 }

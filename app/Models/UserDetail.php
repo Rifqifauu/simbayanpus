@@ -19,6 +19,8 @@ class UserDetail extends Model
         'alamat',
         'status_pendaftaran',
         'foto',
+        'agama',
+        'domisili',
         'updated_at',
 'created_at'
             ];

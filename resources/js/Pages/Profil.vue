@@ -20,7 +20,7 @@
           <aside class="md:w-2/5 p-6 bg-gray-50">
             <!-- Profile Photo -->
             <div class="text-center mb-6">
-              <div class="w-60 h-80 mx-auto rounded overflow-hidden border-4 border-white shadow-lg relative group">
+              <div class="w-40 h-50 mx-auto rounded overflow-hidden border-4 border-white shadow-lg relative group">
                 <img
                   v-if="preview || formData.foto"
                   :src="preview || `/storage/${formData.foto}`"
@@ -46,13 +46,15 @@
               </div>
               
               <!-- Basic Info -->
-              <div class="mt-4 space-y-4">
+              <div class="mt-4 text-left space-y-4">
                 
+                <h2 class="text-xl font-semibold text-red-600">{{ user.name }}</h2>
                 <FormInput
                   v-model="formData.panggilan"
                   label="Nama Panggilan"
                   placeholder="Masukkan nama panggilan"
                 />
+                
               </div>
             </div>
   
@@ -71,62 +73,62 @@
                 placeholder="Link media sosial"
               />
             </div>
+            <h2 class="text-md mt-4 font-semibold text-red-600">Status Pendaftaran</h2>
+            <input
+                  :value="formData.status_pendaftaran"
+                   disabled
+                />
+                <div class=" space-y-4 mt-4">
+                  <a  v-if="formData.status_pendaftaran == 'diterima'" 
+  :href="'download/sk_diterima/' + user.id" 
+  class="inline-flex text-sm items-center gap-2 px-2 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md transition-all duration-300 hover:bg-blue-700 hover:-translate-y-1 active:translate-y-0"
+>
+  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+    <path d="M12 16l4-5h-3V4h-2v7H8l4 5zm-6 2h12v2H6v-2z"/>
+  </svg>
+  Download Surat Keterangan Diterima
+</a>
+              <a  v-if="formData.status_pendaftaran == 'selesai'"
+  :href="'download/sk_selesai/' + user.id" 
+  class="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md transition-all duration-300 hover:bg-blue-700 hover:-translate-y-1 active:translate-y-0"
+>
+  <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+    <path d="M12 16l4-5h-3V4h-2v7H8l4 5zm-6 2h12v2H6v-2z"/>
+  </svg>
+  Download Surat Keterangan Selesai Magang
+</a>
+            </div>
           </aside>
-          <transition 
-    enter-active-class="transition-transform duration-300 ease-out"
-    enter-from-class="opacity-0 scale-90"
-    enter-to-class="opacity-100 scale-100"
-    leave-active-class="transition-transform duration-300 ease-in"
-    leave-from-class="opacity-100 scale-100"
-    leave-to-class="opacity-0 scale-90"
-  >
-    <!-- Modal for Success Messages -->
-    <div v-if="showSuccessModal" class="fixed inset-0 flex justify-center items-center z-50">
-      <div class="bg-white p-6 rounded-lg shadow-lg w-80">
-        <div class="text-center">
-          <h3 class="text-2xl font-semibold text-black">Profil Berhasil Diubah</h3>
-        </div>
-        <div class="mt-6 text-center">
-          <img src="../../../storage/asset/daftarberhasil.gif" alt="Success Illustration" class="mx-auto mb-50 w-40 h-50">
-        </div>
-      </div>
-    </div></transition>
-           <!-- Modal for Error Messages -->
-    <transition 
-    enter-active-class="transition-transform duration-300 ease-out"
-    enter-from-class="opacity-0 scale-90"
-    enter-to-class="opacity-100 scale-100"
-    leave-active-class="transition-transform duration-300 ease-in"
-    leave-from-class="opacity-100 scale-100"
-    leave-to-class="opacity-0 scale-90"
-  >
-    <div v-if="showErrorModal" class="fixed inset-0 flex justify-center items-center z-50">
-      <div class="bg-white p-6 rounded-lg shadow-lg w-80">
-        <div class="text-center">
-          <h3 class="text-xl font-semibold text-red-700">Gagal Menyimpan Data!</h3>
-        </div>
-        <div class="mt-4 text-center">
-          <img src="../../../storage/asset/gagal.gif" alt="Success Illustration" class="mx-auto mb-6 w-40 h-40">
-          <p class="text-gray-800">{{ errorMessage }}</p>
-        </div>
-      </div>
-    </div>
-    </transition>
-  
+          <ErrorModal 
+      :show="showErrorModal"
+      :message="errorMessage"
+      title="Gagal Mengubah Profil"
+    />
+    
+    <SuccessModal
+      :show="showSuccessModal"
+      title="Berhasil Mengubah Profil"
+    />
           <!-- Main Content -->
           <main class="md:w-3/5 p-6">
             <h2 class="text-2xl font-semibold text-red-600 mb-4">Biodata</h2>
             <div class="space-y-4">
               <FormInput
                 v-model="formData.nim"
-                label="NIM"
-                placeholder="Masukkan NIM"
+                label="NIM/NIS/NIP"
+                placeholder="Masukkan Nomor Induk Institusi"
                 required
               />
               <FormInput
                 v-model="formData.nik"
                 label="NIK"
                 placeholder="Masukkan NIK"
+                required
+              />
+              <FormInput
+                v-model="formData.agama"
+                label="Agama"
+                placeholder="Masukkan Agama"
                 required
               />
               <FormInput
@@ -141,10 +143,17 @@
                 placeholder="Masukkan institusi"
                 required
               />
+
               <FormTextarea
                 v-model="formData.alamat"
                 label="Alamat"
                 placeholder="Masukkan alamat lengkap"
+                rows="3"
+              />
+              <FormTextarea
+                v-model="formData.domisili"
+                label="Domisili"
+                placeholder="Masukkan domisili selama magang"
                 rows="3"
               />
               <FormSelect
@@ -157,8 +166,10 @@
                 required
               />
             </div>
+            
           </main>
         </form>
+        
       </div>
   </div>
   </template>
@@ -168,7 +179,8 @@
   import { defineComponent, ref, computed } from 'vue';
   import { router } from '@inertiajs/vue3'; // Update this import
   import AppLayout from '@/Layouts/AppLayout.vue';
-  
+  import ErrorModal from '@/components/ErrorModal.vue'
+import SuccessModal from '@/components/SuccessModal.vue'
   
   // Form Input Component
   const FormInput = defineComponent({
@@ -265,14 +277,15 @@
   });
   
   export default {
-    components: {
-    },
+    
     name: 'EditProfile',
     layout: AppLayout,
     components: {
       FormInput,
       FormTextarea,
       FormSelect,
+      ErrorModal,
+      SuccessModal
     },
   
     props: {
@@ -302,8 +315,9 @@
       });
       const errorMessage = ref('');
 
-      const showSuccessModal = ref('');
-      const showErrorModal = ref('');
+      const showSuccessModal = ref(false);
+const showErrorModal = ref(false);
+
   
   
      
@@ -356,7 +370,7 @@
       if (response.status === 200) {
         showSuccessModal.value = true;
         setTimeout(() => {
-showSuccessModal.value=false;
+        showSuccessModal.value=false;
       }, 2000);
       }
     } catch (error) {
