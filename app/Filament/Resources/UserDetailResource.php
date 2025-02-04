@@ -37,7 +37,7 @@ class UserDetailResource extends Resource
             ->height(250)
             ->columnSpan(2),
             Infolists\Components\TextEntry::make('user.permohonan.tgl_masuk')
-                ->label('Masuk Magang') 
+                ->label('Mulai Magang') 
                 ->badge()
                 ->color('primary'),
             Infolists\Components\TextEntry::make('user.permohonan.tgl_keluar')

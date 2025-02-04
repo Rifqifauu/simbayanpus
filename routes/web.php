@@ -36,6 +36,7 @@ Route::middleware('auth')->group(function () {
     Route::prefix('view')->group(function () {
         Route::get('/cv/{id}', [FileController::class, 'viewCV'])->name('view.cv');
         Route::get('/sk_diterima/{id}', [FileController::class, 'viewSKDiterima'])->name('view.skditerima');
+        Route::get('/sk_selesai/{id}', [FileController::class, 'viewSKDiterima'])->name('view.skselesai');
         Route::get('/surat_pengantar/{id}', [FileController::class, 'viewSuratPengantar'])->name('view.surat_pengantar');
         Route::get('/proposal/{id}', [FileController::class, 'viewProposal'])->name('view.proposal');
         Route::get('/pedoman_magang', [FileController::class, 'viewpedomanMagang'])->name('view.pedoman_magang');

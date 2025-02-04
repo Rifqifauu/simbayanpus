@@ -80,22 +80,16 @@
                 />
                 <div class=" space-y-4 mt-4">
                   <a  v-if="formData.status_pendaftaran == 'diterima'" 
-  :href="'download/sk_diterima/' + user.id" 
+  :href="'view/sk_diterima/' + user.id" 
   class="inline-flex text-sm items-center gap-2 px-2 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md transition-all duration-300 hover:bg-blue-700 hover:-translate-y-1 active:translate-y-0"
 >
-  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-    <path d="M12 16l4-5h-3V4h-2v7H8l4 5zm-6 2h12v2H6v-2z"/>
-  </svg>
   Download Surat Keterangan Diterima
 </a>
               <a  v-if="formData.status_pendaftaran == 'selesai'"
-  :href="'download/sk_selesai/' + user.id" 
-  class="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md transition-all duration-300 hover:bg-blue-700 hover:-translate-y-1 active:translate-y-0"
+  :href="'view/sk_selesai/' + user.id" 
+  class="inline-flex text-sm items-center px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md transition-all duration-300 hover:bg-blue-700 hover:-translate-y-1 active:translate-y-0"
 >
-  <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
-    <path d="M12 16l4-5h-3V4h-2v7H8l4 5zm-6 2h12v2H6v-2z"/>
-  </svg>
-  Download Surat Keterangan Selesai Magang
+  Surat Keterangan Selesai Magang
 </a>
             </div>
           </aside>
@@ -146,7 +140,7 @@
 
               <FormTextarea
                 v-model="formData.alamat"
-                label="Alamat"
+                label="Alamat (KTP)"
                 placeholder="Masukkan alamat lengkap"
                 rows="3"
               />

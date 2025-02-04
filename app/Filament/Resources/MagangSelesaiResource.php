@@ -40,11 +40,11 @@ class MagangSelesaiResource extends Resource
             ->height(250)
             ->columnSpan(2),
             Infolists\Components\TextEntry::make('user.permohonan.tgl_masuk')
-            ->label('Tanggal Masuk') 
+            ->label('Mulai Magang') 
             ->badge()
             ->color('primary'),
         Infolists\Components\TextEntry::make('user.permohonan.tgl_keluar')
-            ->label('Tanggal Keluar')
+            ->label('Selesai Magang')
             ->badge()
             ->color('primary'),
         Infolists\Components\TextEntry::make('nik')
@@ -97,12 +97,12 @@ class MagangSelesaiResource extends Resource
             //     ->searchable(),
 
             Tables\Columns\TextColumn::make('user.permohonan.tgl_masuk')  // Mengakses tgl_masuk dari permohonan melalui relasi user
-                ->label('Tanggal Masuk')
+                ->label('Mulai Magang ')
                 ->sortable()
                 ->searchable(),
 
             Tables\Columns\TextColumn::make('user.permohonan.tgl_keluar')  // Mengakses tgl_keluar dari permohonan melalui relasi user
-                ->label('Tanggal Keluar')
+                ->label('Selesai Magang')
                 ->sortable()
                 ->searchable(),
 
