@@ -3,7 +3,7 @@
   <section class="bg-cover bg-center h-[30rem] " style="background-image: url('storage/homescreen.jpg')" data-aos="fade-up">
   <div class="px-4 bg-black bg-opacity-10 h-full flex flex-col justify-center items-center text-center text-white">
     <h2 class="text-4xl font-bold lg:text-5xl md:text-5xl" data-aos="fade-up" data-aos-delay="100">
-      Selamat Datang di Website Magang 
+      Selamat Datang di Website Pendaftaran Magang 
     </h2>
     <h3 class="text-2xl font-bold md:text-3xl lg:text-3xl pt-3" data-aos="fade-up" data-aos-delay="100">
 Balai Layanan Perpustakaan DPAD DIY    </h3>

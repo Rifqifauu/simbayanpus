@@ -232,7 +232,6 @@ export default {
             'Content-Type': 'multipart/form-data'
           }
         });
-
         if (response.data.success) {
           showSuccessModal.value = true;
           setTimeout(() => {
@@ -240,21 +239,23 @@ export default {
           }, 2000);
         }
       } catch (error) {
-        console.error('Error submitting form:', error);
-        
-        if (error.response?.data?.message) {
-          errorMessage.value = error.response.data.message;
-        } else if (error.response?.data?.errors?.email?.[0]) {
-          errorMessage.value = error.response.data.errors.email[0];
-        } else {
-          errorMessage.value = 'Terjadi kesalahan. Silakan coba lagi.';
-        }
-        
-        showErrorModal.value = true;
-        setTimeout(() => {
-          showErrorModal.value = false;
-        }, 2000);
-      }
+    // Handle known validation errors
+    if (error.response && error.response.data.errors) {
+      const errors = error.response.data.errors;
+      errorMessage.value = errors.email ? errors.email[0] : 'Unknown error';
+      showErrorModal.value = true;
+      setTimeout(() => {
+        showErrorModal.value = false;
+      }, 2000);
+    } else {
+      // Handle unexpected errors
+      errorMessage.value = 'Terjadi kesalahan tak terduga. Silakan coba lagi nanti.';
+      showErrorModal.value = true;
+      setTimeout(() => {
+        showErrorModal.value = false;
+      }, 2000);
+    }
+  }
     };
 
     return {

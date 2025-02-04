@@ -149,34 +149,59 @@ import SuccessModal from '@/components/SuccessModal.vue'
 
 
       const handleRegister = async () => {
-      try {
-        console.log('Register attempted with:', form.value);
-        // Menggunakan axios untuk POST request
-        const response = await axios.post('/register', form.value);
-        console.log('Register successful:', response.data);
-        // Jika login berhasil, tampilkan modal sukses
-        showSuccessModal.value = true;
-        showErrorModal.value = false;
+  try {
+    console.log('Register attempted with:', form.value);
+
+    // Menggunakan axios untuk POST request
+    const response = await axios.post('/register', form.value);
+    console.log('Register successful:', response.data);
+
+    // Jika register berhasil, tampilkan modal sukses
+    showSuccessModal.value = true;
+    showErrorModal.value = false;
+    setTimeout(() => {
+      // Redirect after success
+      document.location.href = '/home';
+    }, 2000);
+
+  } catch (error) {
+    if (error.response) {
+      const errors = error.response.data.errors || {}; // Ambil errors jika ada
+      if (Object.keys(errors).length > 0) {
+        console.error('Validation errors:', errors);
+        let errorMessages = '';
+        for (let field in errors) {
+          if (errors.hasOwnProperty(field)) {
+            errorMessages += `${errors[field][0]}<br>`; 
+          }
+        }
+        errorMessage.value = errorMessages; 
+        showErrorModal.value = true; 
         setTimeout(() => {
-          document.location.href = '/login';
-          }, 2000);
-      } catch (error) {
-        if (error.response && error.response.data.errors) {
-          errorMessage.value = error.response.data.errors.email[0]; // Assuming error is related to email
-          showErrorModal.value = true;
-          setTimeout(() => {
-            showErrorModal.value = false;
-          }, 2000);
-        } else {
-          console.error('An unexpected error occurred:', error);
-          errorMessage.value = error.response.data.errors.email[0]; // Assuming error is related to email
+          showErrorModal.value = false;
+        }, 2000);
+      } else {
+        const messages = error.response.data.messages || [];
+        if (messages.length > 0) {
+          console.error('Error messages:', messages);
+          errorMessage.value = messages.join(', '); // Gabungkan pesan-pesan error
           showErrorModal.value = true;
           setTimeout(() => {
             showErrorModal.value = false;
           }, 2000);
         }
       }
-    };
+    } else {
+      console.error('An unexpected error occurred:', error);
+      errorMessage.value = 'An unexpected error occurred. Please try again later.';
+      showErrorModal.value = true;
+      setTimeout(() => {
+        showErrorModal.value = false;
+      }, 2000);
+    }
+  }
+};
+
 
       return {
         form,
