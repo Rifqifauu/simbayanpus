@@ -24,15 +24,15 @@ class DivisiResource extends Resource
     {
         return $form
             ->schema([
-             
+                Forms\Components\Textarea::make('nama_divisi')
+                ->label('Nama Divisi*')
+                ,
                 Forms\Components\Textarea::make('keterangan')
-                    ->label('Keterangan')
+                    ->label('Keterangan*')
                     ,
                 Forms\Components\TextInput::make('kuota')
                     ->label('Kuota')
-                    ->required()
                     ->numeric()
-                    ->minValue(1)
                     ->default(1),
             ]);
     }
