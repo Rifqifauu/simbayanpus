@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Providers\Filament;
+use Rmsramos\Activitylog\ActivitylogPlugin;
 
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -57,7 +58,12 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
                 'role:admin'
+            ])
+            ->plugins([
+                ActivitylogPlugin::make()
+                ->navigationGroup('Manajemen User'),
+
             ]);
-            
+    
     }
 }

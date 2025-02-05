@@ -65,7 +65,6 @@
           </div>
         </div>
   
-  
         <!-- Statement -->
         <div class="mb-12 leading-loose text-justify">
           <p class="mb-6">
@@ -116,14 +115,36 @@
     methods: {
       async exportToPDF() {
         const element = this.$refs.pdfContent;
-        const canvas = await html2canvas(element, { scale: 2 }); // meningkatkan kualitas
-        const imgData = canvas.toDataURL("image/png");
         
-        const pdf = new jsPDF("p", "mm", "a4");
-        const imgWidth = 210; // ukuran A4 dalam mm
+        // Optimized html2canvas settings
+        const canvas = await html2canvas(element, {
+          scale: 1.5,
+          useCORS: true,
+          logging: false,
+          imageTimeout: 0,
+          removeContainer: true,
+          backgroundColor: '#ffffff'
+        });
+        
+        // Compress the image data
+        const imgData = canvas.toDataURL("image/jpeg", 0.8); // Using JPEG instead of PNG with 0.8 quality
+        
+        // Create PDF with compression
+        const pdf = new jsPDF({
+          orientation: "portrait",
+          unit: "mm",
+          format: "a4",
+          compress: true
+        });
+        
+        const imgWidth = 210; // A4 width
+        const pageHeight = 297; // A4 height
         const imgHeight = (canvas.height * imgWidth) / canvas.width;
-  
-        pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+        
+        // Add image with compression
+        pdf.addImage(imgData, "JPEG", 0, 0, imgWidth, imgHeight, undefined, 'FAST');
+        
+        // Save with optimized settings
         pdf.save("Surat_Pernyataan.pdf");
       },
       formatDate(dateString) {

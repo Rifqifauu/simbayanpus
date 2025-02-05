@@ -15,6 +15,8 @@ use Illuminate\Database\Eloquent\Builder;
 class DivisiResource extends Resource
 {
     protected static ?string $model = Divisi::class;
+    protected static ?string $navigationGroup = 'Konten Website';
+
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 

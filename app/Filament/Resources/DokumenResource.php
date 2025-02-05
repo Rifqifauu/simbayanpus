@@ -19,6 +19,7 @@ class DokumenResource extends Resource
     protected static ?string $model = Dokumen::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationGroup = '';
 
     public static function form(Forms\Form $form): Forms\Form
     {
@@ -32,7 +33,7 @@ class DokumenResource extends Resource
                 ->searchable()
                 ->preload()
                 ->required(),
-    
+
             Forms\Components\Select::make('id_user')
                 ->label('User Email')
                 ->options(
@@ -47,7 +48,6 @@ class DokumenResource extends Resource
                 ->searchable()
                 ->preload()
                 ->required(),
-    
             Forms\Components\FileUpload::make('dokumen')
                 ->required(),
         ]);

@@ -165,6 +165,7 @@ class UserDetailResource extends Resource
                                 'diterima' => 'Diterima',
                             ])
                             ->required(),
+                            
                     ])
                     ->action(function (UserDetail $record, array $data) {
                         // Create new message
@@ -177,6 +178,12 @@ class UserDetailResource extends Resource
                         UserDetail::where('id_user', $record->id_user)->update([
                             'status_pendaftaran' => $data['status_pendaftaran'],
                         ]);
+                        activity()
+                        ->causedBy(auth()->user())
+                        ->performedOn($record)
+                        ->event('ubah status')
+                        ->log('User ' . auth()->user()->name . ' mengubah status milik ' . $record->user->name);
+                
 
                         // Show success notification
                         Notification::make()

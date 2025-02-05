@@ -4,8 +4,6 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\PermohonanResource\Pages;
 use App\Models\Permohonan;
-use App\Models\User;
-use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -16,16 +14,13 @@ use Illuminate\Database\Eloquent\Builder;
 class PermohonanResource extends Resource
 {
     protected static ?string $model = Permohonan::class;
-protected static ?string $navigationGroup = 'Permohonan';
-protected static ?string $navigationIcon = 'heroicon-o-document';
-protected static ?string $navigationLabel = 'Masuk';
+    protected static ?string $navigationGroup = 'Permohonan';
+    protected static ?string $navigationIcon = 'heroicon-o-document';
+    protected static ?string $navigationLabel = 'Masuk';
 
     public static function form(Form $form): Form
     {
-        return $form
-            ->schema([
-              
-            ]);
+        return $form->schema([]);
     }
 
     public static function table(Table $table): Table
@@ -58,10 +53,18 @@ protected static ?string $navigationLabel = 'Masuk';
                         if ($userDetail) {
                             $userDetail->status_pendaftaran = 'diproses';
                             $userDetail->save();
+
+                            // ✅ Tambahkan Logging Aktivitas
+                            activity()
+                                ->causedBy(auth()->user())
+                                ->performedOn($record)
+                                ->event('proses')
+                                ->log('User ' . auth()->user()->name . ' memproses permohonan milik ' . $record->user->name);
                         }
                     })
                     ->icon('heroicon-o-check-badge')
-                    ->color('success'),
+                    ->color('success')
+                    ->requiresConfirmation(),
             ])
             ->bulkActions([]);
     }

@@ -17,6 +17,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class PesanResource extends Resource
 {
     protected static ?string $model = Pesan::class;
+    protected static ?string $navigationGroup = 'Konten Website';
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 

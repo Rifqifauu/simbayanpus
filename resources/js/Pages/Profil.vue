@@ -83,7 +83,13 @@
   :href="'view/sk_diterima/' + user.id" 
   class="inline-flex text-sm items-center gap-2 px-2 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md transition-all duration-300 hover:bg-blue-700 hover:-translate-y-1 active:translate-y-0"
 >
-  Download Surat Keterangan Diterima
+  Surat Keterangan Diterima
+</a>
+                  <a  v-if="formData.status_pendaftaran == 'diterima'" 
+  :href="'view/surat-pernyataan/'" 
+  class="inline-flex text-sm items-center gap-2 px-2 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md transition-all duration-300 hover:bg-blue-700 hover:-translate-y-1 active:translate-y-0"
+>
+   Surat Kesanggupan
 </a>
               <a  v-if="formData.status_pendaftaran == 'selesai'"
   :href="'view/sk_selesai/' + user.id" 
