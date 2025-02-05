@@ -111,7 +111,25 @@ class MagangSelesaiResource extends Resource
                   ->width(80)
                 , // Menyediakan URL lengkap
         ])
-        ->actions([ /* Your actions */ ])
+        ->actions([ /* Your actions */
+            Tables\Actions\Action::make('prosesPendaftaran')
+                    ->label('Nyatakan Selesai')
+                    ->action(function ($record) {
+                        $userDetail = $record->user->userDetail;
+                        if ($userDetail) {
+                            $userDetail->status_pendaftaran = 'selesai';
+                            $userDetail->save();
+                            activity()
+                                ->causedBy(auth()->user())
+                                ->performedOn($record)
+                                ->event('ubah status')
+                                ->log('User ' . auth()->user()->name . ' menyatakan mangang ' . $record->user->name.' telah selesai');
+                        }
+                    })
+                    ->icon('heroicon-o-check-badge')
+                    ->color('success')
+                    ->requiresConfirmation(),
+                     ])
         ->bulkActions([ /* Your bulk actions */ ]);
 }
 

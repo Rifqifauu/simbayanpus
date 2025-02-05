@@ -18,12 +18,12 @@
       
       <div class="w-full md:w-1/2 p-8 flex flex-col justify-center">
 
-        <button onclick="window.history.back()" class="flex items-center text-red-700 hover:text-red-800 mb-4">
+        <a href="/login" class="flex items-center text-red-700 hover:text-red-800 mb-4">
     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
     </svg>
     Kembali ke halaman Masuk
-  </button>
+  </a>
 
         <div class="max-w-md w-full mx-auto">
           <h2 class="text-3xl font-bold mb-4 text-red-700">Daftar</h2>

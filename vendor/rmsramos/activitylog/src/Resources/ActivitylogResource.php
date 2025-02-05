@@ -5,6 +5,8 @@ namespace Rmsramos\Activitylog\Resources;
 use Filament\Facades\Filament;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\KeyValue;
+use Illuminate\Support\Facades\Auth;
+
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Split;
@@ -167,7 +169,6 @@ class ActivitylogResource extends Resource
                 static::getEventColumnCompoment(),
                 static::getSubjectTypeColumnCompoment(),
                 static::getCauserNameColumnCompoment(),
-                static::getPropertiesColumnCompoment(),
                 static::getCreatedAtColumnCompoment(),
             ])
             ->defaultSort(config('filament-activitylog.resources.default_sort_column', 'created_at'), config('filament-activitylog.resources.default_sort_direction', 'asc'))
@@ -300,12 +301,13 @@ class ActivitylogResource extends Resource
         ];
     }
 
-    public static function shouldRegisterNavigation(): bool
+    public static function shouldRegisterNavigation(): bool 
     {
         $plugin = Filament::getCurrentPanel()?->getPlugin('rmsramos/activitylog');
-
-        return $plugin->getNavigationItem();
+    
+        return $plugin && Auth::check() && Auth::user()->role === 'super admin';
     }
+    
 
     public static function canAccess(): bool
     {

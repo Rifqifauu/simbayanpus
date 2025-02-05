@@ -5,6 +5,7 @@ namespace App\Filament\Resources\UserDetailResource\Pages;
 use App\Filament\Resources\UserDetailResource;
 use Filament\Actions\Action;
 use Filament\Resources\Pages\ViewRecord;
+use Illuminate\View\View;
 
 class ViewUserDetails extends ViewRecord
 {
@@ -20,5 +21,13 @@ class ViewUserDetails extends ViewRecord
             Action::make('back')
             ->label('Back')
             ->url(url()->previous())        ];
+    }
+    public function render(): View{
+        activity()
+        ->causedBy(auth()->user())
+        ->performedOn($this->record)
+        ->event('view')
+        ->log('User ' . auth()->user()->name . ' viewed a record ' . $this->record->user->name);
+        return parent::render();
     }
 }

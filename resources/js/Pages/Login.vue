@@ -34,7 +34,7 @@
     <img
       src="/storage/bayanpus.svg"
       alt="Balai Yanpus DPAD DIY"
-      class="h-8"
+      class="h-6 md:h-8 lg:h-8"
     />
   </div>
 

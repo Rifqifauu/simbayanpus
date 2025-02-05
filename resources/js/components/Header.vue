@@ -170,7 +170,7 @@
         >
           Kontak
 </a>
-        <a
+        <a v-if="user"
           href="/pesan"
           class="block w-full text-left px-3 py-2 hover:bg-red-700 rounded-md"
         >

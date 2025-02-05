@@ -30,6 +30,8 @@ class UserResource extends Resource
                 ->label('Nama'),
                 Forms\Components\TextInput::make('email')
                 ->label('Email'),
+                Forms\Components\TextInput::make('password')
+                ->label('Password'),
                 Forms\Components\Select::make('role')
     ->label('Role')
     ->options([

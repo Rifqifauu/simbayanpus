@@ -79,6 +79,17 @@ class DokumenResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make()
+                    ->requiresConfirmation()
+                    ->modalHeading('Konfirmasi Penghapusan')
+                    ->modalDescription('Apakah Anda yakin ingin menghapus data ini? Tindakan ini tidak dapat dibatalkan.')
+                    ->after(function ($record) {
+                        activity()
+                            ->causedBy(auth()->user()) // User yang melakukan
+                            ->performedOn($record) // Data yang dihapus
+                            ->event('deleted') // Event yang terjadi
+                            ->log('User ' . auth()->user()->name . ' menghapus dokumen milik ' . $record->user->name);
+                    }),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
