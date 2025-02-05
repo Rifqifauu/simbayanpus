@@ -1,4 +1,29 @@
 # SIMBAYANPUS
+![image](https://github.com/user-attachments/assets/5ba899f9-baa6-4dae-9ce5-44b930ac980f)
+![image](https://github.com/user-attachments/assets/c8303b02-49b6-4b10-a8b7-e319fb0c926a)
+
+
+## Fitur
+- Front User
+    - Login (Login.vue)
+    - Register (Register.vue)
+    - Home Page (Home.vue)
+    - Permohonan/Pengajuan Magang (BuatPermohonan.vue
+    - Kontak/ Pesan (Kontak.vue, Pesan.vue)
+    - Status Permohonan/Pengajuan (Permohonan.vue_
+    - Profil (Profil.vue)
+    - Informasi Divisi (Divisi.vue)
+    - Surat Pernyataan (Surat-Pernyataan.vue)
+- Dashboard (Filament)
+    - Data Magang (AdminPanel)
+    - Pendaftaran Masuk (PermohonanResource
+    - Pendaftaran Diproses (UserDetailResource)
+    - Pendaftaran Diterima (PermohonanDiterimaResource)
+    - Magang Aktif (MagangAktifResource)
+    - Magang Selesai (MagangSelesaiResource)
+    - Kirim Dokumen (DokumenResource)
+    - Kirim Pesan (PesanResource)
+    - Log Activity (ActivitylogResource)
 
 ## Prerequisites
 - PHP >= 8.0
@@ -6,7 +31,12 @@
 - Node.js & NPM
 - Git
 - MySQL/MariaDB
-
+## Tech Stack
+- Laravel 11
+- Inertia Js
+- Vue Js
+- Tailwind CSS
+- Laravel Filament
 ## Installation Steps
 
 1. Clone the repository
@@ -65,3 +95,4 @@ After running the seeder, you'll have access to the following accounts:
 - Admin account (email: admin@example.com, password: iamadmin)
 - Superadmin account (email: superadmin@example.com, password: iamsuper)
 
+**Import divisi.sql** ke dalam database yg telah dibuat **(simbayanpus)** untuk mendapatkan data divisi/layanan yg sebelumnya sudah ada.
