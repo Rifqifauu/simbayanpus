@@ -1,12 +1,40 @@
 # SIMBAYANPUS
 
+### Fitur
+
+- Front User
+    - Login (Login.vue)
+    - Register (Register.vue)
+    - Home Page (Home.vue)
+    - Permohonan/Pengajuan Magang (BuatPermohonan.vue
+    - Kontak/ Pesan (Kontak.vue, Pesan.vue)
+    - Status Permohonan/Pengajuan (Permohonan.vue_
+    - Profil (Profil.vue)
+    - Informasi Divisi (Divisi.vue)
+    - Surat Pernyataan (Surat-Pernyataan.vue)
+- Dashboard (Filament)
+    - Data Magang (AdminPanel)
+    - Pendaftaran Masuk (PermohonanResource
+    - Pendaftaran Diproses (UserDetailResource)
+    - Pendaftaran Diterima (PermohonanDiterimaResource)
+    - Magang Aktif (MagangAktifResource)
+    - Magang Selesai (MagangSelesaiResource)
+    - Kirim Dokumen (DokumenResource)
+    - Kirim Pesan (PesanResource)
+    - Log Activity (ActivitylogResource)
+
 ## Prerequisites
 - PHP >= 8.0
 - Composer
 - Node.js & NPM
 - Git
 - MySQL/MariaDB
-
+## Tech Stack
+- Laravel 11
+- Inertia Js
+- Vue Js
+- Tailwind CSS
+- Laravel Filament
 ## Installation Steps
 
 1. Clone the repository
