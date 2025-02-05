@@ -15,19 +15,19 @@
   
             <!-- Desktop Navigation -->
             <div class="relative hidden lg:flex lg:items-center lg:space-x-8 ml-auto pe-4">
-              <button @click="home" class="text-lg text-white hover:text-gray-200 transition px-3 py-2">
+              <a href="/home" class="text-lg text-white hover:text-gray-200 transition px-3 py-2">
                 Beranda
-              </button>
-              <button @click="divisi" class="text-lg text-white hover:text-gray-200 transition px-3 py-2">
+              </a>
+              <a href="/divisi" class="text-lg text-white hover:text-gray-200 transition px-3 py-2">
                 Penugasan
-              </button>
-              <button v-if="user" @click="permohonan" class="text-lg text-white hover:text-gray-200 transition px-3 py-2">
+              </a>
+              <a v-if="user" href="/permohonan" class="text-lg text-white hover:text-gray-200 transition px-3 py-2">
                 Permohonan
-              </button>
-              <button @click="kontak" class="text-white text-lg hover:text-gray-200 transition px-3 py-2">
+              </a>
+              <a href="/kontak" class="text-white text-lg hover:text-gray-200 transition px-3 py-2">
                 Kontak
-              </button>
-              <a href="https://drive.google.com/file/d/1lcD5gla1hGP0cl3CGGxYt1nZms-3fZ6C/view?pli=1" class="text-white text-lg hover:text-gray-200 transition px-3 py-2 relative group">
+              </a>
+            <a href="https://drive.google.com/file/d/1lcD5gla1hGP0cl3CGGxYt1nZms-3fZ6C/view?pli=1" class="text-white text-lg hover:text-gray-200 transition px-3 py-2 relative group" target="_blank">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor" class="text-white">
     <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.9 2 1.99 2h12c1.1 0 1.99-.9 1.99-2V8l-6-6zm0 2v6h6l-6-6z"/>
   </svg>
@@ -36,26 +36,26 @@
 
 
 
-<button v-if="user" @click="pesan" class="text-white text-lg hover:text-gray-200 transition px-3 py-2 relative group">
+<a v-if="user" href="/pesan" class="text-white text-lg hover:text-gray-200 transition px-3 py-2 relative group">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
     <path d="M1.5 8.67v8.58a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V8.67l-8.928 5.493a3 3 0 0 1-3.144 0L1.5 8.67Z" />
     <path d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.714 5.978a1.5 1.5 0 0 0 1.572 0L22.5 6.908Z" />
   </svg>
   <span class="absolute left-1/2 transform -translate-x-1/2 translate-y-6 opacity-0 group-hover:opacity-100 text-sm text-white bg-red-00 p-1 rounded transition-opacity z-10">Pesan</span>
-</button>
+</a>
             </div>
   
             <!-- User Menu (Desktop) -->
             <div class="hidden lg:flex items-center relative">
               <div v-if="!user" class="relative">
-                <button 
-                  @click="login"     
+                <a 
+                  href="/login"     
                   class="relative overflow-hidden text-lg px-6 py-2 rounded-xl text-white 
                   group transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-lg transform hover:border-red-400">
                   <div class="absolute inset-0 bg-gradient-to-r from-red-800 to-red-600 transition-opacity duration-500 ease-in-out"></div>
                   <div class="absolute inset-0 bg-gradient-to-l from-red-800 to-red-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
                   <span class="relative">Masuk</span>
-                </button>
+              </a>
               </div>
   
               <div v-else class="relative">
@@ -81,12 +81,12 @@
                   v-show="dropdownOpen"
                   class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-30"
                 >
-                  <button
-                    @click="profile"
+                  <a
+                    href="/profile"
                     class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
                   >
                     Profile
-                  </button>
+              </a>
                   <button
                     @click="showLogoutConfirm"
                     class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
@@ -145,44 +145,44 @@
       </button>
 
       <div class="px-4 pt-10 pb-3 justify space-y-2">
-        <button
-          @click="home"
+        <a
+          href="/home"
           class="block w-full text-left px-3 py-2 hover:bg-red-700 rounded-md"
         >
           Beranda
-        </button>
-        <button
-          @click="divisi"
+      </a>
+        <a
+          href="/divisi"
           class="block w-full text-left px-3 py-2 hover:bg-red-700 rounded-md"
         >
           Penugasan
-        </button>
-        <button
+    </a>
+        <a
           v-if="user"
-          @click="permohonan"
+          href="/permohonan"
           class="block w-full text-left px-3 py-2 hover:bg-red-700 rounded-md"
         >
           Permohonan
-        </button>
-        <button
-          @click="kontak"
+  </a>
+        <a
+          href="/kontak"
           class="block w-full text-left px-3 py-2 hover:bg-red-700 rounded-md"
         >
           Kontak
-        </button>
-        <button
-          @click="pesan"
+</a>
+        <a
+          href="/pesan"
           class="block w-full text-left px-3 py-2 hover:bg-red-700 rounded-md"
         >
           Pesan
-        </button>
+</a>
         <template v-if="user">
-          <button
-            @click="profile"
+          <a
+            href="/profile"
             class="block w-full text-left px-3 py-2 hover:bg-red-700 rounded-md"
           >
             Profile
-          </button>
+        </a>
           <button
             @click="showLogoutConfirm"
             class="block w-full text-left px-3 py-2 hover:bg-red-700 rounded-md"
@@ -190,13 +190,13 @@
             Logout
           </button>
         </template>
-        <button
+        <a
           v-else
-          @click="login"
+          href="/login"
           class="block w-full text-left px-3 py-2 hover:bg-red-700 rounded-md"
         >
           Login
-        </button>
+      </a>
       </div>
     </div>
   </div>

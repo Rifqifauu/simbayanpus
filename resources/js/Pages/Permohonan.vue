@@ -2,11 +2,11 @@
     <div class="status-page">
         <!-- Header with updated styling -->
         <header class="header mt-4">
-            <h1 v-if="status !== 'default' && status !== null && status !== 'ditolak'" class="text-3xl pb-4 sm:text-3xl md:text-4xl font-bold mb-2 text-red-800">Status Permohonan</h1>
-            <img v-if="status !== 'default' && status !==null  && status !== 'ditolak'" :src="currentStatus.image" alt="" class="mx-auto max-w-18 pt-2 h-auto">
+            <h1 v-if="status !== 'default' && status !== null && status !== 'ditolak' && status !== 'selesai'" class="text-3xl pb-4 sm:text-3xl md:text-4xl font-bold mb-2 text-red-800">Status Permohonan</h1>
+            <img v-if="status !== 'default' && status !==null  && status !== 'ditolak' && status !== 'selesai'" :src="currentStatus.image" alt="" class="mx-auto max-w-18 pt-2 h-auto">
         </header>
 
-        <template v-if="status !== 'default'  && status !== 'ditolak' && status !==null ">
+        <template v-if="status !== 'default'  && status !== 'ditolak' && status !== 'selesai' && status !==null ">
             <!-- Updated Progress Bar -->
             <div class="progress-container" aria-live="polite">
                 <div class="progress-bar">
@@ -86,7 +86,7 @@
             </div>
         </template>
 
-        <div v-if="status === 'default' || status === null || status === 'ditolak'" class="">
+        <div v-if="status === 'default' || status === null || status === 'ditolak' || status === 'selesai'" class="">
         <div class="inset-0 bg-black bg-opacity-50"></div>
         <div class="inset-0 overflow-y-auto">
             <div class="w-full px-8 flex min-h-full items-center justify-center text-center">
@@ -159,7 +159,7 @@ export default defineComponent({
             type: String,
             required: true,
             validator: (value) =>
-                [null,"default", "pending", "diproses", "diterima","ditolak"].includes(value),
+                [null,"default", "pending", "diproses", "diterima","ditolak","selesai"].includes(value),
             default: null,
         },
         user: {
@@ -242,6 +242,7 @@ export default defineComponent({
         getTitle() {
             if (this.status === 'default') return 'Belum Ada Permohonan';
             if (this.status === 'ditolak') return 'Permohonan Anda Ditolak';
+            if (this.status === 'selesai') return 'Periode Magang Anda Selesai';
             if (this.status === null) return 'Belum Ada Data Profil';
             return '';
         },
@@ -255,12 +256,16 @@ export default defineComponent({
             if (this.status === null) {
                 return 'Anda belum mengisi data profil. Silahkan isi terlebih dahulu.';
             }
+            if (this.status === 'selesai') {
+                return 'Periode magang Anda telah selesai. Terimakasih atas kerjasamanya selama magang di Balai Yanpus DPAD DIY';
+            }
             return '';
         },
         getButtonText() {
             if (this.status === 'default') return 'Buat Permohonan Baru';
             if (this.status === null) return 'Ke halaman profil';
             if (this.status === 'ditolak') return 'Buat Permohonan Ulang';
+            if (this.status === 'selesai') return 'Surat Keterangan Selesai';
             return '';
         },
         handleAction() {
@@ -270,6 +275,8 @@ export default defineComponent({
                 this.profil();
             } else if (this.status === 'ditolak'){
                 this.deletePermohonan(this.user.id);
+            } else if (this.status === 'selesai'){
+                this.suratSelesai(this.user.id)
             }
         },
 
@@ -295,6 +302,9 @@ export default defineComponent({
         profil() {
             window.location.href = "/profile";
         },
+        suratSelesai(id) {
+            window.open(`/view/sk_selesai/${id}`, '_blank');
+        },
         async deletePermohonan(id) {
     try {
         const response = await axios.delete(`/permohonan/delete/${id}`);
@@ -310,7 +320,6 @@ export default defineComponent({
         }
     } catch (error) {
         console.error("Request Failed:", error);
-
         if (error.response?.data) {
             console.error("Server Error:", error.response.data);
         } else if (error.request) {

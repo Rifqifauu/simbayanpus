@@ -40,8 +40,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/surat_pengantar/{id}', [FileController::class, 'viewSuratPengantar'])->name('view.surat_pengantar');
         Route::get('/proposal/{id}', [FileController::class, 'viewProposal'])->name('view.proposal');
         Route::get('/pedoman_magang', [FileController::class, 'viewpedomanMagang'])->name('view.pedoman_magang');
+        Route::get('/surat-pernyataan', [FileController::class, 'viewSuratPernyataan'])->name('view.surat_pernyataan');
 });
 });
+
+
 // Logout Route
 Route::post('/logout', function () {
     Auth::logout();

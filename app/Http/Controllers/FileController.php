@@ -6,9 +6,20 @@ use App\Models\Dokumen;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
-
+use Inertia\Inertia;
 class FileController extends Controller
 {
+    public function viewSuratPernyataan(){
+        $user = Auth::user();
+        $userDetail = $user->UserDetail;
+        $permohonan = $user->Permohonan;
+
+        return Inertia::render('Surat-Pernyataan', [
+            'user' => $user,
+            'userDetail' => $userDetail,
+            'permohonan' => $permohonan,
+        ]);
+    }
     public function viewCv($userId)
     {
         $file = Permohonan::where('user_id', $userId)->firstOrFail()->cv;

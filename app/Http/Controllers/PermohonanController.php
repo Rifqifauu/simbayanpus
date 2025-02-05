@@ -52,10 +52,10 @@ class PermohonanController extends Controller
         'division' => 'required|string',
         'startDate' => 'required|date',
         'endDate' => 'required|date|after_or_equal:startDate',
-        'cv' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-        'coverLetter' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-        'proposal' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
-        'guidelines' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+        'cv' => 'nullable|file|mimes:pdf|max:2048',
+        'coverLetter' => 'nullable|file|mimes:pdf|max:2048',
+        'proposal' => 'nullable|file|mimes:pdf|max:2048',
+        'guidelines' => 'nullable|file|mimes:pdf|max:2048',
     ]);
 
     $uploadPath = 'uploads/internships';

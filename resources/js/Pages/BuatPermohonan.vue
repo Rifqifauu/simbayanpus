@@ -34,26 +34,33 @@
 
           <!-- File Uploads -->
           <div v-for="(label, key) in fileUploadFields" :key="key">
-            <label class="block text-yellow-300 mb-2">{{ label }} <span class="text-yellow-200">*</span></label>
-            <div class="flex items-center space-x-2">
-              <input 
-                type="file"
-                :ref="setFileInputReference(key)"
-                :data-key="key"
-                @change="handleFileUpload($event)"
-                class="hidden"
-                accept=".pdf,.doc,.docx"
-              >
-              <button 
-                type="button"
-                @click="triggerFileInput(key)"
-                class="bg-gray-200 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-300"
-              >
-                Pilih File
-              </button>
-              <span class="text-sm">{{ formData[key] ? formData[key].name : 'Tidak ada file yang dipilih.' }}</span>
-            </div>
-          </div>
+      <label class="block text-yellow-300 mb-2">{{ label }} <span class="text-yellow-200">*</span></label>
+      <div class="flex items-center space-x-2">
+        <input 
+          type="file"
+          :ref="setFileInputReference(key)"
+          :data-key="key"
+          @change="handleFileUpload($event)"
+          class="hidden"
+          accept=".pdf,.doc,.docx"
+        >
+        <button 
+          type="button"
+          @click="triggerFileInput(key)"
+          class="bg-gray-200 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-300"
+        >
+          Pilih File
+        </button>
+        <span class="text-sm">{{ formData[key] ? formData[key].name : 'Tidak ada file yang dipilih.' }}</span>
+      </div>
+      
+      <!-- Add FilePreview component -->
+      <FilePreview
+        v-if="formData[key] && formData[key].type === 'application/pdf'"
+        :file="formData[key]"
+        class="mt-4"
+      />
+    </div>
 
           <!-- Submit Button -->
           <button 
@@ -86,6 +93,7 @@
 </template>
 
 <script>
+import FilePreview from '@/components/FilePreview.vue';
 import { reactive, ref, computed } from 'vue';
 import AppLayout from '../layouts/AppLayout.vue';
 import axios from 'axios';
@@ -97,6 +105,7 @@ export default {
   components: {
     SuccessModal,
     ErrorModal,
+    FilePreview
   },
   layout: AppLayout,
   setup(props) {

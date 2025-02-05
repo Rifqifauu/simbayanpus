@@ -25,6 +25,8 @@
         "@lottiefiles/dotlottie-vue": "^0.5.4",
         "@vitejs/plugin-vue": "^5.0.0",
         "aos": "^2.3.4",
+        "html2canvas": "^1.4.1",
+        "jspdf": "^2.5.2",
         "vite": "^5.0.0"
     }
 }
