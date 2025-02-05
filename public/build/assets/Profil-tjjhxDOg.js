@@ -1,0 +1,51 @@
+import{r as c,i as D,j as b,c as f,b as t,t as x,d as V,k as S,a as r,g as w,I as y,p as _,o as p}from"./app-DBr-amPc.js";import{A as M}from"./AppLayout-Dy7lUTt2.js";import{E as P}from"./ErrorModal-qL7AgLcL.js";import{S as q}from"./SuccessModal-4EUGx5_s.js";import{_ as E}from"./_plugin-vue_export-helper-DlAUqK2U.js";const I=y({props:{modelValue:String,label:String,type:{type:String,default:"text"},placeholder:String,required:Boolean},emits:["update:modelValue"],template:`
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">
+          {{ label }}
+          <span v-if="required" class="text-red-500">*</span>
+        </label>
+        <input
+          :type="type"
+          :value="modelValue"
+          @input="$emit('update:modelValue', $event.target.value)"
+          :placeholder="placeholder"
+          :required="required"
+          class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500"
+        >
+      </div>
+    `}),U=y({props:{modelValue:String,label:String,placeholder:String,rows:{type:[Number,String],default:3}},emits:["update:modelValue"],template:`
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">
+          {{ label }}
+        </label>
+        <textarea
+          :value="modelValue"
+          @input="$emit('update:modelValue', $event.target.value)"
+          :placeholder="placeholder"
+          :rows="rows"
+          class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500"
+        ></textarea>
+      </div>
+    `}),j=y({props:{modelValue:String,label:String,options:Array,required:Boolean},emits:["update:modelValue"],template:`
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">
+          {{ label }}
+          <span v-if="required" class="text-red-500">*</span>
+        </label>
+        <select
+          :value="modelValue"
+          @input="$emit('update:modelValue', $event.target.value)"
+          :required="required"
+          class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500"
+        >
+          <option value="">Pilih {{ label }}</option>
+          <option 
+            v-for="option in options" 
+            :key="option.value"
+            :value="option.value"
+          >
+            {{ option.label }}
+          </option>
+        </select>
+      </div>
+    `}),F={name:"EditProfile",layout:M,components:{FormInput:I,FormTextarea:U,FormSelect:j,ErrorModal:P,SuccessModal:q},props:{user:{type:Object,required:!0},userDetail:{type:Object,required:!0},title:String,success:String,error:String},mounted(){document.title=this.title},setup(i){console.log("Props di setup:",i);const a=c({...i.userDetail}),d=c(""),e=c(!1),u=c(!1),h=c(null),n=l=>{const s=l.target.files[0];s&&(h.value=URL.createObjectURL(s),a.value.foto=s)},v=D(()=>i.userDetail!==null&&i.userDetail!==void 0);return{showSuccessModal:e,formData:a,preview:h,handleImageChange:n,handleSubmit:async()=>{try{const l=new FormData;Object.entries(a.value).forEach(([g,m])=>{m!=null&&(g==="foto"&&m instanceof File,l.append(g,m))}),i.userDetail&&l.append("_method","PUT"),l.forEach((g,m)=>{console.log("Isi Form",`Key: ${m}, Value: ${g}`)});const s=i.userDetail?"/profile/edit":"/profile/store",o=await _.post(s,l);console.log(o.data),o.status===200&&(e.value=!0,setTimeout(()=>{e.value=!1},2e3))}catch(l){if(l.response&&l.response.data.errors)console.error("Error updating profile:",l),d.value=l.response.data.errors,u.value=!0,setTimeout(()=>{u.value=!1},2e3);else{console.error("An unexpected error occurred:",l.response.data.messages);for(let s in l.response.data.messages)l.response.data.messages.hasOwnProperty(s)&&(console.log(`Error in ${s}:`,l.response.data.messages[s][0]),d.value=l.response.data.messages[s][0],u.value=!0,setTimeout(()=>{u.value=!1},2e3))}}},isEdit:v,showErrorModal:u,errorMessage:d}}},N={class:"min-h-screen bg-gray-50 py-8 px-4"},C={class:"max-w-4xl mx-auto bg-white shadow-xl rounded-lg overflow-hidden"},T={class:"bg-red-600 text-white flex justify-between items-center p-4 rounded-2xl"},B={class:"text-lg font-semibold"},K={class:"md:w-2/5 p-6 bg-gray-50"},A={class:"text-center mb-6"},L={class:"w-40 h-50 mx-auto rounded overflow-hidden border-4 border-white shadow-lg relative group"},O=["src","alt"],z={key:1,class:"w-full h-full p-8 bg-gray-200 flex items-center justify-center"},G={class:"absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"},H={class:"cursor-pointer bg-white text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-100"},R={class:"mt-4 text-left space-y-4"},J={class:"text-xl font-semibold text-red-600"},Q={class:"space-y-4"},W=["value"],X={class:"space-y-4 mt-4"},Y=["href"],Z={key:1,href:"view/surat-pernyataan/",class:"inline-flex text-sm items-center gap-2 px-2 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md transition-all duration-300 hover:bg-blue-700 hover:-translate-y-1 active:translate-y-0"},$=["href"],ee={class:"md:w-3/5 p-6"},ae={class:"space-y-4"};function oe(i,a,d,e,u,h){const n=b("FormInput"),v=b("ErrorModal"),k=b("SuccessModal"),l=b("FormTextarea"),s=b("FormSelect");return p(),f("div",N,[t("div",C,[t("div",T,[t("h2",B,x(e.isEdit?"Edit Profile":"Create Profile"),1),t("button",{onClick:a[0]||(a[0]=(...o)=>e.handleSubmit&&e.handleSubmit(...o)),class:"flex items-center bg-white text-red-600 px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors"},[a[14]||(a[14]=t("svg",{xmlns:"http://www.w3.org/2000/svg",class:"w-5 h-5 mr-2",fill:"none",viewBox:"0 0 24 24",stroke:"currentColor"},[t("path",{"stroke-linecap":"round","stroke-linejoin":"round","stroke-width":"2",d:"M5 13l4 4L19 7"})],-1)),V(" "+x(e.isEdit?"Simpan":"Buat"),1)])]),t("form",{onSubmit:a[13]||(a[13]=S((...o)=>e.handleSubmit&&e.handleSubmit(...o),["prevent"])),class:"md:flex"},[t("aside",K,[t("div",A,[t("div",L,[e.preview||e.formData.foto?(p(),f("img",{key:0,src:e.preview||`/storage/${e.formData.foto}`,alt:e.formData.name,class:"w-full h-full object-cover"},null,8,O)):(p(),f("div",z,a[15]||(a[15]=[t("svg",{xmlns:"http://www.w3.org/2000/svg",class:"w-full h-full text-gray-400",fill:"none",viewBox:"0 0 24 24",stroke:"currentColor"},[t("path",{"stroke-linecap":"round","stroke-linejoin":"round","stroke-width":"2",d:"M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"})],-1)]))),t("div",G,[t("label",H,[t("input",{type:"file",class:"hidden",accept:"image/*",onChange:a[1]||(a[1]=(...o)=>e.handleImageChange&&e.handleImageChange(...o))},null,32),a[16]||(a[16]=V(" Ganti Foto "))])])]),t("div",R,[t("h2",J,x(d.user.name),1),r(n,{modelValue:e.formData.panggilan,"onUpdate:modelValue":a[2]||(a[2]=o=>e.formData.panggilan=o),label:"Nama Panggilan",placeholder:"Masukkan nama panggilan"},null,8,["modelValue"])])]),t("div",Q,[a[17]||(a[17]=t("h2",{class:"text-xl font-semibold text-red-600"},"Kontak",-1)),r(n,{modelValue:e.formData.nomor_hp,"onUpdate:modelValue":a[3]||(a[3]=o=>e.formData.nomor_hp=o),type:"tel",label:"Nomor HP",placeholder:"Masukkan nomor HP"},null,8,["modelValue"]),r(n,{modelValue:e.formData.medsos,"onUpdate:modelValue":a[4]||(a[4]=o=>e.formData.medsos=o),label:"Media Sosial",placeholder:"Link media sosial"},null,8,["modelValue"])]),a[18]||(a[18]=t("h2",{class:"text-md mt-4 font-semibold text-red-600"},"Status Pendaftaran",-1)),t("input",{value:e.formData.status_pendaftaran,disabled:""},null,8,W),t("div",X,[e.formData.status_pendaftaran=="diterima"?(p(),f("a",{key:0,href:"view/sk_diterima/"+d.user.id,class:"inline-flex text-sm items-center gap-2 px-2 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md transition-all duration-300 hover:bg-blue-700 hover:-translate-y-1 active:translate-y-0"}," Surat Keterangan Diterima ",8,Y)):w("",!0),e.formData.status_pendaftaran=="diterima"?(p(),f("a",Z," Surat Kesanggupan ")):w("",!0),e.formData.status_pendaftaran=="selesai"?(p(),f("a",{key:2,href:"view/sk_selesai/"+d.user.id,class:"inline-flex text-sm items-center px-4 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md transition-all duration-300 hover:bg-blue-700 hover:-translate-y-1 active:translate-y-0"}," Surat Keterangan Selesai Magang ",8,$)):w("",!0)])]),r(v,{show:e.showErrorModal,message:e.errorMessage,title:"Gagal Mengubah Profil"},null,8,["show","message"]),r(k,{show:e.showSuccessModal,title:"Berhasil Mengubah Profil"},null,8,["show"]),t("main",ee,[a[19]||(a[19]=t("h2",{class:"text-2xl font-semibold text-red-600 mb-4"},"Biodata",-1)),t("div",ae,[r(n,{modelValue:e.formData.nim,"onUpdate:modelValue":a[5]||(a[5]=o=>e.formData.nim=o),label:"NIM/NIS/NIP",placeholder:"Masukkan Nomor Induk Institusi",required:""},null,8,["modelValue"]),r(n,{modelValue:e.formData.nik,"onUpdate:modelValue":a[6]||(a[6]=o=>e.formData.nik=o),label:"NIK",placeholder:"Masukkan NIK",required:""},null,8,["modelValue"]),r(n,{modelValue:e.formData.agama,"onUpdate:modelValue":a[7]||(a[7]=o=>e.formData.agama=o),label:"Agama",placeholder:"Masukkan Agama",required:""},null,8,["modelValue"]),r(n,{modelValue:e.formData.program_studi,"onUpdate:modelValue":a[8]||(a[8]=o=>e.formData.program_studi=o),label:"Program Studi",placeholder:"Masukkan program studi",required:""},null,8,["modelValue"]),r(n,{modelValue:e.formData.institusi,"onUpdate:modelValue":a[9]||(a[9]=o=>e.formData.institusi=o),label:"Institusi/PT",placeholder:"Masukkan institusi/PT",required:""},null,8,["modelValue"]),r(l,{modelValue:e.formData.alamat,"onUpdate:modelValue":a[10]||(a[10]=o=>e.formData.alamat=o),label:"Alamat (KTP)",placeholder:"Masukkan alamat lengkap",rows:"3"},null,8,["modelValue"]),r(l,{modelValue:e.formData.domisili,"onUpdate:modelValue":a[11]||(a[11]=o=>e.formData.domisili=o),label:"Domisili",placeholder:"Masukkan domisili selama magang",rows:"3"},null,8,["modelValue"]),r(s,{modelValue:e.formData.jenis_kelamin,"onUpdate:modelValue":a[12]||(a[12]=o=>e.formData.jenis_kelamin=o),label:"Jenis Kelamin",options:[{value:"Laki-laki",label:"Laki-laki"},{value:"Perempuan",label:"Perempuan"}],required:""},null,8,["modelValue"])])])],32)])])}const ie=E(F,[["render",oe]]);export{ie as default};
