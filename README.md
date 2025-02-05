@@ -1,7 +1,7 @@
 # SIMBAYANPUS
+Sistem Informasi Magang Balai Yanpus DPAD DIY merupakan sebuah aplikasi berbasis web yang dikembangkan untuk mempermudah proses pendaftaran magang siswa/mahasiswa di Balai Yanpus DPAD DIY.
 
 ## Fitur
-
 - Front User
     - Login (Login.vue)
     - Register (Register.vue)
@@ -93,3 +93,4 @@ After running the seeder, you'll have access to the following accounts:
 - Admin account (email: admin@example.com, password: iamadmin)
 - Superadmin account (email: superadmin@example.com, password: iamsuper)
 
+**Import divisi.sql** ke dalam database yg telah dibuat **(simbayanpus)** untuk mendapatkan data divisi/layanan yg sebelumnya sudah ada.
