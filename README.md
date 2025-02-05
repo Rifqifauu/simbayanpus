@@ -1,5 +1,4 @@
 # SIMBAYANPUS
-Ini merupakan sebuah aplikasi berbasis web yang dikembangkan untuk mempermudah proses pendaftaran magang siswa/mahasiswa di Balai Yanpus DPAD DIY.
 ![image](https://github.com/user-attachments/assets/5ba899f9-baa6-4dae-9ce5-44b930ac980f)
 ![image](https://github.com/user-attachments/assets/c8303b02-49b6-4b10-a8b7-e319fb0c926a)
 
