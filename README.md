@@ -1,6 +1,6 @@
 # SIMBAYANPUS
 
-### Fitur
+## Fitur
 
 - Front User
     - Login (Login.vue)
