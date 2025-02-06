@@ -34,9 +34,9 @@ class FileController extends Controller
             'Content-Disposition' => 'inline; filename="' . basename($path) . '"',        ]);
     }
 
-    public function viewSKDiterima($userId)
+    public function viewSKDiterima()
     {
-        $file = Dokumen::where('id_user', $userId)
+        $file = Dokumen::where('id_user', Auth::id())
             ->where('keterangan', 'diterima')
             ->firstOrFail()->dokumen;
         

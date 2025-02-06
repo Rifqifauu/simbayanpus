@@ -187,6 +187,11 @@
           >
             Profile
         </a>
+         <a href="https://drive.google.com/file/d/1lcD5gla1hGP0cl3CGGxYt1nZms-3fZ6C/view?pli=1"  target="_blank"
+            class="block w-full text-left px-3 py-2 hover:bg-red-700 rounded-md"
+          >
+            Pedoman Magang
+        </a>
           <button
             @click="showLogoutConfirm"
             class="block w-full text-left px-3 py-2 hover:bg-red-700 rounded-md"

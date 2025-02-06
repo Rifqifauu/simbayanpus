@@ -84,12 +84,12 @@
                 />
                 <div class=" space-y-4 mt-4">
                   <a  v-if="formData.status_pendaftaran == 'diterima'" 
-  :href="'view/sk_diterima/' + user.id" 
+  :href="'view/sk_diterima' "  target="_blank"
   class="inline-flex text-sm items-center gap-2 px-2 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md transition-all duration-300 hover:bg-blue-700 hover:-translate-y-1 active:translate-y-0"
 >
   Surat Keterangan Diterima
 </a>
-                  <a  v-if="formData.status_pendaftaran == 'diterima'" 
+                  <a target="_blank"  v-if="formData.status_pendaftaran == 'diterima'" 
   :href="'view/surat-pernyataan/'" 
   class="inline-flex text-sm items-center gap-2 px-2 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md transition-all duration-300 hover:bg-blue-700 hover:-translate-y-1 active:translate-y-0"
 >
@@ -106,12 +106,12 @@
           <ErrorModal 
       :show="showErrorModal"
       :message="errorMessage"
-      title="Gagal Mengubah Profil"
+      title="Gagal Memperbarui Profil"
     />
     
     <SuccessModal
       :show="showSuccessModal"
-      title="Berhasil Mengubah Profil"
+      title="Berhasil Memperbarui Profil"
     />
           <!-- Main Content -->
           <main class="md:w-3/5 p-6">
