@@ -48,15 +48,19 @@
             <!-- User Menu (Desktop) -->
             <div class="hidden lg:flex items-center relative">
               <div v-if="!user" class="relative">
-                <a 
-                  href="/login"     
-                  class="relative overflow-hidden text-lg px-6 py-2 rounded-xl text-white 
-                  group transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-lg transform hover:border-red-400">
-                  <div class="absolute inset-0 bg-gradient-to-r from-red-800 to-red-600 transition-opacity duration-500 ease-in-out"></div>
-                  <div class="absolute inset-0 bg-gradient-to-l from-red-800 to-red-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out"></div>
-                  <span class="relative">Masuk</span>
-              </a>
-              </div>
+    <a 
+      href="/login"     
+      class="relative overflow-hidden text-lg px-6 py-2 rounded-xl text-white 
+      group transition-all duration-500 ease-in-out hover:scale-105 hover:shadow-lg transform hover:border-red-400">
+      
+      <!-- Tambahkan `rounded-xl` di sini -->
+      <div class="absolute inset-0 bg-gradient-to-r from-red-800 to-red-600 transition-opacity duration-500 ease-in-out rounded-xl"></div>
+      <div class="absolute inset-0 bg-gradient-to-l from-red-800 to-red-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out rounded-xl"></div>
+      
+      <span class="relative">Masuk</span>
+    </a>
+</div>
+
   
               <div v-else class="relative">
                 <button 

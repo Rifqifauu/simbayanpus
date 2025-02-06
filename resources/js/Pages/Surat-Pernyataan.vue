@@ -82,7 +82,7 @@
         <div class="text-right mt-12 leading-loose">
           <p class="">Yogyakarta, {{formatDate(today)}}</p>
           <div class="h-20"></div>
-          <p class="font-bold">Rifqi Nur Fauzi</p>
+          <p class="font-bold">{{ user.name }}</p>
         </div>
       </div>
   
