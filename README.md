@@ -80,6 +80,8 @@ php artisan db:seed
 
 8. Build Assets
 ```bash
+npm run build
+or
 npm run dev
 ```
 
