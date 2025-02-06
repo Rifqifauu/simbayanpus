@@ -67,7 +67,12 @@
 import AppLayout from "../layouts/AppLayout.vue";
 import ConfirmModal from "../components/ConfirmModal.vue";
 import { router } from "@inertiajs/vue3";
-import { defineProps, defineOptions, ref } from "vue";
+import { defineProps, defineOptions, ref, onMounted } from "vue";
+
+
+onMounted(() => {
+  document.title='Pesan'
+});
 
 defineOptions({
   layout: AppLayout,

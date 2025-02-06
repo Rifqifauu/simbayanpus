@@ -112,6 +112,9 @@
         today: new Date().toISOString().split('T')[0]
       };
     },
+    mounted(){
+document.title="Surat Pernyataan"
+    },
     methods: {
       async exportToPDF() {
         const element = this.$refs.pdfContent;

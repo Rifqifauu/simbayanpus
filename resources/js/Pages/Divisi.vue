@@ -32,6 +32,10 @@ export default {
       : ''; // Jika tidak ada keterangan, kosongkan
   }
 },
+mounted (){
+  document.title = this.title;
+
+},
 
   props: {
     title: String,

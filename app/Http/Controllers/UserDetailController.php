@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\UserDetail;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -43,7 +44,7 @@ class UserDetailController extends Controller
             'jenis_kelamin' => 'required|string|max:50',
             'alamat' => 'required|string|max:255',
             'domisili' => 'required|string|max:255',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg|max:10000'
+            'foto' => 'required|image|mimes:jpeg,png,jpg|max:10000'
         ]);
     
         if ($validator->fails()) {
@@ -92,13 +93,14 @@ class UserDetailController extends Controller
         $user = Auth::user();
     
         if (!$request->all()) {
-            return response()->json(['error' => 'FormData kosong'], 400);  // Mengembalikan error jika data kosong
+            return response()->json(['error' => 'FormData kosong'], 400);
         }
     
         $userDetail = $user->userDetail;
     
         try {
             $rules = [
+                'name' => 'nullable|string|max:255', // Tambahkan validasi untuk name
                 'panggilan' => 'nullable|string|max:50',
                 'nim' => 'nullable|string|max:20|unique:user_details,nim,' . $userDetail->id,
                 'nik' => 'nullable|string|size:16|unique:user_details,nik,' . $userDetail->id,
@@ -127,18 +129,26 @@ class UserDetailController extends Controller
                 return response()->json([
                     'error' => 'Validation failed.',
                     'messages' => $validator->errors()
-                ], 422);  // Mengembalikan error validasi
+                ], 422);
             }
     
             if (!$userDetail) {
                 Log::error('User detail not found.');
                 return response()->json([
                     'error' => 'User details not found. Please create them first.'
-                ], 404);  // User detail tidak ditemukan
+                ], 404);
             }
     
             $validatedData = $validator->validated();
     
+            if ($request->has('name')) {
+                $user = User::find(Auth::id());
+$user->name = $request->input('name');
+$user->save();
+            }
+            
+    
+            // **Update foto jika ada**
             if ($request->hasFile('foto')) {
                 if ($userDetail->foto) {
                     Storage::disk('public')->delete($userDetail->foto);
@@ -151,17 +161,18 @@ class UserDetailController extends Controller
                 unset($validatedData['foto']);
             }
     
+            // **Update user_details**
             $userDetail->update($validatedData);
     
             return response()->json([
                 'success' => 'Profil Berhasil Diubah'
-            ], 200);  // Status sukses
+            ], 200);
         } catch (\Exception $e) {
             Log::error('Error in UserDetailController@update: ' . $e->getMessage(), ['exception' => $e]);
             return response()->json([
                 'error' => 'An error occurred while updating user details.',
                 'message' => $e->getMessage()
-            ], 500);  // Error server
+            ], 500);
         }
     }    
 }

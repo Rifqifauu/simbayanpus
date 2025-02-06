@@ -15,7 +15,7 @@
           <!-- Period Selection -->
           <div class="grid grid-cols-2 gap-4">
             <div>
-              <label class="block text-yellow-300 mb-2">Periode Mulai <span class="text-yellow-200">*</span></label>
+              <label class="block text-yellow-300 mb-2">Tanggal Mulai Magang<span class="text-yellow-200">*</span></label>
               <input 
                 type="date" 
                 v-model="formData.startDate"
@@ -23,7 +23,7 @@
               >
             </div>
             <div>
-              <label class="block text-yellow-300 mb-2">Periode Berakhir <span class="text-yellow-200">*</span></label>
+              <label class="block text-yellow-300 mb-2">Tanggal Selesai Magang<span class="text-yellow-200">*</span></label>
               <input 
                 type="date" 
                 v-model="formData.endDate"
@@ -34,7 +34,7 @@
 
           <!-- File Uploads -->
           <div v-for="(label, key) in fileUploadFields" :key="key">
-      <label class="block text-yellow-300 mb-2">{{ label }} <span class="text-yellow-200">*</span></label>
+      <label class="block text-yellow-300 mb-2">{{ label }} <span class="text-yellow-200"></span></label>
       <div class="flex items-center space-x-2">
         <input 
           type="file"
@@ -111,9 +111,9 @@ export default {
   setup(props) {
     // Reactive data
     const fileUploadFields = {
-      cv: 'CV / Daftar Riwayat Hidup',
-      coverLetter: 'Surat Pengantar Magang',
-      proposal: 'Proposal Magang',
+      cv: 'CV / Daftar Riwayat Hidup*',
+      coverLetter: 'Surat Pengantar Magang*',
+      proposal: 'Proposal Magang*',
       guidelines: 'Pedoman Magang dari Universitas'
     };
 

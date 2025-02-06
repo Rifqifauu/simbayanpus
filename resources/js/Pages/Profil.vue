@@ -48,7 +48,11 @@
               <!-- Basic Info -->
               <div class="mt-4 text-left space-y-4">
                 
-                <h2 class="text-xl font-semibold text-red-600">{{ user.name }}</h2>
+                <FormInput
+                  v-model="formData.name"
+                  label="Nama Lengkap"
+                  placeholder="Masukkan nama lengkap"
+                />
                 <FormInput
                   v-model="formData.panggilan"
                   label="Nama Panggilan"
@@ -310,9 +314,10 @@ import SuccessModal from '@/components/SuccessModal.vue'
       console.log('Props di setup:', props);
      
   // Mendapatkan akses ke $inertia
-      const formData = ref({
-        ...props.userDetail,
-      });
+  const formData = ref({
+  ...props.userDetail, 
+  name: props.user.name // Menambahkan user.name secara eksplisit
+});
       const errorMessage = ref('');
 
       const showSuccessModal = ref(false);
