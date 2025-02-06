@@ -47,6 +47,19 @@ class FileController extends Controller
             'Content-Type' => $mimeType,
             'Content-Disposition' => 'inline; filename="' . basename($path) . '"',        ]);
     }
+    public function viewSKSelesai()
+    {
+        $file = Dokumen::where('id_user', Auth::id())
+            ->where('keterangan', 'selesai')
+            ->firstOrFail()->dokumen;
+        
+        $path = Storage::path($file);
+        $mimeType = Storage::mimeType($file);
+        
+        return Response::file($path, [
+            'Content-Type' => $mimeType,
+            'Content-Disposition' => 'inline; filename="' . basename($path) . '"',        ]);
+    }
 
     public function viewPedomanMagang()
     {
