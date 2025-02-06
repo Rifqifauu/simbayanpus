@@ -314,7 +314,7 @@ export default defineComponent({
             window.location.href = "/profile";
         },
         suratSelesai(id) {
-            window.open(`/view/sk_selesai/${id}`, '_blank');
+            window.open(`/view/sk_selesai`, '_blank');
         },
         async deletePermohonan(id) {
     try {
