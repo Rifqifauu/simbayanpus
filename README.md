@@ -94,5 +94,6 @@ The application should now be running at `http://localhost:8000`
 After running the seeder, you'll have access to the following accounts:
 - Admin account (email: admin@example.com, password: iamadmin)
 - Superadmin account (email: superadmin@example.com, password: iamsuper)
+Use /admin or /login/admin, but you can use /login too.
 
 **Import divisi.sql** ke dalam database yg telah dibuat **(simbayanpus)** untuk mendapatkan data divisi/layanan yg sebelumnya sudah ada.
