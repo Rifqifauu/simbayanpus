@@ -53,8 +53,6 @@ class PermohonanResource extends Resource
                         if ($userDetail) {
                             $userDetail->status_pendaftaran = 'diproses';
                             $userDetail->save();
-
-                            // ✅ Tambahkan Logging Aktivitas
                             activity()
                                 ->causedBy(auth()->user())
                                 ->performedOn($record)

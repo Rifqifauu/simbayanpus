@@ -27,6 +27,5 @@ class ViewPermohonanDiterima extends ViewRecord
         ->event('view')
         ->log('User ' . auth()->user()->name . ' viewed a record ' . $this->record->user->name);
         return parent::render();
-
     }
 }

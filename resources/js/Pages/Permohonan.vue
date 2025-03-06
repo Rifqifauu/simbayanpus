@@ -59,7 +59,7 @@
                         <div class="flex flex-col md:flex-row gap-2">
                             <a
                             v-if="status === 'diterima'"
-                           :href="`/view/sk_diterima/${user.id}`"
+                           :href="`/view/sk_diterima`"
                             class="button print-button" target="_blank"
                         >
                             <!-- Print Icon -->
