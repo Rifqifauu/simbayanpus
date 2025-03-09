@@ -216,56 +216,67 @@ export default {
     };
 
     const submitForm = async () => {
-      try {
-        if (!validateForm()) {
-          return;
-        }
+  try {
+    if (!validateForm()) {
+      return;
+    }
 
-        const formDataToSend = new FormData();
+    const formDataToSend = new FormData();
+    formDataToSend.append("division", formData.division);
+    formDataToSend.append("startDate", formData.startDate);
+    formDataToSend.append("endDate", formData.endDate);
 
-        // Append form fields
-        formDataToSend.append('division', formData.division);
-        formDataToSend.append('startDate', formData.startDate);
-        formDataToSend.append('endDate', formData.endDate);
+    Object.keys(fileUploadFields).forEach((key) => {
+      if (formData[key]) {
+        formDataToSend.append(key, formData[key]);
+      }
+    });
 
-        // Append files
-        Object.keys(fileUploadFields).forEach((key) => {
-          if (formData[key]) {
-            formDataToSend.append(key, formData[key]);
-          }
-        });
+    // Kirim request ke server
+    const response = await axios.post("/permohonan/create", formDataToSend, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
 
-        // Send request
-        const response = await axios.post('/permohonan/create', formDataToSend, {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-        });
-        if (response.data.success) {
-          showSuccessModal.value = true;
-          setTimeout(() => {
-            document.location.href = '/permohonan';
-          }, 2000);
-        }
-      } catch (error) {
-    // Handle known validation errors
-    if (error.response && error.response.data.errors) {
-      const errors = error.response.data.errors;
-      errorMessage.value = errors.email ? errors.email[0] : 'Unknown error';
-      showErrorModal.value = true;
+    if (response.data.success) {
+      showSuccessModal.value = true;
       setTimeout(() => {
-        showErrorModal.value = false;
-      }, 2000);
-    } else {
-      // Handle unexpected errors
-      errorMessage.value = 'Terjadi kesalahan tak terduga. Silakan coba lagi nanti.';
-      showErrorModal.value = true;
-      setTimeout(() => {
-        showErrorModal.value = false;
+        document.location.href = "/permohonan";
       }, 2000);
     }
+  } catch (error) {
+    console.error("Error:", error);
+    console.error("Error Response:", error.response);
+
+    if (error.response) {
+      if (error.response.status === 400) {
+        // Tangkap error Laravel
+        errorMessage.value = error.response.data.error || "Terjadi kesalahan.";
+      } else if (error.response.data.errors) {
+        // Tangkap error validasi (422)
+        errorMessage.value = Object.values(error.response.data.errors)
+          .flat()
+          .join(", ");
+      } else {
+        errorMessage.value =
+          error.response.data.message || "Terjadi kesalahan tak terduga.";
+      }
+    } else {
+      errorMessage.value = "Gagal menghubungkan ke server.";
+    }
+
+    // Paksa modal error muncul
+    showErrorModal.value = true;
+
+    // Debug apakah nilai berubah
+    console.log("showErrorModal:", showErrorModal.value);
+    console.log("errorMessage:", errorMessage.value);
+
+    setTimeout(() => {
+      showErrorModal.value = false;
+    }, 3000);
   }
-    };
+};
+
 
     return {
       fileUploadFields,

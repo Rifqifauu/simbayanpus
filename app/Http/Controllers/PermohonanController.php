@@ -43,7 +43,7 @@ class PermohonanController extends Controller
     if ($existingApplication) {
         return response()->json([
             'success' => false,
-            'message' => 'Anda sudah mengajukan permohonan. Anda tidak bisa mengajukan lagi.',
+            'error' => 'Anda sudah mengajukan permohonan. Anda tidak bisa mengajukan lagi.',
         ], 400);
     }
 
