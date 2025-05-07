@@ -123,7 +123,7 @@ class MagangSelesaiResource extends Resource
                                 ->causedBy(auth()->user())
                                 ->performedOn($record)
                                 ->event('ubah status')
-                                ->log('User ' . auth()->user()->name . ' menyatakan mangang ' . $record->user->name.' telah selesai');
+                                ->log('User ' . auth()->user()->name . ' menyatakan magang ' . $record->user->name.' telah selesai');
                         }
                     })
                     ->icon('heroicon-o-check-badge')

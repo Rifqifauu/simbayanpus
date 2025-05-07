@@ -229,7 +229,7 @@ class ActivitylogResource extends Resource
                     return new HtmlString('&mdash;');
                 }
 
-                return $record->causer->name;
+                return $record->causer->name ?? 'Penghapusan Massal';
             })
             ->searchable();
     }
