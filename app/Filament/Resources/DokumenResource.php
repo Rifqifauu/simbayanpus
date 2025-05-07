@@ -33,26 +33,13 @@ class DokumenResource extends Resource
                 ->searchable()
                 ->preload()
                 ->required(),
-
-            Forms\Components\Select::make('id_user')
-                ->label('User Email')
-                ->options(
-                    User::whereDoesntHave('dokumen', function ($query) {
-                        $query->whereIn('keterangan', ['diterima', 'selesai']);
-                    })
-                    ->whereHas('userDetail', function ($query) {
-                        $query->whereIn('status_pendaftaran', ['diterima', 'selesai']);
-                    })
-                    ->pluck('email', 'id') // Ambil email sebagai label, ID sebagai value
-                )                
-                ->searchable()
-                ->preload()
-                ->required(),
             Forms\Components\FileUpload::make('dokumen')
+                ->disk('public') // pakai disk sesuai storage
+                ->directory('') // simpan ke folder 'dokumen'
+                ->visibility('public')
                 ->required(),
         ]);
     }
-    
 
     public static function table(Table $table): Table
     {

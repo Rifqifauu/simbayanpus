@@ -50,11 +50,16 @@ class FileController extends Controller
     public function viewSKSelesai()
     {
         $file = Dokumen::where('id_user', Auth::id())
-            ->where('keterangan', 'selesai')
-            ->firstOrFail()->dokumen;
+        ->where('keterangan', 'selesai')
+        ->latest() // Mengambil dokumen terbaru
+        ->firstOrFail()->dokumen;
+    
         
         $path = Storage::path($file);
         $mimeType = Storage::mimeType($file);
+
+        \Log::info('Path dokumen: ' . $path);
+
         
         return Response::file($path, [
             'Content-Type' => $mimeType,

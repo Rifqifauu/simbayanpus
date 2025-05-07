@@ -28,6 +28,12 @@ class PermohonanController extends Controller
     {
         $divisi = Divisi::all();
         $user = Auth::user();
+        $userDetail = $user->userDetail;
+
+        // Jika userDetail belum ada atau belum terisi, arahkan ke halaman profil
+        if (!$userDetail) {
+            return redirect()->route('profil.index'); // Ganti 'profil' dengan nama rute yang sesuai dengan halaman profil
+        }
         return Inertia::render('BuatPermohonan',[
             'title' => 'Buat Permohonan',
             'user' => $user,

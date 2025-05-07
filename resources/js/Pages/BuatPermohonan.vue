@@ -102,11 +102,20 @@ import ErrorModal from '@/components/ErrorModal.vue';
 
 export default {
   name: 'InternshipForm',
+  props: {
+    user: {
+      type: Object,
+    },
+    userDetail: {
+      type: Object,
+    }
+  },
   components: {
     SuccessModal,
     ErrorModal,
     FilePreview
   },
+  
   layout: AppLayout,
   setup(props) {
     // Reactive data
@@ -116,7 +125,10 @@ export default {
       proposal: 'Proposal Magang*',
       guidelines: 'Pedoman Magang dari Universitas'
     };
-
+    
+    console.log("User:", props.user);
+    console.log("User Detail:", props.userDetail);
+    
     const formData = reactive({
       division: 'default',
       startDate: '',
