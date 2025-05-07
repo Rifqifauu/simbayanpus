@@ -4,6 +4,8 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
+use Illuminate\Support\Facades\Hash;
+
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -31,7 +33,11 @@ class UserResource extends Resource
                 Forms\Components\TextInput::make('email')
                 ->label('Email'),
                 Forms\Components\TextInput::make('password')
-                ->label('Password'),
+                ->password()
+                ->dehydrateStateUsing(fn ($state) => 
+                    !empty($state) ? Hash::make($state) : null)
+                ->dehydrated(fn ($state) => filled($state))
+                ->required(fn (string $context): bool => $context === 'create'),
                 Forms\Components\Select::make('role')
     ->label('Role')
     ->options([
@@ -59,7 +65,7 @@ class UserResource extends Resource
                 ->badge()
                 ->color(fn (string $state): string => match ($state) {
                     'admin' => 'success',
-                    'super admin' => 'warning',
+                    'super_admin' => 'warning',
                     'user' => 'info',
                 })
                 ->searchable()
@@ -91,7 +97,7 @@ class UserResource extends Resource
     public static function shouldRegisterNavigation(): bool
     {
         // Pastikan hanya Super Admin yang dapat mengakses resource ini
-        return Auth::user() && Auth::user()->role === 'super admin';
+        return Auth::user() && Auth::user()->role === 'super_admin';
     }
 
     public static function getRelations(): array

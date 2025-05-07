@@ -13,8 +13,7 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next)
 {
-    // Pastikan pengguna sudah login dan memiliki role 'admin' atau 'super admin'
-    if (Auth::check() && in_array(Auth::user()->role, ['admin', 'super admin'])) {
+    if (Auth::check() && in_array(Auth::user()->role, ['admin', 'super_admin'])) {
         return $next($request);
     }
 

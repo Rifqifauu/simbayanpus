@@ -79,7 +79,7 @@ class MagangAktifResource extends Resource
 {
     return $table
         ->modifyQueryUsing(fn (Builder $query) => $query->whereHas('user.Permohonan', function ($query) {
-            $query->where('status_pendaftaran', 'diterima')->whereDate('tgl_keluar', '>=', Carbon::today())->whereDate('tgl_masuk','<=',Carbon::today());
+            $query->where('status_pendaftaran', 'diterima')->whereDate('tgl_keluar', '>', Carbon::today())->whereDate('tgl_masuk','<=',Carbon::today());
         }))
         ->columns([
             Tables\Columns\TextColumn::make('user.name')

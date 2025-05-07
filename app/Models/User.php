@@ -26,9 +26,11 @@ class User extends Authenticatable implements FilamentUser
         'role',
     ];
 
-    public function canAccessPanel(Panel $panel): bool
-    {
-        return in_array($this->role, ['admin', 'super admin']);    }
+    public function canAccessPanel(Panel $panel): bool {
+        $result = in_array($this->role, ['admin', 'super_admin']);
+        error_log("Role: " . $this->role . ", Access: " . ($result ? "allowed" : "denied"));
+        return $result;
+    }
     public function pesan()
     {
         return $this->hasMany(Pesan::class, 'id_user');

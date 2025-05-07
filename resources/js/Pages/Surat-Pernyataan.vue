@@ -72,8 +72,7 @@
       <div class="mb-12 leading-loose text-justify">
         <p class="mb-6">
           Dengan ini menyatakan kesanggupan dan bersedia mengikuti kegiatan Magang yang
-          ditetapkan oleh Balai Layanan Perpustakaan DPAD DIY sesuai dengan Tata Tertib yang berlaku, selama
-          30 hari, mulai tanggal <b>{{ formatDate(permohonan.tgl_masuk) }}</b> sampai dengan tanggal <b>{{ formatDate(permohonan.tgl_keluar) }}</b>.
+          ditetapkan oleh Balai Layanan Perpustakaan DPAD DIY sesuai dengan Tata Tertib yang berlaku, mulai tanggal <b>{{ formatDate(permohonan.tgl_masuk) }}</b> sampai dengan tanggal <b>{{ formatDate(permohonan.tgl_keluar) }}</b>.
         </p>
 
         <p>

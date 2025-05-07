@@ -305,7 +305,7 @@ class ActivitylogResource extends Resource
     {
         $plugin = Filament::getCurrentPanel()?->getPlugin('rmsramos/activitylog');
     
-        return $plugin && Auth::check() && Auth::user()->role === 'super admin';
+        return $plugin && Auth::check() && Auth::user()->role === 'super_admin';
     }
     
 

@@ -57,12 +57,11 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-                'role:admin'
+                'role:admin|super_admin',
             ])
             ->plugins([
                 ActivitylogPlugin::make()
                 ->navigationGroup('Manajemen User'),
-
             ]);
     
     }
