@@ -46,7 +46,7 @@ class DivisiResource extends Resource
     public static function shouldRegisterNavigation(): bool
     {
         // Pastikan hanya Super Admin yang dapat mengakses resource ini
-        return Auth::user() && Auth::user()->role === 'super admin';
+        return Auth::user() && Auth::user()->role === 'super_admin'||Auth::user()->role === 'admin';
     }
     public static function getslug(): string
     {
