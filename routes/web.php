@@ -8,6 +8,7 @@ use App\Http\Controllers\UserDetailController;
 use App\Http\Controllers\PermohonanController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\PesanController;
+use App\Http\Controllers\LogbookController;
 
 
 // Authentication Routes
@@ -17,10 +18,16 @@ Auth::routes();
 Route::get('/', [HomeController::class, 'index'])->name('home')->withoutMiddleware('auth');
 Route::get('/home', [HomeController::class, 'index'])->name('home')->withoutMiddleware('auth');
 // Divisi Routes
-Route::get('/divisi', action: [DivisiController::class, 'index'])->name('divisi');
-Route::get('/kontak', [HomeController::class, 'kontak'])->name('kontak')->withoutMiddleware('auth');
+Route::get('/divisi',  [DivisiController::class, 'index'])->name('divisi');
+Route::get( '/kontak', [HomeController::class, 'kontak'])->name('kontak')->withoutMiddleware('auth');
 
 Route::middleware('auth')->group(function () {
+    Route::prefix('/logbook')->group(function(){
+    Route::get('',[LogbookController::class,'index'])->name('logbook.index');
+    Route::post('/',[LogbookController::class,'store'])->name('logbook.store');
+    Route::put('/{id}',[LogbookController::class,'edit']);
+    Route::delete('/{id}',[LogbookController::class,'delete']);
+    });
     Route::get('/pesan', [PesanController::class, 'index'])->name('pesan.index');
     Route::delete('/pesan/{id}', [PesanController::class, 'delete'])->name('pesan.delete');
     Route::post('/pesan', [PesanController::class, 'store'])->name('pesan.store');
@@ -33,7 +40,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/profile/store', [UserDetailController::class, 'store']);
     Route::put('/profile/edit', [UserDetailController::class, 'update'])->name('profile.update');
     // Download Routes
-    Route::prefix('view')->group(function () {
+    Route::prefix(prefix: 'view')->group(function () {
         Route::get('/cv/{id}', [FileController::class, 'viewCV'])->name('view.cv');
         Route::get('/sk_diterima', [FileController::class, 'viewSKDiterima'])->name('view.skditerima');
         Route::get('/sk_selesai', [FileController::class, 'viewSKSelesai'])->name('view.skselesai');
@@ -43,6 +50,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/surat-pernyataan', [FileController::class, 'viewSuratPernyataan'])->name('view.surat_pernyataan');
 });
 });
+
+
 
 
 // Logout Route

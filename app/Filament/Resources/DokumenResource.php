@@ -24,6 +24,13 @@ class DokumenResource extends Resource
     public static function form(Forms\Form $form): Forms\Form
     {
         return $form->schema([
+            Forms\Components\Select::make('id_user')
+                ->label('Nama Pengguna')
+                ->relationship('user', 'name') // relasi dengan model User dan kolom 'name'
+                ->searchable()
+                ->preload()
+                ->required(),
+    
             Forms\Components\Select::make('keterangan')
                 ->label('Keterangan')
                 ->options([
@@ -33,14 +40,15 @@ class DokumenResource extends Resource
                 ->searchable()
                 ->preload()
                 ->required(),
+    
             Forms\Components\FileUpload::make('dokumen')
-                ->disk('public') // pakai disk sesuai storage
-                ->directory('') // simpan ke folder 'dokumen'
+                ->disk('public')
+                ->directory('')
                 ->visibility('public')
                 ->required(),
         ]);
     }
-
+    
     public static function table(Table $table): Table
     {
         return $table

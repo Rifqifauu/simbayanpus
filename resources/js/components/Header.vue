@@ -91,6 +91,18 @@
                   >
                     Profile
               </a>
+                  <a
+                    href="/logbook"
+                    class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
+                  >
+                    Logbook
+              </a>
+                  <a
+                    href="/attendance"
+                    class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
+                  >
+                    Kehadiran
+              </a>
                   <button
                     @click="showLogoutConfirm"
                     class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"

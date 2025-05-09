@@ -3,8 +3,8 @@
 namespace App\Filament\Resources\DokumenResource\Pages;
 
 use App\Filament\Resources\DokumenResource;
-use Filament\Actions;
 use Filament\Resources\Pages\CreateRecord;
+use Filament\Pages\Actions\Action;
 
 class CreateDokumen extends CreateRecord
 {
@@ -17,6 +17,15 @@ class CreateDokumen extends CreateRecord
             ->performedOn($this->record)
             ->event('created')
             ->log('User ' . auth()->user()->name . ' membuat surat keterangan ' . $this->record->keterangan . ' untuk ' . $this->record->user->name);
+    }
+    protected function getHeaderActions(): array
+    {
+        return [
+            Action::make('back')
+                ->label('Kembali')
+                ->icon('heroicon-o-arrow-left')
+                ->color('gray')
+                ->url(ListDokumens::getUrl()),        ];
     }
 
 }

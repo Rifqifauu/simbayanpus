@@ -75,7 +75,7 @@ class PermohonanController extends Controller
     }
 
     // Save application data
-    $permohonan = Permohonan::create([
+    Permohonan::create([
         'user_id' => $user->id,
         'divisi' => $request->input('division'),
         'tgl_masuk' => $request->input('startDate'),
