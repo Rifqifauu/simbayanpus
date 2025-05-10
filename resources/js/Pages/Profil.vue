@@ -320,7 +320,7 @@ import SuccessModal from '@/components/SuccessModal.vue'
 });
       const errorMessage = ref('');
 
-      const showSuccessModal = ref(false);
+   const showSuccessModal = ref(false);
 const showErrorModal = ref(false);
 
   
@@ -340,7 +340,7 @@ const showErrorModal = ref(false);
         return props.userDetail !== null && props.userDetail !== undefined;
       });
   
-      const handleSubmit = async () => {
+    const handleSubmit = async () => {
     try {
       const form = new FormData();
   

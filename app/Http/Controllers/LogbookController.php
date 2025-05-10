@@ -124,7 +124,7 @@ public function delete($id){
         $logbook->delete();
          return response()->json([
             'success' => true,
-            'message' => 'Logbook berhasil dihapus.',
+            'message' => 'Logbook berhasil dihapusw.',
         ]);
 
     }

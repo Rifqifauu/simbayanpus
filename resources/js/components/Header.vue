@@ -91,18 +91,18 @@
                   >
                     Profile
               </a>
-                  <a
+                  <a v-if="status == 'diterima' || 'selesai'"
                     href="/logbook"
                     class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
                   >
                     Logbook
               </a>
-                  <a
+                  <a v-if="status == 'diterima' || 'selesai'"
                     href="/attendance"
                     class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
                   >
                     Kehadiran
-              </a>
+              </a >
                   <button
                     @click="showLogoutConfirm"
                     class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
@@ -239,10 +239,14 @@
   </template>
   
   <script>
+  import { computed } from 'vue';
+
   import { ref } from 'vue';
   import axios from 'axios';
   import ConfirmModal from './ConfirmModal.vue';
-  
+  import { usePage } from '@inertiajs/vue3'
+
+ 
   export default {
     name: 'Header',
     components: {
@@ -252,9 +256,12 @@
       user: {
         type: Object,
         default: null
-      }
+      },
     },
     setup() {
+      const page = usePage();
+    const user = computed(() => page.props.auth.user);
+    const status = computed(() => user.value?.user_detail?.status_pendaftaran);
       const dropdownOpen = ref(false);
       const menuOpen = ref(false);
       const showLogoutModal = ref(false);
@@ -264,7 +271,9 @@
         dropdownOpen,
         menuOpen,
         showLogoutModal,
-        dropdownTimeout
+        dropdownTimeout,
+         user,
+      status,
       };
     },
     methods: {

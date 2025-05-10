@@ -5,7 +5,6 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
 use Illuminate\Support\Facades\Hash;
-
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;

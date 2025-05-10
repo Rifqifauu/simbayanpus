@@ -20,8 +20,8 @@
         <div v-for="(item, idx) in logbook" :key="item.id"
           class="bg-white rounded-lg shadow border border-gray-200 p-4">
           <div class="flex justify-between items-center mb-3 pb-2 border-b border-gray-200">
-            <span class="font-bold text-red-800">#{{ idx + 1 }}</span>
-            <div class="flex space-x-2">
+            <span class="font-bold text-red-800">Hari Ke - #{{ idx + 1 }} Magang</span>
+            <!-- <div class="flex space-x-2">
               <button @click="openEditModal(item)" class="text-red-600 hover:text-red-800">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                   stroke="currentColor">
@@ -36,7 +36,7 @@
                     d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5-4h4a1 1 0 011 1v1H9V4a1 1 0 011-1z" />
                 </svg>
               </button>
-            </div>
+            </div> -->
           </div>
 
           <div class="divide-y divide-gray-200 text-sm">
@@ -56,17 +56,18 @@
               <div class="font-medium text-gray-600">Catatan Pembimbing:</div>
               <div>{{ item.catatan_pembimbing }}</div>
             </div>
-            <div class="py-2 grid grid-cols-2 gap-2">
+            <!-- <div class="py-2 grid grid-cols-2 gap-2">
               <div class="font-medium text-gray-600">Dibuat:</div>
               <div>{{ item.created_at }}</div>
             </div>
             <div class="py-2 grid grid-cols-2 gap-2">
               <div class="font-medium text-gray-600">Diperbarui:</div>
               <div>{{ item.updated_at }}</div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
+
       <div v-else class="bg-white rounded-lg shadow p-4 text-center text-gray-500">
         Anda belum membuat log.
       </div>
@@ -83,9 +84,9 @@
             <th class="bg-red-700 sticky top-0 px-6 py-3 text-start">Aktivitas</th>
             <th class="bg-red-700 sticky top-0 px-6 py-3 text-end">Verifikasi</th>
             <th class="bg-red-700 sticky top-0 px-6 py-3 text-end">Catatan Pembimbing</th>
-            <th class="bg-red-700 sticky top-0 px-6 py-3 text-end">Dibuat</th>
-            <th class="bg-red-700 sticky top-0 px-6 py-3 text-end">Diperbarui</th>
-            <th colspan="2" class="bg-red-700 sticky top-0 px-6 py-3 text-center">Aksi</th>
+            <!-- <th class="bg-red-700 sticky top-0 px-6 py-3 text-end">Dibuat</th>
+            <th class="bg-red-700 sticky top-0 px-6 py-3 text-end">Diperbarui</th> -->
+            <!-- <th colspan="2" class="bg-red-700 sticky top-0 px-6 py-3 text-center">Aksi</th> -->
           </tr>
         </thead>
         <tbody>
@@ -96,9 +97,9 @@
               <td class="px-6 py-4 text-sm text-gray-800">{{ item.aktivitas }}</td>
               <td class="px-6 py-4 text-sm text-gray-800 text-end">{{ item.verifikasi }}</td>
               <td class="px-6 py-4 text-sm text-gray-800 text-end">{{ item.catatan_pembimbing }}</td>
-              <td class="px-6 py-4 text-sm text-gray-800 text-end">{{ item.created_at }}</td>
-              <td class="px-6 py-4 text-sm text-gray-800 text-end">{{ item.updated_at }}</td>
-              <td class="px-6 py-4 text-sm text-gray-800 text-end">
+              <!-- <td class="px-6 py-4 text-sm text-gray-800 text-end">{{ item.created_at }}</td>
+              <td class="px-6 py-4 text-sm text-gray-800 text-end">{{ item.updated_at }}</td> -->
+              <!-- <td class="px-6 py-4 text-sm text-gray-800 text-end">
                 <a @click="openEditModal(item)" class="cursor-pointer">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-600 hover:text-red-800" fill="none"
                     viewBox="0 0 24 24" stroke="currentColor">
@@ -108,14 +109,14 @@
                 </a>
               </td>
               <td class="px-6 py-4 text-sm text-gray-800 text-end">
-          <a @click="showDeleteModalID(item.id)" class="cursor-pointer">
+           <a @click="showDeleteModalID(item.id)" class="cursor-pointer">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-600 hover:text-red-800" fill="none"
                     viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                       d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5-4h4a1 1 0 011 1v1H9V4a1 1 0 011-1z" />
                   </svg>
                 </a>
-              </td>
+              </td> -->
             </tr>
           </template>
           <tr v-else class="bg-white">

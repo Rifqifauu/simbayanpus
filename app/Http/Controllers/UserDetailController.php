@@ -163,7 +163,6 @@ $user->save();
     
             // **Update user_details**
             $userDetail->update($validatedData);
-    
             return response()->json([
                 'success' => 'Profil Berhasil Diubah'
             ], 200);
