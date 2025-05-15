@@ -9,6 +9,17 @@ use Illuminate\Support\Facades\Response;
 use Inertia\Inertia;
 class FileController extends Controller
 {
+    public function viewNilai(){
+        $user = Auth::user();
+        $userDetail = $user->UserDetail;
+        $nilai = $user->Nilai;
+
+        return Inertia::render('Nilai', [
+            'user' => $user,
+            'userDetail' => $userDetail,
+            'nilai' => $nilai,
+        ]);
+    }
     public function viewSuratPernyataan(){
         $user = Auth::user();
         $userDetail = $user->UserDetail;

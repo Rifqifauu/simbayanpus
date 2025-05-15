@@ -11,7 +11,7 @@
         <div class="w-full md:w-1/4 mb-10 md:mb-0">
           <div class="flex items-center mb-4">
             <img
-              src="storage/asset/logo-removebg-preview.png"
+              src="/storage/asset/logo-removebg-preview.png"
               alt="Logo"
               class="w-16 h-16 mr-3"
             />

@@ -45,7 +45,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/profile/store', [UserDetailController::class, 'store']);
     Route::put('/profile/edit', [UserDetailController::class, 'update'])->name('profile.update');
     // Download Routes
-    Route::prefix(prefix: 'view')->group(function () {
+    Route::prefix( 'view')->group(function () {
+        Route::get('/nilai', [FileController::class, 'viewNilai'])->name('view.nilai');
         Route::get('/cv/{id}', [FileController::class, 'viewCV'])->name('view.cv');
         Route::get('/sk_diterima', [FileController::class, 'viewSKDiterima'])->name('view.skditerima');
         Route::get('/sk_selesai', [FileController::class, 'viewSKSelesai'])->name('view.skselesai');
