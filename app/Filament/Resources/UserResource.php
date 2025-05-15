@@ -54,12 +54,10 @@ class UserResource extends Resource
         ->columns([
             Tables\Columns\TextColumn::make('name')
                 ->searchable()
-                ->sortable(),
-                
+                ->sortable(),   
             Tables\Columns\TextColumn::make('email')
                 ->searchable()
-                ->sortable(),
-                
+                ->sortable(), 
             Tables\Columns\TextColumn::make('role')
                 ->badge()
                 ->color(fn (string $state): string => match ($state) {
@@ -93,6 +91,10 @@ class UserResource extends Resource
                 ]),
             ]);
     }
+    public static function getNavigationSort(): ?int
+{
+    return 12; 
+}
     public static function shouldRegisterNavigation(): bool
     {
         // Pastikan hanya Super Admin yang dapat mengakses resource ini

@@ -7,7 +7,7 @@
     @vite(['resources/js/app.js'])
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
-    <link rel="icon" type="image" href="storage/logo-balaiyanpus.svg">
+    <link rel="icon" type="image" href="/storage/asset/logo-removebg-preview.png">
 
     
     @inertiaHead

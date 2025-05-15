@@ -9,6 +9,7 @@ use App\Http\Controllers\PermohonanController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\PesanController;
 use App\Http\Controllers\LogbookController;
+use App\Http\Controllers\AttendanceController;
 
 
 // Authentication Routes
@@ -27,6 +28,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/',[LogbookController::class,'store'])->name('logbook.store');
     Route::put('/{id}',[LogbookController::class,'edit']);
     Route::delete('/{id}',[LogbookController::class,'delete']);
+    });
+    Route::prefix('/attendance')->group(function(){
+    Route::get('',[AttendanceController::class,'index'])->name('attendance.index');
+    Route::post('',[AttendanceController::class,'submitOtp'])->name('attendance.otp');
     });
     Route::get('/pesan', [PesanController::class, 'index'])->name('pesan.index');
     Route::delete('/pesan/{id}', [PesanController::class, 'delete'])->name('pesan.delete');

@@ -21,6 +21,7 @@ class LogbookResource extends Resource
     protected static ?string $model = Logbook::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationGroup = 'Manajemen Magang';
 
     public static function form(Form $form): Form
     {
@@ -101,7 +102,10 @@ class LogbookResource extends Resource
                 ]),
             ]);
     }
-
+public static function getNavigationSort(): ?int
+{
+    return 2; // Angka kecil tampil lebih atas
+}
     public static function getRelations(): array
     {
         return [

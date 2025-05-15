@@ -9,13 +9,13 @@ use App\Filament\Resources\MagangSelesaiResource\Pages;
 use App\Filament\Resources\MagangSelesaiResource\RelationManagers;
 use App\Models\UserDetail;
 use Filament\Forms;
+use Filament\Notifications\Notification;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-
 class MagangSelesaiResource extends Resource
 {
     protected static ?string $model = UserDetail::class;
@@ -83,13 +83,15 @@ class MagangSelesaiResource extends Resource
         }))
         ->columns([
             Tables\Columns\TextColumn::make('user.name')
-                ->label('User')
+                ->label('Nama')
                 ->sortable()
                 ->searchable(),
             Tables\Columns\TextColumn::make('user.userDetail.institusi')
                 ->label('Asal Institusi')
                 ->sortable()
-                ->searchable(),
+                ->searchable()
+                    ->wrap()
+,
 
             // Tables\Columns\TextColumn::make('user.permohonan.divisi')  // Mengakses divisi dari permohonan melalui relasi user
             //     ->label('Divisi')
@@ -105,17 +107,51 @@ class MagangSelesaiResource extends Resource
                 ->label('Selesai Magang')
                 ->sortable()
                 ->searchable(),
+                Tables\Columns\TextColumn::make('status_dokumen')
+    ->label('SK Selesai')
+    ->getStateUsing(function ($record) {
+        return $record->user
+            ->dokumen()
+            ->where('keterangan', 'selesai')
+            ->exists()
+            ? '✅ Ada'
+            : '❌ Belum';
+    }),
 
-            Tables\Columns\ImageColumn::make('foto')
-                  ->height(100)
-                  ->width(80)
-                , // Menyediakan URL lengkap
+Tables\Columns\TextColumn::make('status_nilai')
+    ->label('Nilai')
+    ->getStateUsing(function ($record) {
+        return $record->user
+            ->nilai()
+            ->exists()
+            ? '✅ Sudah'
+            : '❌ Belum';
+    }), // Menyediakan URL lengkap
         ])
         ->actions([ /* Your actions */
             Tables\Actions\Action::make('prosesPendaftaran')
-                    ->label('Nyatakan Selesai')
+                    ->label('Selesai')
                     ->action(function ($record) {
                         $userDetail = $record->user->userDetail;
+                          $user = $record->user;
+
+        $sudahAdaDokumenSelesai = $user->dokumen()->where('keterangan', 'selesai')->exists();
+        $sudahDinilai = $user->nilai()->exists();
+
+           if (! $sudahAdaDokumenSelesai || ! $sudahDinilai) {
+            Notification::make()
+                ->title('Tidak dapat menyelesaikan')
+                ->body(
+                    collect([
+                        $sudahAdaDokumenSelesai ? null : '❌ SK selesai belum diunggah.',
+                        $sudahDinilai ? null : '❌ Nilai belum diinput.',
+                    ])->filter()->implode("\n")
+                )
+                ->danger()
+                ->persistent()
+                ->send();
+            return;
+        }
                         if ($userDetail) {
                             $userDetail->status_pendaftaran = 'selesai';
                             $userDetail->save();
@@ -132,7 +168,10 @@ class MagangSelesaiResource extends Resource
                      ])
         ->bulkActions([ /* Your bulk actions */ ]);
 }
-
+public static function getNavigationSort(): ?int
+    {
+        return 9;
+    }
     public static function getRelations(): array
     {
         return [

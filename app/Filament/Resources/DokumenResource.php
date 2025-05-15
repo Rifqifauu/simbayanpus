@@ -19,7 +19,8 @@ class DokumenResource extends Resource
     protected static ?string $model = Dokumen::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $navigationGroup = '';
+    protected static ?string $navigationGroup = 'Manajemen Magang';
+    protected static ?string $navigationLabel = 'Penerbitan Surat';
 
     public static function form(Forms\Form $form): Forms\Form
     {
@@ -48,7 +49,10 @@ class DokumenResource extends Resource
                 ->required(),
         ]);
     }
-    
+    public static function getNavigationSort(): ?int
+{
+    return 1; // Angka kecil tampil lebih atas
+}
     public static function table(Table $table): Table
     {
         return $table
@@ -104,8 +108,6 @@ class DokumenResource extends Resource
     {
         return [
             'index' => Pages\ListDokumens::route('/'),
-            'create' => Pages\CreateDokumen::route('/create'),
-            'edit' => Pages\EditDokumen::route('/{record}/edit'),
         ];
     }
 }

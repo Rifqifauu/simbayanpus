@@ -59,6 +59,7 @@ class ActivitylogResource extends Resource
     {
         return ActivitylogPlugin::get()->getNavigationIcon();
     }
+    
 
     public static function getNavigationLabel(): string
     {
@@ -67,7 +68,7 @@ class ActivitylogResource extends Resource
 
     public static function getNavigationSort(): ?int
     {
-        return ActivitylogPlugin::get()->getNavigationSort();
+        return 12;
     }
 
     public static function getNavigationGroup(): ?string

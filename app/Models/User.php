@@ -45,8 +45,12 @@ class User extends Authenticatable implements FilamentUser
     }
     public function Permohonan()
     {
-        return $this->hasOne(Permohonan::class, 'user_id');
+        return $this->hasOne(Permohonan::class, 'id_user');
     }
+    public function nilai()
+{
+    return $this->hasOne(\App\Models\Nilai::class,'id_user');
+}
     /**
      * The attributes that should be hidden for serialization.
      *

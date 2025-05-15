@@ -21,7 +21,7 @@ class Permohonan extends Model
         'surat_pengantar',
         'proposal',
         'pedoman_magang',
-        'user_id', // Foreign key to users table
+        'id_user', // Foreign key to users table
     ];
 
     /**
@@ -29,6 +29,6 @@ class Permohonan extends Model
      */
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id'); // The 'user_id' is the foreign key
+        return $this->belongsTo(User::class, 'id_user'); // The 'user_id' is the foreign key
     }
 }

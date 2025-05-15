@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('surat_pengantar');
             $table->string('proposal');
             $table->string('pedoman_magang')->nullable();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Foreign key to users table
+            $table->foreignId('id_user')->constrained('users')->onDelete('cascade'); // Foreign key to users table
             $table->timestamps();
         });
     }

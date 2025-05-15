@@ -68,6 +68,8 @@ class UserDetailResource extends Resource
                 ->label('Program Studi'),
             Infolists\Components\TextEntry::make('institusi')
                 ->label('Institusi'),
+            Infolists\Components\TextEntry::make('user.Permohonan.divisi')
+                ->label('Pilihan Divisi'),
             Infolists\Components\TextEntry::make('user.Permohonan.cv')
                 ->label('CV')
                 ->formatStateUsing(function ($state, $record) {
@@ -145,6 +147,10 @@ class UserDetailResource extends Resource
                     ->label('Institusi')
                     ->searchable(),
                     
+                Tables\Columns\TextColumn::make('user.Permohonan.divisi')
+                    ->label('Divisi')
+                    ->searchable(),
+                    
        // Menyediakan URL lengkap
             ])
             ->filters([
@@ -170,7 +176,7 @@ class UserDetailResource extends Resource
                     ->action(function (UserDetail $record, array $data) {
                         // Create new message
                         Pesan::create([
-                            'id_user' => $record->id_user, // Get the user_id from UserDetail
+                            'id_user' => $record->id_user, // Get the id_user from UserDetail
                             'pesan' => $data['pesan'],
                             'tipe' => 'masuk',
                             'tanggal' => now(),
@@ -199,6 +205,10 @@ class UserDetailResource extends Resource
             ]);
     }
     
+    public static function getNavigationSort(): ?int
+    {
+        return 6;
+    }
 
     public static function getRelations(): array
     {

@@ -10,35 +10,43 @@ class PermohonanOverview extends BaseWidget
 {
     protected function getStats(): array
     {
-        // Menghitung jumlah permohonan masuk dengan status 'pending'
+        // Jumlah permohonan masuk dengan status 'pending'
         $pendingCount = UserDetail::whereHas('user', function ($query) {
             $query->whereHas('userDetail', function ($query) {
                 $query->where('status_pendaftaran', 'pending');
             });
         })->count();
 
-        // Menghitung jumlah permohonan dengan status 'diproses'
+        // Jumlah permohonan dengan status 'diproses'
         $processCount = UserDetail::whereHas('user', function ($query) {
             $query->whereHas('userDetail', function ($query) {
                 $query->where('status_pendaftaran', 'diproses');
             });
         })->count();
 
-        // Menghitung jumlah permohonan dengan status 'diterima'
+        // Jumlah permohonan dengan status 'diterima'
         $acceptedCount = UserDetail::whereHas('user', function ($query) {
             $query->whereHas('userDetail', function ($query) {
                 $query->where('status_pendaftaran', 'diterima');
             });
         })->count();
 
-        // Menghitung jumlah permohonan yang aktif
+        // Jumlah magang aktif (hari ini berada di antara tgl_masuk dan tgl_keluar)
         $activeCount = UserDetail::whereHas('user', function ($query) {
             $query->whereHas('userDetail', function ($query) {
                 $query->where('status_pendaftaran', 'diterima');
-            })
-            ->whereHas('Permohonan', function ($query) {
-                $query->whereDate('tgl_masuk', '<=', Carbon::today())  // Ensure tgl_masuk is before or today
-                    ->whereDate('tgl_keluar', '>=', Carbon::today()); // Ensure tgl_keluar is after or today
+            })->whereHas('Permohonan', function ($query) {
+                $query->whereDate('tgl_masuk', '<=', Carbon::today())
+                      ->whereDate('tgl_keluar', '>=', Carbon::today());
+            });
+        })->count();
+
+        // Jumlah magang selesai (tgl_keluar < hari ini dan status 'diterima')
+        $finishedCount = UserDetail::whereHas('user', function ($query) {
+            $query->whereHas('userDetail', function ($query) {
+                $query->where('status_pendaftaran', 'diterima');
+            })->whereHas('Permohonan', function ($query) {
+                $query->whereDate('tgl_keluar', '<', Carbon::today());
             });
         })->count();
 
@@ -58,6 +66,10 @@ class PermohonanOverview extends BaseWidget
             Stat::make('Magang Aktif', $activeCount)
                 ->icon('heroicon-o-fire')
                 ->label('Magang yang sedang aktif'),
+
+            Stat::make('Magang Selesai', $finishedCount)
+                ->icon('heroicon-o-check')
+                ->label('Magang yang telah selesai dan menunggu finalisasi')
         ];
     }
 }

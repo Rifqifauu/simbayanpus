@@ -3,7 +3,7 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'cfcefbc342acd0a7acc68ba3577dd870f1b57040',
+        'reference' => 'ed5cbaa7f59bd47b4bc53f06604a0e6d6852b0f3',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -646,6 +646,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'laravel-notification-channels/telegram' => array(
+            'pretty_version' => '6.0.0',
+            'version' => '6.0.0.0',
+            'reference' => '289eb825f6c918b21bbda19bffb900d882c9647a',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../laravel-notification-channels/telegram',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'laravel/framework' => array(
             'pretty_version' => 'v11.37.0',
             'version' => '11.37.0.0',
@@ -658,7 +667,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'cfcefbc342acd0a7acc68ba3577dd870f1b57040',
+            'reference' => 'ed5cbaa7f59bd47b4bc53f06604a0e6d6852b0f3',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

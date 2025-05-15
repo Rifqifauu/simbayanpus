@@ -120,8 +120,13 @@ class MagangAktifResource extends Resource
         return [
             //
         ];
+        
     }
 
+    public static function getNavigationSort(): ?int
+    {
+        return 8;
+    }
     public static function getPluralLabel(): ?string
     {
         return 'Magang Aktif';

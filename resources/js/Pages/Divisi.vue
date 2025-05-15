@@ -1,76 +1,58 @@
 <template>
-  <h3 class="text-center text-2xl md:text-3xl lg:text-3xl font-bold mt-5 text-red-600 mb-6">Daftar Penugasan Magang</h3>
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2 p-8">
-    <div v-for="(item, index) in divisi" :key="index" @click="openModal(item)" class="bg-red-700 text-white p-6 rounded-lg shadow-lg cursor-pointer hover:bg-red-800">
-      <h4 class="text-xl text-white font-bold mb-4">{{ item.nama_divisi }}</h4>
+  <div class="min-h-screen bg-gradient-to-br from-red-900 via-red-700 to-red-800 py-10 px-4">
+    <h3 class="text-center text-white text-3xl md:text-4xl font-extrabold mb-10 drop-shadow-lg">
+      Daftar Divisi Magang
+    </h3>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+      <div 
+        v-for="(item, index) in divisi" 
+        :key="index"
+        class="relative bg-white p-6 rounded-2xl shadow-lg hover:shadow-red-400 transition-transform hover:-translate-y-1 cursor-pointer flex flex-col gap-4"
+      >
+        <!-- Kuota Badge -->
+        <span class="absolute top-4 right-4 bg-yellow-400 text-black text-xs font-bold px-3 py-1 rounded-full shadow">
+          Kuota: {{ item.kuota }}
+        </span>
+
+        <h4 class="text-red-700 text-xl font-bold">{{ item.nama_divisi }}</h4>
+        <p class="text-sm text-gray-700 flex-grow">{{ item.keterangan }}</p>
+
+        <button 
+          @click="daftarMagang(item)"
+          class="mt-4 bg-yellow-400 hover:bg-yellow-500 text-black text-sm font-semibold px-4 py-2 rounded-full shadow transition duration-300 self-start"
+        >
+          Daftar
+        </button>
+      </div>
     </div>
   </div>
-
-  <!-- Modal -->
-<div v-if="isModalOpen" class="fixed inset-0 bg-gray-500 bg-opacity-75 flex items-center justify-center z-50">
-  <div class="bg-white mx-6 p-6 rounded-lg max-w-lg w-full max-h-96 overflow-y-auto">
-    <h2 class="text-xl font-semibold"> Jobdesk     <span class="text-md font-semibold text-red-600">
-    {{ selectedDivisi.nama_divisi }}</span></h2>
-    <p class="mb-4 text-sm" v-html="formattedKeterangan"></p>
-    <button @click="closeModal" class="mt-4 bg-red-500 text-white px-4 py-2 rounded">Tutup</button>
-  </div>
-</div>
-
 </template>
 
 <script>
 import AppLayout from '../layouts/AppLayout.vue';
 
-
 export default {
-  computed: {
-  formattedKeterangan() {
-    return this.selectedDivisi?.keterangan
-      ? this.selectedDivisi.keterangan
-          .replace(/(\d+)\./g, '<br><strong>$1.</strong> ') // Menambahkan line break & bold di angka
-          .replace(/\n/g, '<br>') // Mengubah newline menjadi `<br>`
-      : ''; // Jika tidak ada keterangan, kosongkan
-  }
-},
-mounted (){
-  document.title = this.title;
-
-},
-
   props: {
     title: String,
     divisi: {
       type: Array,
       required: true,
       validator(value) {
-        return Array.isArray(value) && value.every(item => item.nama_divisi && item.keterangan && item.kuota);
+        return Array.isArray(value) &&
+          value.every(item => item.nama_divisi && item.keterangan && item.kuota);
       },
     },
   },
   layout: AppLayout,
-  data() {
-    return {
-      isModalOpen: false,
-      selectedDivisi: {},
-    };
+  mounted() {
+    document.title = this.title;
   },
   methods: {
-    openModal(divisi) {
-      this.selectedDivisi = divisi;
-      this.isModalOpen = true;
-    },
-    closeModal() {
-      this.isModalOpen = false;
-      this.selectedDivisi = {};
-    },
+    daftarMagang(item) {
+      const params = new URLSearchParams({ divisi: item.nama_divisi });
+      window.location.href = `/permohonan/create?${params.toString()}`;
+    }
   },
 };
-
 </script>
-
-<style scoped>
-.cursor-pointer:hover {
-  transform: translateY(-5px);
-  transition: transform 0.3s ease-in-out;
-}
-</style>

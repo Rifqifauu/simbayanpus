@@ -71,6 +71,10 @@ class PermohonanResource extends Resource
     {
         return [];
     }
+      public static function getNavigationSort(): ?int
+    {
+        return 5;
+    }
 
     public static function getPages(): array
     {

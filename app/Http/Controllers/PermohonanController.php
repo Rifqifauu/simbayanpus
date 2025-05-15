@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Http;
 use App\Models\Permohonan;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -37,13 +37,13 @@ class PermohonanController extends Controller
         return Inertia::render('BuatPermohonan',[
             'title' => 'Buat Permohonan',
             'user' => $user,
-            'divisions' => $divisi,
+            'divisi' => $divisi,
         ]);
     }    public function store(Request $request)
 {
     // Check if the user already has a submitted application
     $user = Auth::user();
-    $existingApplication = Permohonan::where('user_id', $user->id)->first();
+    $existingApplication = Permohonan::where('id_user', $user->id)->first();
 
     // If an application already exists, return an error response
     if ($existingApplication) {
@@ -75,8 +75,8 @@ class PermohonanController extends Controller
     }
 
     // Save application data
-    Permohonan::create([
-        'user_id' => $user->id,
+   $permohonan = Permohonan::create([
+        'id_user' => $user->id,
         'divisi' => $request->input('division'),
         'tgl_masuk' => $request->input('startDate'),
         'tgl_keluar' => $request->input('endDate'),
@@ -86,6 +86,20 @@ class PermohonanController extends Controller
         'pedoman_magang' => $files['guidelines'] ?? null,
     ]);
 
+    if($permohonan){
+        $message = "📬 Permohonan Magang Baru Masuk\n"
+            . "Nama: {$user->name}\n"
+            . "Email: {$user->email}\n"
+            . "Program Studi: {$user->userDetail->program_studi}\n"
+            . "Institusi: {$user->userDetail->institusi}\n"
+            . "Silahkan cek halaman dashboard admin segera!";
+            $telegramToken="7652493380:AAGary1XWXhIiYSD9UkXSJHW69pSivWIA2A";$chatId="7456474633";
+             Http::post("https://api.telegram.org/bot{$telegramToken}/sendMessage", [
+            'chat_id' => $chatId,
+            'text' => $message,
+        ]);
+    }
+
     // Update user details
     $userDetail = $user->userDetail;
     if ($userDetail) {
@@ -93,7 +107,7 @@ class PermohonanController extends Controller
         $userDetail->save();
     } else {
         UserDetail::create([
-            'user_id' => $user->id,
+            'id_user' => $user->id,
             'status_pendaftaran' => 'pending',
         ]);
     }
@@ -113,7 +127,7 @@ public function action(Request $request, $id) {
             $userDetail->update(['status_pendaftaran' => $request->input('status_pendaftaran')]);
         }
         $user->pesan()->updateOrCreate(
-            ['user_id' => $user->id],
+            ['id_user' => $user->id],
             ['pesan' => $request->input('pesan')]
         );
 
@@ -122,8 +136,8 @@ public function action(Request $request, $id) {
     public function destroy($id)
 {
     try {
-        // Cek apakah permohonan dengan user_id tersebut ada
-        $permohonan = Permohonan::where('user_id', $id);
+        // Cek apakah permohonan dengan id_user tersebut ada
+        $permohonan = Permohonan::where('id_user', $id);
         
         if (!$permohonan->exists()) {
             return response()->json([

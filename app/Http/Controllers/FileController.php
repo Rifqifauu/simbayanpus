@@ -22,7 +22,7 @@ class FileController extends Controller
     }
     public function viewCv($userId)
     {
-        $file = Permohonan::where('user_id', $userId)->firstOrFail()->cv;
+        $file = Permohonan::where('id_user', $userId)->firstOrFail()->cv;
         
         // Get file path and mime type
         $path = Storage::path($file);
@@ -91,7 +91,7 @@ class FileController extends Controller
     
     public function viewSuratPengantar($userId)
     {
-        $file = Permohonan::where('user_id', $userId)->firstOrFail()->surat_pengantar;
+        $file = Permohonan::where('id_user', $userId)->firstOrFail()->surat_pengantar;
         
         $path = Storage::path($file);
         $mimeType = Storage::mimeType($file);
@@ -103,7 +103,7 @@ class FileController extends Controller
 
     public function viewProposal($userId)
     {
-        $file = Permohonan::where('user_id', $userId)->firstOrFail()->proposal;
+        $file = Permohonan::where('id_user', $userId)->firstOrFail()->proposal;
         
         $path = Storage::path($file);
         $mimeType = Storage::mimeType($file);

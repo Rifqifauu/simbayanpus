@@ -12,6 +12,7 @@
         "inertiajs/inertia-laravel": "^2.0",
         "laravel-lang/lang": "^15.11",
         "laravel-lang/publisher": "^16.4",
+        "laravel-notification-channels/telegram": "^6.0",
         "laravel/framework": "^11.31",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",

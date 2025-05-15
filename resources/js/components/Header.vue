@@ -6,11 +6,8 @@
           <div class="flex justify-between items-center h-16">
             <!-- Logo/Brand -->
             <div class="flex justify-between items-center h-16">
-              <div class="flex-shrink-0 p-2">
-                <a href="../../../storage/asset/logo-removebg-preview.png" class="text-white text-lg font-bold hover:text-gray-200 transition">
-                  <img src="../../../storage/asset/logo-removebg-preview.png" alt="Logo" class="w-14 h-auto">
-                </a>
-              </div>
+                              <img class=" h-10 drop-shadow-lg" src="/storage/asset/logo-removebg-preview.png"></img>
+                <p class="ps-4 text-xl font-bold drop-shadow-lg">Internity</p>
             </div>
   
             <!-- Desktop Navigation -->
@@ -19,7 +16,7 @@
                 Beranda
               </a>
               <a href="/divisi" class="text-lg text-white hover:text-gray-200 transition px-3 py-2">
-                Penugasan
+                Divisi
               </a>
               <a v-if="user" href="/permohonan" class="text-lg text-white hover:text-gray-200 transition px-3 py-2">
                 Permohonan
@@ -27,12 +24,7 @@
               <a href="/kontak" class="text-white text-lg hover:text-gray-200 transition px-3 py-2">
                 Kontak
               </a>
-            <a href="https://drive.google.com/file/d/1lcD5gla1hGP0cl3CGGxYt1nZms-3fZ6C/view?pli=1" class="text-white text-lg hover:text-gray-200 transition px-3 py-2 relative group" target="_blank">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="currentColor" class="text-white">
-    <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.9 2 1.99 2h12c1.1 0 1.99-.9 1.99-2V8l-6-6zm0 2v6h6l-6-6z"/>
-  </svg>
-  <span class="absolute left-1/2 transform -translate-x-1/2 translate-y-6 opacity-0 group-hover:opacity-100 text-sm text-white bg-red-800 p-1 rounded transition-opacity z-10">Pedoman Magang</span>
-</a>
+           
 
 
 
@@ -91,13 +83,13 @@
                   >
                     Profile
               </a>
-                  <a v-if="status == 'diterima' || 'selesai'"
+                  <a v-if="status == 'diterima' || status == 'selesai'"
                     href="/logbook"
                     class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
                   >
                     Logbook
               </a>
-                  <a v-if="status == 'diterima' || 'selesai'"
+                  <a v-if="status == 'diterima' || status == 'selesai'"
                     href="/attendance"
                     class="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
                   >
@@ -171,7 +163,7 @@
           href="/divisi"
           class="block w-full text-left px-3 py-2 hover:bg-red-700 rounded-md"
         >
-          Penugasan
+          Divisi
     </a>
         <a
           v-if="user"
@@ -199,11 +191,18 @@
           >
             Profile
         </a>
-         <a href="https://drive.google.com/file/d/1lcD5gla1hGP0cl3CGGxYt1nZms-3fZ6C/view?pli=1"  target="_blank"
-            class="block w-full text-left px-3 py-2 hover:bg-red-700 rounded-md"
-          >
-            Pedoman Magang
-        </a>
+         <a v-if="status == 'diterima' || status == 'selesai'"
+                    href="/logbook"
+                    class="block w-full text-left px-4 py-2 text-white hover:bg-red-700"
+                  >
+                    Logbook
+              </a>
+                  <a v-if="status == 'diterima' || status == 'selesai'"
+                    href="/attendance"
+                    class="block w-full text-left px-4 py-2 text-white hover:bg-red-700"
+                  >
+                    Kehadiran
+              </a >
           <button
             @click="showLogoutConfirm"
             class="block w-full text-left px-3 py-2 hover:bg-red-700 rounded-md"
@@ -260,8 +259,8 @@
     },
     setup() {
       const page = usePage();
-    const user = computed(() => page.props.auth.user);
-    const status = computed(() => user.value?.user_detail?.status_pendaftaran);
+      const user = computed(() => page.props.auth.user);
+      const status = computed(() => user.value?.user_detail?.status_pendaftaran);
       const dropdownOpen = ref(false);
       const menuOpen = ref(false);
       const showLogoutModal = ref(false);
@@ -307,8 +306,8 @@
       home() {
         window.location.href = '/home';
       },
-      divisi() {
-        window.location.href = '/divisi';
+      Divisi() {
+        window.location.href = '/Divisi';
       },
       permohonan() {
         window.location.href = '/permohonan';

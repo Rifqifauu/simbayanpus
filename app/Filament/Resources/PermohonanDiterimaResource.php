@@ -85,13 +85,13 @@ class PermohonanDiterimaResource extends Resource
                 ->sortable()
                 ->searchable(),
 
-            // Tables\Columns\TextColumn::make('user.permohonan.divisi')  // Mengakses divisi dari permohonan melalui relasi user
-            //     ->label('Divisi')
-            //     ->sortable()
-            //     ->searchable(),
+            Tables\Columns\TextColumn::make('user.permohonan.divisi')  // Mengakses divisi dari permohonan melalui relasi user
+                ->label('Divisi')
+                ->sortable()
+                ->searchable(),
 
             Tables\Columns\TextColumn::make('user.permohonan.tgl_masuk')  // Mengakses tgl_masuk dari permohonan melalui relasi user
-                ->label('Masuk Magang')
+                ->label('Mulai Magang')
                 ->sortable()
                 ->searchable(),
 
@@ -116,6 +116,10 @@ class PermohonanDiterimaResource extends Resource
         return [
             //
         ];
+    }
+    public static function getNavigationSort(): ?int
+    {
+        return 7;
     }
 
     public static function getPluralLabel(): ?string

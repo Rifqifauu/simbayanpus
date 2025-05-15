@@ -268,7 +268,7 @@ export default defineComponent({
                 return 'Anda belum mengisi data profil. Silahkan isi terlebih dahulu.';
             }
             if (this.status === 'selesai') {
-                return 'Periode magang Anda telah selesai. Terimakasih atas kerjasamanya selama magang di Balai Yanpus DPAD DIY';
+                return 'Periode magang Anda telah selesai. Terimakasih atas kerjasamanya selama magang.';
             }
             return '';
         },
@@ -340,14 +340,13 @@ export default defineComponent({
         }
     }
 }
-
     },
 });
 </script>
 
 <style scoped>
 .status-page {
-    @apply min-h-screen bg-red-50 py-4 px-4 sm:px-6 lg:px-8;
+    @apply min-h-screen  py-4 px-4 sm:px-6 lg:px-8;
 }
 
 .header {
@@ -418,7 +417,7 @@ export default defineComponent({
 }
 
 .status-content {
-    @apply max-w-4xl mx-auto px-4 py-4 bg-white rounded-lg shadow-md;
+  @apply max-w-4xl mx-auto px-4 py-4 bg-red-800 rounded-lg shadow-md border-2 border-red-200 shadow-red-300;
 }
 
 .status-title {
@@ -426,7 +425,7 @@ export default defineComponent({
 }
 
 .status-description {
-    @apply text-lg text-gray-600 mt-2;
+    @apply  text-lg text-gray-600 mt-2;
 }
 
 .action-buttons {
@@ -458,7 +457,7 @@ export default defineComponent({
 }
 
 .status-card {
-    @apply p-6 bg-white rounded-lg shadow-md;
+    @apply  p-6 bg-white rounded-lg shadow-md;
 }
 
 .dialog-panel {

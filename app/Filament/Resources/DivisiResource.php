@@ -20,7 +20,7 @@ class DivisiResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationLabel = 'Penugasan';
+    protected static ?string $navigationLabel = 'Divisi';
 
     public static function form(Form $form): Form
     {
@@ -41,7 +41,7 @@ class DivisiResource extends Resource
 
     public static function getPluralLabel(): string
     {
-        return 'Penugasan';  
+        return 'Divisi';  
     }
     public static function shouldRegisterNavigation(): bool
     {

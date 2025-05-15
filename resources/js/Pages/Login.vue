@@ -32,7 +32,7 @@
 
     <!-- Logo di Sebelah Kanan -->
     <img
-      src="/storage/bayanpus.svg"
+      src="/storage/asset/logo-removebg-preview.png"
       alt="Balai Yanpus DPAD DIY"
       class="h-6 md:h-8 lg:h-8"
     />

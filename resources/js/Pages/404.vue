@@ -23,7 +23,7 @@ defineOptions({
                 Halaman Tidak Ditemukan.
             </p>
             <p class="mb-4 text-lg font-light text-gray-500 dark:text-gray-400">
-                Mohon maaf <span class="text-red-600"> {{ user.name }}</span> , sepertinya kamu tersesat. Halaman yang kamu cari tidak ditemukan.
+                Mohon maaf <span class="text-red-600">{{ user ? user.name : 'pengunjung'}}</span> , sepertinya kamu tersesat. Halaman yang kamu cari tidak ditemukan.
             </p>
         </div>   
     </div>

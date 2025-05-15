@@ -14,6 +14,7 @@ class ListDokumens extends ListRecords
     {
         return [
             Actions\CreateAction::make(),
+            Actions\EditAction::make(),
         ];
     }
 }

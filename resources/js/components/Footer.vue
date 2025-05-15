@@ -1,67 +1,193 @@
 <template>
-<footer class="bg-red-50 mt-2">
-    <div class="bg-red-700 h-2"></div>
-    <div class="pt-8 container mx-auto px-4 flex flex-wrap justify-between items-start bg-red-50">
-      <div class="w-full md:w-1/3 text-center md:text-left mb-6 md:mb-0">
-        <img src="storage/logo-balaiyanpus.svg" alt="Logo Balai Yanpus" class="w-20 h-20 mx-auto md:mx-0 mb-4">
-        <p class="text-red-700 font-bold">Balai Layanan Perpustakaan DPAD DIY</p>
-        <div class="flex justify-center md:justify-start mt-4 space-x-4">
-          <!-- Facebook -->
-          <a target="_blank" href="https://www.facebook.com/balaiyanpus.dpaddiy/" class="text-red-700 hover:text-red-500">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M22 12C22 6.477 17.523 2 12 2S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987H7.898v-2.89h2.54V9.768c0-2.508 1.492-3.89 3.773-3.89 1.094 0 2.238.195 2.238.195v2.461h-1.26c-1.243 0-1.63.772-1.63 1.562v1.874h2.773l-.443 2.89h-2.33v6.987C18.343 21.128 22 16.991 22 12z" />
-            </svg>
-          </a>
-          <!-- Instagram -->
-          <a target="_blank" href="https://www.instagram.com/balaiyanpus.dpaddiy" class="text-red-700 hover:text-red-500">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 2A3.75 3.75 0 004 7.75v8.5A3.75 3.75 0 007.75 20h8.5A3.75 3.75 0 0020 16.25v-8.5A3.75 3.75 0 0016.25 4h-8.5zM12 7.25a4.75 4.75 0 110 9.5 4.75 4.75 0 010-9.5zm0 2a2.75 2.75 0 100 5.5 2.75 2.75 0 000-5.5zm4.75-3.5a.75.75 0 110 1.5.75.75 0 010-1.5z" />
-            </svg>
-          </a>
-          <!-- TikTok -->
-          <a href="https://www.tiktok.com/@balai_yanpus" target="_blank" class="text-red-700 hover:text-red-500">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2zm0 2a8 8 0 100 16 8 8 0 000-16zm2.25 1.5h1v4.75c.875.48 1.37.75 2.25.75V12h-1.25c-1.08 0-1.75-.75-2.75-1.25v5.5c0 1.96-1.64 3.25-3.25 3.25s-3.25-1.29-3.25-3.25c0-2 1.64-3.25 3.25-3.25.67 0 1.11.17 1.75.5V7h1.25z" />
-            </svg>
-          </a>
-          <!-- WhatsApp -->
-          <a target="_blank" href="https://api.whatsapp.com/send/?phone=628812658192&text&type=phone_number&app_absent=0" class="text-red-700 hover:text-red-500">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 0c-6.624 0-12 5.376-12 12 0 2.109.548 4.152 1.599 5.957l-1.636 5.912 6.031-1.585c1.647.901 3.473 1.396 5.411 1.396 6.625 0 12-5.377 12-12s-5.375-12-12-12zm6.664 16.738c-.283.796-1.387 1.515-1.936 1.596-.514.073-1.177.106-3.406-.724-2.842-1.177-4.662-4.085-4.808-4.284-.143-.198-1.148-1.523-1.148-2.903s.726-2.057.987-2.352c.259-.296.568-.37.756-.37.19 0 .377.002.542.01.176.009.413-.067.646.506.246.601.833 2.082.906 2.226.073.145.12.315.021.513-.098.198-.148.314-.295.485-.148.171-.311.383-.448.516-.15.148-.305.31-.132.61.173.301.77 1.28 1.652 2.073 1.137 1.049 2.108 1.373 2.409 1.521.301.148.477.127.653-.076.175-.203.744-.866.946-1.164.201-.296.402-.245.673-.147.27.098 1.709.805 2.001.951.294.146.49.225.562.351.074.125.074.737-.209 1.533z" />
-            </svg>
-          </a>
+  <footer class="bg-red-50 mt-8">
+    <!-- Top border accent -->
+    <div class="bg-red-700 h-1.5 shadow-md"></div>
+
+    <!-- Main footer content -->
+    <div class="container mx-auto px-6 py-12">
+      <div class="flex flex-wrap justify-between">
+        
+        <!-- Logo & Brand Section -->
+        <div class="w-full md:w-1/4 mb-10 md:mb-0">
+          <div class="flex items-center mb-4">
+            <img
+              src="storage/asset/logo-removebg-preview.png"
+              alt="Logo"
+              class="w-16 h-16 mr-3"
+            />
+            <h2 class="text-red-700 text-2xl font-bold">Internity</h2>
+          </div>
+          <p class="text-gray-600 mb-6 text-sm">
+            Sistem Informasi untuk mempermudah pendaftaran dan manajemen data magang.
+          </p>
+          <div class="flex space-x-4">
+            <a href="#" class="text-red-600 hover:text-red-800 transition duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24h-1.918c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.294h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/>
+              </svg>
+            </a>
+            <a href="#" class="text-red-600 hover:text-red-800 transition duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 2A3.75 3.75 0 004 7.75v8.5A3.75 3.75 0 007.75 20h8.5A3.75 3.75 0 0020 16.25v-8.5A3.75 3.75 0 0016.25 4h-8.5zM12 7.25a4.75 4.75 0 110 9.5 4.75 4.75 0 010-9.5zm0 2a2.75 2.75 0 100 5.5 2.75 2.75 0 000-5.5zm4.75-3.5a.75.75 0 110 1.5.75.75 0 010-1.5z"/>
+              </svg>
+            </a>
+            <a href="#" class="text-red-600 hover:text-red-800 transition duration-300">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+            </a>
+          </div>
         </div>
-      </div>
-  
-      <div class="w-full md:w-1/3 text-center md:text-left mb-6 md:mb-0">
-        <h4 class="text-red-700 font-bold mb-4">Tautan Cepat</h4>
-        <ul class="space-y-2">
-          <li><a href="#" class="text-gray-700 hover:text-red-700">Beranda</a></li>
-          <li><a href="#" class="text-gray-700 hover:text-red-700">Divisi</a></li>
-          <li><a href="#" class="text-gray-700 hover:text-red-700">Permohonan</a></li>
-          <li><a href="#" class="text-gray-700 hover:text-red-700">Kontak</a></li>
-        </ul>
-      </div>
-  
-      <div class="w-full md:w-1/3 text-center md:text-left">
-        <h4 class="text-red-700 font-bold mb-4">Hubungi Kami</h4>
-        <ul class="text-gray-700 space-y-2">
-          <li>Telp. (0274) 4536234;</li>
-          <li><a href="https://balaiyanpus.jogjaprov.go.id" class="hover:text-red-700">www.balaiyanpus.jogjaprov.go.id</a></li>
-          <li>Grhatama Pustaka, Jalan Raya Janti, Banguntapan, Bantul, DIY</li>
-        </ul>
+        
+        <!-- Quick Links Section -->
+        <div class="w-full md:w-1/4 mb-10 md:mb-0">
+          <h4 class="text-red-700 font-bold text-lg mb-5 pb-2 border-b border-red-200">Tautan Cepat</h4>
+          <ul class="space-y-3">
+            <li>
+              <a href="#" class="text-gray-700 hover:text-red-700 transition duration-300 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+                Beranda
+              </a>
+            </li>
+            <li>
+              <a href="#" class="text-gray-700 hover:text-red-700 transition duration-300 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                </svg>
+                Divisi
+              </a>
+            </li>
+            <li>
+              <a href="#" class="text-gray-700 hover:text-red-700 transition duration-300 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+                Permohonan
+              </a>
+            </li>
+            <li>
+              <a href="#" class="text-gray-700 hover:text-red-700 transition duration-300 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                Kontak
+              </a>
+            </li>
+          </ul>
+        </div>
+        
+        <!-- Contact Section -->
+        <div class="w-full md:w-2/5">
+          <div class="bg-white rounded-lg shadow-lg p-6 border-t-4 border-red-700">
+            <h4 class="font-bold text-xl mb-6 text-red-800 border-b-2 border-red-100 pb-2 flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+              Hubungi Kami
+            </h4>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <!-- Rifqi Contact -->
+              <div class="bg-red-50 p-4 rounded-lg transition-transform duration-300 hover:scale-105">
+                <h2 class="font-semibold text-lg mb-3 border-b border-red-200 pb-1 text-red-700 flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                  Rifqi
+                </h2>
+                <ul class="space-y-3">
+                  <li>
+                    <a
+                      href="https://wa.me/6281325243608"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="flex items-center space-x-2 text-gray-700 hover:text-green-600 transition-colors duration-200"
+                    >
+                     <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50">
+    <path d="M25,2C12.318,2,2,12.318,2,25c0,3.96,1.023,7.854,2.963,11.29L2.037,46.73c-0.096,0.343-0.003,0.711,0.245,0.966 C2.473,47.893,2.733,48,3,48c0.08,0,0.161-0.01,0.24-0.029l10.896-2.699C17.463,47.058,21.21,48,25,48c12.682,0,23-10.318,23-23 S37.682,2,25,2z M36.57,33.116c-0.492,1.362-2.852,2.605-3.986,2.772c-1.018,0.149-2.306,0.213-3.72-0.231 c-0.857-0.27-1.957-0.628-3.366-1.229c-5.923-2.526-9.791-8.415-10.087-8.804C15.116,25.235,13,22.463,13,19.594 s1.525-4.28,2.067-4.864c0.542-0.584,1.181-0.73,1.575-0.73s0.787,0.005,1.132,0.021c0.363,0.018,0.85-0.137,1.329,1.001 c0.492,1.168,1.673,4.037,1.819,4.33c0.148,0.292,0.246,0.633,0.05,1.022c-0.196,0.389-0.294,0.632-0.59,0.973 s-0.62,0.76-0.886,1.022c-0.296,0.291-0.603,0.606-0.259,1.19c0.344,0.584,1.529,2.493,3.285,4.039 c2.255,1.986,4.158,2.602,4.748,2.894c0.59,0.292,0.935,0.243,1.279-0.146c0.344-0.39,1.476-1.703,1.869-2.286 s0.787-0.487,1.329-0.292c0.542,0.194,3.445,1.604,4.035,1.896c0.59,0.292,0.984,0.438,1.132,0.681 C37.062,30.587,37.062,31.755,36.57,33.116z"></path>
+</svg>
+                      <span>0813-2524-3608</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://instagram.com/rifqifauu"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="flex items-center space-x-2 text-gray-700 hover:text-pink-600 transition-colors duration-200"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 2A3.75 3.75 0 004 7.75v8.5A3.75 3.75 0 007.75 20h8.5A3.75 3.75 0 0020 16.25v-8.5A3.75 3.75 0 0016.25 4h-8.5zM12 7.25a4.75 4.75 0 110 9.5 4.75 4.75 0 010-9.5zm0 2a2.75 2.75 0 100 5.5 2.75 2.75 0 000-5.5zm4.75-3.5a.75.75 0 110 1.5.75.75 0 010-1.5z"
+                        />
+                      </svg>
+                      <span>@rifqifauu</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Ifan Contact -->
+              <div class="bg-red-50 p-4 rounded-lg transition-transform duration-300 hover:scale-105">
+                <h2 class="font-semibold text-lg mb-3 border-b border-red-200 pb-1 text-red-700 flex items-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                  Ifan
+                </h2>
+                <ul class="space-y-3">
+                  <li>
+                    <a
+                      href="https://wa.me/6281325243608"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="flex items-center space-x-2 text-gray-700 hover:text-green-600 transition-colors duration-200"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50">
+    <path d="M25,2C12.318,2,2,12.318,2,25c0,3.96,1.023,7.854,2.963,11.29L2.037,46.73c-0.096,0.343-0.003,0.711,0.245,0.966 C2.473,47.893,2.733,48,3,48c0.08,0,0.161-0.01,0.24-0.029l10.896-2.699C17.463,47.058,21.21,48,25,48c12.682,0,23-10.318,23-23 S37.682,2,25,2z M36.57,33.116c-0.492,1.362-2.852,2.605-3.986,2.772c-1.018,0.149-2.306,0.213-3.72-0.231 c-0.857-0.27-1.957-0.628-3.366-1.229c-5.923-2.526-9.791-8.415-10.087-8.804C15.116,25.235,13,22.463,13,19.594 s1.525-4.28,2.067-4.864c0.542-0.584,1.181-0.73,1.575-0.73s0.787,0.005,1.132,0.021c0.363,0.018,0.85-0.137,1.329,1.001 c0.492,1.168,1.673,4.037,1.819,4.33c0.148,0.292,0.246,0.633,0.05,1.022c-0.196,0.389-0.294,0.632-0.59,0.973 s-0.62,0.76-0.886,1.022c-0.296,0.291-0.603,0.606-0.259,1.19c0.344,0.584,1.529,2.493,3.285,4.039 c2.255,1.986,4.158,2.602,4.748,2.894c0.59,0.292,0.935,0.243,1.279-0.146c0.344-0.39,1.476-1.703,1.869-2.286 s0.787-0.487,1.329-0.292c0.542,0.194,3.445,1.604,4.035,1.896c0.59,0.292,0.984,0.438,1.132,0.681 C37.062,30.587,37.062,31.755,36.57,33.116z"></path>
+</svg>
+                      <span>0813-2524-3608</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://instagram.com/xvanm_"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="flex items-center space-x-2 text-gray-700 hover:text-pink-600 transition-colors duration-200"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 2A3.75 3.75 0 004 7.75v8.5A3.75 3.75 0 007.75 20h8.5A3.75 3.75 0 0020 16.25v-8.5A3.75 3.75 0 0016.25 4h-8.5zM12 7.25a4.75 4.75 0 110 9.5 4.75 4.75 0 010-9.5zm0 2a2.75 2.75 0 100 5.5 2.75 2.75 0 000-5.5zm4.75-3.5a.75.75 0 110 1.5.75.75 0 010-1.5z"
+                        />
+                      </svg>
+                      <span>@xvanm_</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
-    <div class="border-t font-medium border-red-1000 mt-8 pt-4 text-center">
-<p class="text-red-600 text-sm">
-  &copy; 2025 Balai Layanan Perpustakaan DPAD DIY. Made by IF Unsoed '22.
-</p>
-</div>
-    <div class="bg-red-50 py-4"></div>
+    
+    <!-- Copyright section -->
+    <div class="bg-red-700 text-white text-center py-4">
+      <p>&copy; {{ new Date().getFullYear() }} Informatika Unsoed 22. Rifqi & Ifan</p>
+    </div>
   </footer>
-  </template>
-  <script>
- export default {
-    name: 'Footer'
-}
-</script>
+</template>

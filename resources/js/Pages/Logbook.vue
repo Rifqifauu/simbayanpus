@@ -1,12 +1,16 @@
 <template>
   <div class="min-h-screen flex flex-col p-4">
     <!-- Header -->
-    <div class="flex flex-col md:flex-row items-center justify-between mb-6">
+    <div class="flex flex-col md:flex-row items-center justify-between mb-6" 
+         data-aos="fade-down" 
+         data-aos-duration="800">
       <h1 class="text-2xl md:text-3xl font-bold text-red-800 mb-4 md:mb-0 text-center md:text-left">
         Logbook Harian Peserta Magang
       </h1>
       <button type="button" @click="openCreateModal()"
-        class="w-full md:w-auto flex items-center justify-center space-x-2 bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg text-sm px-4 py-2 transition">
+        class="w-full md:w-auto flex items-center justify-center space-x-2 bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg text-sm px-4 py-2 transition"
+        data-aos="fade-left" 
+        data-aos-delay="200">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
         </svg>
@@ -18,25 +22,11 @@
     <div class="md:hidden space-y-4">
       <div v-if="logbook.length">
         <div v-for="(item, idx) in logbook" :key="item.id"
-          class="bg-white rounded-lg shadow border border-gray-200 p-4">
+          class="bg-white rounded-lg shadow border border-gray-200 p-4"
+          data-aos="fade-up"
+          :data-aos-delay="idx * 100">
           <div class="flex justify-between items-center mb-3 pb-2 border-b border-gray-200">
             <span class="font-bold text-red-800">Hari Ke - #{{ idx + 1 }} Magang</span>
-            <!-- <div class="flex space-x-2">
-              <button @click="openEditModal(item)" class="text-red-600 hover:text-red-800">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                  stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M11 5H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2v-5m-7-7l7 7-3 3-7-7 3-3z" />
-                </svg>
-              </button>
-              <button @click="deleteLogbook(item.id)" class="text-red-600 hover:text-red-800">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                  stroke="currentColor">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5-4h4a1 1 0 011 1v1H9V4a1 1 0 011-1z" />
-                </svg>
-              </button>
-            </div> -->
           </div>
 
           <div class="divide-y divide-gray-200 text-sm">
@@ -56,26 +46,21 @@
               <div class="font-medium text-gray-600">Catatan Pembimbing:</div>
               <div>{{ item.catatan_pembimbing }}</div>
             </div>
-            <!-- <div class="py-2 grid grid-cols-2 gap-2">
-              <div class="font-medium text-gray-600">Dibuat:</div>
-              <div>{{ item.created_at }}</div>
-            </div>
-            <div class="py-2 grid grid-cols-2 gap-2">
-              <div class="font-medium text-gray-600">Diperbarui:</div>
-              <div>{{ item.updated_at }}</div>
-            </div> -->
           </div>
         </div>
       </div>
 
-      <div v-else class="bg-white rounded-lg shadow p-4 text-center text-gray-500">
+      <div v-else class="bg-white rounded-lg shadow p-4 text-center text-gray-500"
+           data-aos="zoom-in">
         Anda belum membuat log.
       </div>
     </div>
 
     <!-- Desktop Table View -->
     <div class="hidden md:block overflow-auto border border-gray-200 rounded-lg"
-      style="max-height: calc(100vh - 150px)">
+         data-aos="fade-up"
+         data-aos-duration="1000"
+         style="max-height: calc(100vh - 150px)">
       <table class="min-w-full table-fixed border-collapse">
         <thead>
           <tr class="text-white uppercase text-xs font-medium">
@@ -84,42 +69,23 @@
             <th class="bg-red-700 sticky top-0 px-6 py-3 text-start">Aktivitas</th>
             <th class="bg-red-700 sticky top-0 px-6 py-3 text-end">Verifikasi</th>
             <th class="bg-red-700 sticky top-0 px-6 py-3 text-end">Catatan Pembimbing</th>
-            <!-- <th class="bg-red-700 sticky top-0 px-6 py-3 text-end">Dibuat</th>
-            <th class="bg-red-700 sticky top-0 px-6 py-3 text-end">Diperbarui</th> -->
-            <!-- <th colspan="2" class="bg-red-700 sticky top-0 px-6 py-3 text-center">Aksi</th> -->
           </tr>
         </thead>
         <tbody>
           <template v-if="logbook.length">
-            <tr v-for="(item, idx) in logbook" :key="item.id" class="odd:bg-white even:bg-gray-50">
+            <tr v-for="(item, idx) in logbook" :key="item.id" 
+                class="odd:bg-white even:bg-gray-50"
+                data-aos="fade-right"
+                :data-aos-delay="idx * 50"
+                data-aos-offset="-100">
               <td class="px-6 py-4 text-sm font-medium text-gray-800">{{ idx + 1 }}</td>
               <td class="px-6 py-4 text-sm text-gray-800">{{ item.tanggal }}</td>
               <td class="px-6 py-4 text-sm text-gray-800">{{ item.aktivitas }}</td>
               <td class="px-6 py-4 text-sm text-gray-800 text-end">{{ item.verifikasi }}</td>
               <td class="px-6 py-4 text-sm text-gray-800 text-end">{{ item.catatan_pembimbing }}</td>
-              <!-- <td class="px-6 py-4 text-sm text-gray-800 text-end">{{ item.created_at }}</td>
-              <td class="px-6 py-4 text-sm text-gray-800 text-end">{{ item.updated_at }}</td> -->
-              <!-- <td class="px-6 py-4 text-sm text-gray-800 text-end">
-                <a @click="openEditModal(item)" class="cursor-pointer">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-600 hover:text-red-800" fill="none"
-                    viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M11 5H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2v-5m-7-7l7 7-3 3-7-7 3-3z" />
-                  </svg>
-                </a>
-              </td>
-              <td class="px-6 py-4 text-sm text-gray-800 text-end">
-           <a @click="showDeleteModalID(item.id)" class="cursor-pointer">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-600 hover:text-red-800" fill="none"
-                    viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5-4h4a1 1 0 011 1v1H9V4a1 1 0 011-1z" />
-                  </svg>
-                </a>
-              </td> -->
             </tr>
           </template>
-          <tr v-else class="bg-white">
+          <tr v-else class="bg-white" data-aos="zoom-in">
             <td colspan="9" class="px-6 py-4 text-center text-sm text-gray-500">
               Anda belum membuat log.
             </td>
@@ -131,7 +97,9 @@
     <!-- Modal -->
     <transition name="modal">
       <div v-if="showModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-        <div class="bg-white rounded-lg shadow-lg w-full max-w-md p-6 relative">
+        <div class="bg-white rounded-lg shadow-lg w-full max-w-md p-6 relative"
+             data-aos="zoom-in"
+             data-aos-duration="400">
           <button class="absolute top-2 right-2 text-gray-500 hover:text-red-600" @click="closeModal">
             ✕
           </button>
@@ -160,14 +128,14 @@
   <ErrorModal :show="showErrorModal" :message="errorMessage" title="Gagal Membuat Catatan"
     @close="showErrorModal = false" />
   <SuccessModal :show="showSuccessModal" :title="successModalTitle" @close="showSuccessModal = false" />
-   <ConfirmModal
-  v-if="showDeleteModal"
-  :show="showDeleteModal"
-  title="Konfirmasi Hapus"
-  message="Apakah Anda yakin ingin menghapus data ini?"
-  @confirm="deleteLogbook"
-  @close="showDeleteModal = false"
-/>
+  <ConfirmModal
+    v-if="showDeleteModal"
+    :show="showDeleteModal"
+    title="Konfirmasi Hapus"
+    message="Apakah Anda yakin ingin menghapus data ini?"
+    @confirm="deleteLogbook"
+    @close="showDeleteModal = false"
+  />
 </template>
 <script>
 import axios from 'axios';
@@ -175,6 +143,9 @@ import AppLayout from '../layouts/AppLayout.vue';
 import ErrorModal from '@/components/ErrorModal.vue';
 import SuccessModal from '@/components/SuccessModal.vue';
 import ConfirmModal from '@/components/ConfirmModal.vue';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
 export default {
   layout: AppLayout,
   components: {
@@ -198,6 +169,7 @@ export default {
       showSuccessModal: false,
       showErrorModal: false,
       showDeleteModal: false,
+      deleteID: null,
       errorMessage: '',
       successModalTitle: '',
       form: {
@@ -209,6 +181,15 @@ export default {
 
   mounted() {
     document.title = this.title;
+    
+    // Initialize AOS
+    AOS.init({
+      duration: 800,
+      easing: 'ease-in-out',
+      once: true,
+      offset: 50,
+      delay: 100,
+    });
   },
 
   methods: {
@@ -217,17 +198,29 @@ export default {
       this.editId = null;
       this.resetForm();
       this.showModal = true;
+      
+      // Refresh AOS for modal elements
+      this.$nextTick(() => {
+        AOS.refresh();
+      });
     },
-    showDeleteModalID(id){
-    this.deleteID = id;
-    this.showDeleteModal = true;
+    
+    showDeleteModalID(id) {
+      this.deleteID = id;
+      this.showDeleteModal = true;
     },
+    
     openEditModal(item) {
       this.isEdit = true;
       this.editId = item.id;
       this.form.tanggal = item.tanggal;
       this.form.aktivitas = item.aktivitas;
       this.showModal = true;
+      
+      // Refresh AOS for modal elements
+      this.$nextTick(() => {
+        AOS.refresh();
+      });
     },
 
     closeModal() {
@@ -243,20 +236,19 @@ export default {
     },
 
     async deleteLogbook() {
-        try {
-          const id = this.deleteID;
-          const response = await axios.delete(`/logbook/${id}`);
-          if (response.status === 200) {
-            this.successModalTitle = "Berhasil Menghapus Data";
-            this.showSuccessModal = true;
-            setTimeout(() => {
-              this.showSuccessModal = false;
-              window.location.reload();
-            }, 2000);
-          }
-        } catch (error) {
-          this.handleError(error);
-
+      try {
+        const id = this.deleteID;
+        const response = await axios.delete(`/logbook/${id}`);
+        if (response.status === 200) {
+          this.successModalTitle = "Berhasil Menghapus Data";
+          this.showSuccessModal = true;
+          setTimeout(() => {
+            this.showSuccessModal = false;
+            window.location.reload();
+          }, 2000);
+        }
+      } catch (error) {
+        this.handleError(error);
       }
     },
 
@@ -276,7 +268,6 @@ export default {
         } else {
           response = await axios.post('/logbook', formData);
           this.successModalTitle = "Berhasil Membuat Catatan";
-
         }
 
         if (response.status === 200) {
@@ -329,3 +320,15 @@ export default {
   }
 };
 </script>
+
+<style>
+/* Optional custom transition effects for modals */
+.modal-enter-active, .modal-leave-active {
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.modal-enter-from, .modal-leave-to {
+  opacity: 0;
+  transform: scale(0.9);
+}
+</style>

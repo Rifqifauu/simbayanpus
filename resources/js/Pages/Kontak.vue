@@ -1,209 +1,186 @@
 <template>
-  <div class="contact-page">
-    <h1 class="text-center text-3xl font-bold text-red-600 mb-8">{{ title }}</h1>
+  <div class="contact-page min-h-screen py-10 px-4">
+    <h1 class="text-center text-3xl md:text-4xl font-bold text-red-800 mb-10 drop-shadow-md">
+      {{ title }}
+    </h1>
 
-    <div class="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto px-4">
-      <!-- Contact Information Card -->
-      <div class="bg-red-600 rounded-lg p-6 text-white">
-        <div class="mb-6">
-          <h2 class="flex items-center gap-2 text-xl font-semibold mb-2">
-            <i class="fas fa-map-marker-alt"></i> Alamat
-          </h2>
-          <p>Ghatama Pustaka, Jalan Raya Janti, Banguntapan, Bantul, DIY</p>
-        </div>
-
-        <div class="mb-6">
-          <h2 class="flex items-center gap-2 text-xl font-semibold mb-2">
-            <i class="fas fa-envelope"></i> Email
-          </h2>
-          <a href="mailto:balaiyanpus@jogjaprov.go.id" class="hover:text-yellow-200 transition-colors">
-            balaiyanpus@jogjaprov.go.id
-          </a>
-        </div>
-
-        <div class="mb-6">
-          <h2 class="flex items-center gap-2 text-xl font-semibold mb-2">
-            <i class="fab fa-whatsapp"></i> Whatsapp
-          </h2>
-          <a href="https://wa.me/628812658192" class="hover:text-yellow-200 transition-colors">
-            +62 881-2658-192          </a>
-        </div>
-
-        <div class="mb-6">
-          <h2 class="flex items-center gap-2 text-xl font-semibold mb-2">
-            <i class="fas fa-phone"></i> Telepon
-          </h2>
-          <a href="tel:+62744469024" class="hover:text-yellow-200 transition-colors">
-            (0274) 4469024
-          </a>
-        </div>
-
+    <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto w-full">
+      <!-- Kartu Informasi -->
+      <div
+        class="bg-red-800 p-6 rounded-2xl shadow-xl text-white space-y-6 hover:shadow-red-400 transition"
+      >
         <div>
-          <h2 class="flex items-center gap-2 text-xl font-semibold mb-2">
-            <i class="fas fa-map"></i> Peta
+          <h2 class="text-xl font-semibold flex items-center gap-2 mb-2">
+            <i class="fas fa-map-marker-alt text-white"></i> Alamat
           </h2>
-          <div class="rounded-lg overflow-hidden">
+          <p>
+            Jl. Raya Mayjen Sungkono No.KM 5, Dusun 2, Blater, Kec. Kalimanah,
+            Kabupaten Purbalingga, Jawa
+          </p>
+        </div>
+        <!-- Email -->
+        <div>
+          <h2 class="text-xl font-semibold flex items-center gap-2 mb-2">
+            <i class="fas fa-envelope text-white"></i> Email
+          </h2>
+          <a
+            href="mailto:rifqi.fauzi@mhs.unsoed.ac.id"
+            class="text-white hover:text-yellow-500 font-medium"
+            >rifqi.fauzi@mhs.unsoed.ac.id</a
+          ><br />
+          <a
+            href="mailto:ifan.maulana@mhs.unsoed.ac.id"
+            class="text-white hover:text-yellow-500 font-medium"
+            >ifan.maulana@mhs.unsoed.ac.id</a
+          >
+        </div>
+        <!-- WhatsApp -->
+        <div>
+          <h2 class="text-xl font-semibold flex items-center gap-2 mb-2">
+            <i class="fab fa-whatsapp text-white"></i> Whatsapp
+          </h2>
+          <a
+            href="https://wa.me/6281325243608"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-white hover:text-yellow-500 font-medium"
+            >+6281325243608</a
+          >
+          ||
+          <a
+            href="https://wa.me/6281325243608"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-white hover:text-yellow-500 font-medium"
+            >+6281325243608</a
+          >
+        </div>
+        <!-- Map -->
+        <div>
+          <h2 class="text-xl font-semibold flex items-center gap-2 mb-2">
+            <i class="fas fa-map text-white"></i> Peta
+          </h2>
+          <div class="rounded-lg overflow-hidden shadow-lg">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d7905.805142211918!2d110.409016!3d-7.800138999999999!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a5756951cdd8d%3A0x476c4fa152e22651!2sDiorama%20Arsip%20Jogja!5e0!3m2!1sen!2sus!4v1736836306636!5m2!1sen!2sus"
-              width="100%"
-              height="250"
-              class="border-0"
-              allowfullscreen=""
+              class="w-full"
+              height="200"
+              style="border:0;"
+              allowfullscreen
               loading="lazy"
               referrerpolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63307.59932438935!2d109.24036995260114!3d-7.384688193885435!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6559814ade5b79%3A0xaef1b7bab5cba0f0!2sFaculty%20of%20Engineering%20Unsoed!5e0!3m2!1sen!2sid!4v1747283644258!5m2!1sen!2sid"
             ></iframe>
           </div>
         </div>
       </div>
-
-      <!-- Contact Form Card -->
-      <div class="bg-red-600 rounded-lg p-6 text-white">
-        <div v-if="!user" class="text-left">
-          <form @submit.prevent="submitForm">
+      <!-- Form Kontak -->
+      <div
+        class="bg-red-800 p-6 rounded-2xl shadow-xl text-white hover:shadow-red-800 transition"
+      >
+        <form @submit.prevent="submitForm">
+          <!-- Nama -->
           <div class="mb-4">
-            <label for="nama" class="block text-xl font-semibold mb-2">Nama</label>
+            <label class="block text-lg font-semibold mb-2">Nama</label>
             <input
-              id="nama"
-              value="Nama Pengguna"
               type="text"
-              class="w-full px-4 py-2 rounded-lg bg-white/20 text-white placeholder-white/70"
+              :value="user ? user.name : 'Nama Pengguna'"
+              class="w-full px-4 py-2 bg-gray-100 text-red-900 rounded-lg text-sm md:text-base"
               disabled
             />
           </div>
-
+          <!-- Email -->
           <div class="mb-4">
-            <label for="email" class="block text-xl font-semibold mb-2">Email</label>
+            <label class="block text-lg font-semibold mb-2">Email</label>
             <input
-              id="email"
-              value="Email"
               type="email"
-              class="w-full px-4 py-2 rounded-lg bg-white/20 text-white placeholder-white/70"
+              :value="user ? user.email : 'Email'"
+              class="w-full px-4 py-2 bg-gray-100 text-red-900 rounded-lg text-sm md:text-base"
               disabled
             />
           </div>
-
+          <!-- Pesan -->
           <div class="mb-6">
-            <label for="pesan" class="block text-xl font-semibold mb-2">Tulis Pesan</label>
+            <label class="block text-lg font-semibold mb-2">Tulis Pesan</label>
             <textarea
-              id="pesan"
-              class="w-full px-4 py-2 rounded-lg bg-white text-gray-900 h-32 placeholder-gray-500"
-              placeholder="Silahkan login untuk mengirim pesan..."
-              disabled 
-            ></textarea>
-          </div>
-
-          <button
-            type="submit"
-            class="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-4 rounded-lg transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-          disabled>         Kirim Pesan </button>
-        </form>        </div>
-
-        <form v-else @submit.prevent="submitForm">
-          <div class="mb-4">
-            <label for="nama" class="block text-xl font-semibold mb-2">Nama</label>
-            <input
-              id="nama"
-              :value="user.name"
-              type="text"
-              class="w-full px-4 py-2 rounded-lg bg-white/20 text-white placeholder-white/70"
-              disabled
-            />
-          </div>
-
-          <div class="mb-4">
-            <label for="email" class="block text-xl font-semibold mb-2">Email</label>
-            <input
-              id="email"
-              :value="user.email"
-              type="email"
-              class="w-full px-4 py-2 rounded-lg bg-white/20 text-white placeholder-white/70"
-              disabled
-            />
-          </div>
-
-          <div class="mb-6">
-            <label for="pesan" class="block text-xl font-semibold mb-2">Tulis Pesan</label>
-            <textarea
-              id="pesan"
               v-model="formData.pesan"
-              class="w-full px-4 py-2 rounded-lg bg-white text-gray-900 h-32 placeholder-gray-500"
-              placeholder="Tulis pesan disini..."
+              class="w-full px-4 py-2 bg-gray-100 text-gray-800 h-32 rounded-lg text-sm md:text-base"
+              :placeholder="user ? 'Tulis pesan di sini...' : 'Silahkan login terlebih dahulu...'"
+              :disabled="!user"
               required
             ></textarea>
           </div>
 
+          <!-- Tombol -->
           <button
             type="submit"
-            class="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-4 rounded-lg transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-            :disabled="isSubmitting"
+            class="w-full bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-3 px-4 rounded-lg transition duration-300 disabled:opacity-50"
+            :disabled="isSubmitting || !user"
           >
-            {{ isSubmitting ? 'Mengirim...' : 'Kirim' }}
+            {{ isSubmitting ? 'Mengirim...' : 'Kirim Pesan' }}
           </button>
         </form>
       </div>
     </div>
+
+    <SuccessModal :show="showSuccessModal" title="Pesan Terkirim" />
   </div>
-  <SuccessModal
-      :show="showSuccessModal"
-      title="Pesan Terkirim"
-    />
 </template>
 
 <script>
-import { ref } from 'vue';
-import axios from 'axios';
-import AppLayout from '../layouts/AppLayout.vue';
-import SuccessModal from '../components/SuccessModal.vue';
+import { ref } from "vue";
+import axios from "axios";
+import AppLayout from "../layouts/AppLayout.vue";
+import SuccessModal from "../components/SuccessModal.vue";
+
 export default {
-  name: 'ContactPage',
+  name: "ContactPage",
   layout: AppLayout,
-  components:{
-    SuccessModal
+  components: {
+    SuccessModal,
   },
   props: {
     title: {
       type: String,
-      required: true
+      required: true,
     },
     user: {
       type: Object,
-      default: null
-    }
+      default: null,
+    },
   },
 
   setup(props) {
     const isSubmitting = ref(false);
-    
+
     const formData = ref({
-      pesan: '',
-      asal: 'user'
+      pesan: "",
+      asal: "user",
     });
     const showSuccessModal = ref(false);
 
     const redirectToLogin = () => {
-      window.location.href = '/login';
+      window.location.href = "/login";
     };
 
     const submitForm = async () => {
       if (!props.user) {
-        alert('Anda harus login untuk mengirim pesan.');
+        alert("Anda harus login untuk mengirim pesan.");
         return;
       }
-
       try {
         isSubmitting.value = true;
-        await axios.post('/pesan', {
+        await axios.post("/pesan", {
           ...formData.value,
-          id_user: props.user.id
+          id_user: props.user.id,
         });
-        formData.value.pesan = '';
+        formData.value.pesan = "";
         showSuccessModal.value = true;
         setTimeout(() => {
-          document.location.href = '/pesan';
+          document.location.href = "/pesan";
         }, 2000);
       } catch (error) {
-        console.error('Error sending message:', error);
-        alert('Gagal mengirim pesan. Silakan coba lagi.');
+        console.error("Error sending message:", error);
+        alert("Gagal mengirim pesan. Silakan coba lagi.");
       } finally {
         isSubmitting.value = false;
       }
@@ -220,7 +197,7 @@ export default {
 
   mounted() {
     document.title = this.title;
-  }
+  },
 };
 </script>
 
