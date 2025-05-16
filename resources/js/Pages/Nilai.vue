@@ -2,9 +2,9 @@
   <div class="py-8 px-12 text-sm max-w-[650px] mx-auto bg-white" ref="printArea">
     <!-- Judul -->
     <h1 class="text-center text-base font-bold mb-12 uppercase  leading-tight tracking-wide">
-      Lampiran Penilaian Pelaksanaan <br> Kerja Praktik
+      Lampiran Penilaian Pelaksanaan  <br> Kegiatan Magang
     </h1>
-<p>Telah dilaksanakan penilaian hasil kerja praktik mahasiswa sebagai berikut.</p>
+<p>Telah dilaksanakan penilaian hasil magang mahasiswa sebagai berikut.</p>
     <!-- Informasi Mahasiswa -->
     <div class="my-6">
       <p class="mb-1 flex"><span class="w-32 font-medium">Nama</span>: {{ user.name }}</p>
@@ -79,25 +79,17 @@
       </div>
     </div>
 
-    <!-- Catatan -->
-    <div class="text-xs mb-10 leading-normal p-3 border border-gray-200 rounded">
-      <p class="font-medium mb-1">Catatan:</p>
-      <p class="text-justify">
-        Nilai di atas akan sah sebagai nilai matakuliah jika yang bersangkutan telah melengkapi kekurangannya
-        yang tercantum dalam "Berita Acara Seminar Kerja Praktik" beserta menyerahkan laporan akhir Kerja Praktik
-        yang telah dijilid dan disahkan.
-      </p>
-    </div>
+  
 
     <!-- Tanda Tangan -->
-    <div class="flex justify-between text-xs mt-12">
+    <div class="flex justify-between text-xs mt-8">
       <div>
         <p class="font-medium">Pembimbing Teknis Lapangan:</p>
-        <p class="mt-12 font-semibold underline">..........................................</p>
+        <p class="mt-16 font-semibold underline">..........................................</p>
       </div>
       <div class="text-center">
         <p>{{ new Date().toLocaleDateString('id-ID', {day: 'numeric', month: 'long', year: 'numeric'}) }}</p>
-        <p class="mt-12">TTD</p>
+        <p class="mt-16">.........</p>
       </div>
     </div>
   </div>
@@ -124,6 +116,9 @@ export default {
     user: Object,
     userDetail: Object,
     nilai: Object,
+  },
+   mounted(){
+      document.title = 'Nilai Magang';
   },
   methods: {
     async printToPDF() {

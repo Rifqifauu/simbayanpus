@@ -43,15 +43,24 @@ class PesanResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->columns([
-                Tables\Columns\TextColumn::make('asal')  // Akses nama pengguna melalui relasi 'user'
-                ->label('Pengirim')
-                ->searchable()
-                ->sortable(),   
+        ->columns([
+                Tables\Columns\TextColumn::make('asal')
+        ->label('Tipe Pesan')
+    ->badge()
+    ->formatStateUsing(function ($state) {
+        return $state === 'admin' ? 'Pesan Keluar' : 'Pesan Masuk';
+    })
+    ->color(function ($state) {
+        return $state === 'admin' ? 'warning' : 'success'; // Warna badge: merah untuk keluar, hijau untuk masuk
+    })
+    ->searchable()
+    ->sortable(),
+ 
                 Tables\Columns\TextColumn::make('user.name')  // Akses nama pengguna melalui relasi 'user'
                 ->label('Nama')
                 ->searchable()
-                ->sortable(),   
+                ->sortable()
+                ->wrap(),   
                 Tables\Columns\TextColumn::make('user.email')  // Akses nama pengguna melalui relasi 'user'
                 ->label('Email')
                 ->searchable()
@@ -59,17 +68,28 @@ class PesanResource extends Resource
                 Tables\Columns\TextColumn::make('pesan')  // Akses nama pengguna melalui relasi 'user'
                 ->label('Pesan')
                 ->searchable()
-                ->sortable(),   
+                ->sortable()
+                ->wrap(),   
+                Tables\Columns\TextColumn::make('created_at')  // Akses nama pengguna melalui relasi 'user'
+                ->label('Tanggal')
+                ->searchable()
+                ->sortable()
+                ->date('d M Y'),
+                 
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make()
+                ->requiresConfirmation()
+                    ->modalHeading('Konfirmasi Penghapusan')
+                    ->modalDescription('Apakah Anda yakin ingin menghapus data ini? Tindakan ini tidak dapat dibatalkan.')
+                ,
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+                Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }

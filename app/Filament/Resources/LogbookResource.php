@@ -52,7 +52,10 @@ class LogbookResource extends Resource
                 Tables\Columns\TextColumn::make('verifikasi')
                 ->label('Verifikasi')
                 ->sortable()
-                ->searchable(),
+                ->searchable()
+                ->badge()
+                ->color(function ($state) {
+        return $state === 'disetujui' ? 'success' : 'danger';}),
                 Tables\Columns\TextColumn::make('catatan_pembimbing')
                 ->label('Catatan Pembimbing')
                 ->sortable()
@@ -69,7 +72,6 @@ class LogbookResource extends Resource
         ->actions([
         Action::make('verifikasi')
         ->form([
-            
                 Select::make('verifikasi')
                 ->label('Status Verifikasi')
                 ->options([

@@ -91,7 +91,16 @@ public static function getNavigationSort(): ?int
                 Tables\Columns\TextColumn::make('status')
                 ->label('Status')
                 ->sortable()
-                ->searchable(),
+                ->searchable()
+                ->badge()
+                ->color(function ($state) {
+    return match ($state) {
+        'alpha' => 'danger',
+        'hadir' => 'success',
+        'izin' => 'warning',
+       'sakit' => 'info',
+    };
+}),
             ])
             ->filters([
                 Filter::make('tanggal')

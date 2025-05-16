@@ -48,11 +48,11 @@
           >
           ||
           <a
-            href="https://wa.me/6281325243608"
+            href="https://wa.me/6285229141150"
             target="_blank"
             rel="noopener noreferrer"
             class="text-white hover:text-yellow-500 font-medium"
-            >+6281325243608</a
+            >+6285229141150</a
           >
         </div>
         <!-- Map -->
